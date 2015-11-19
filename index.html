@@ -63,6 +63,78 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Github实践-Git-Command" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/11/17/Github实践-Git-Command/" class="article-date">
+  <time datetime="2015-11-17T06:01:23.000Z" itemprop="datePublished">2015-11-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/17/Github实践-Git-Command/">Github实践&amp;Git Command</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Github实践&amp;Git_Command">Github实践&amp;Git Command</h1><p>###1.创建本地仓库</p>
+<ul>
+<li>1 mkdir git-tutorial</li>
+<li>2 cd git-tutorial</li>
+<li>3 git init</li>
+<li>4 git status</li>
+</ul>
+<p>###2.在仓库中创建一个文件 (本地git仓库操作)</p>
+<ul>
+<li>touch README.md</li>
+<li>git status  显示没有被跟踪</li>
+<li>git add README.md  添加文件到仓库中</li>
+<li>git status  b被跟踪</li>
+<li>git commit -m “description” 提交</li>
+<li>git log  直到当前的提交日志</li>
+<li>git log –pretty=short  显示精简日志</li>
+<li>git log -p README.md</li>
+<li>git diff   工作区和暂存区的区别</li>
+<li>git diff HEAD 当前要提交和上次提交的区别</li>
+<li>git checkout -b feature-A == (git branch feature-A git checkout feature-A) 创建特性A分支</li>
+<li>git checkout master  切换分支</li>
+<li>git merge –no-ff feature-A (要在主分支合并) 非快速提交,会有历史</li>
+<li>git log –graph 图表显示</li>
+<li>git relog   显示所有历史记录</li>
+<li>git reset –hard comment id  回转到想要的历史提交</li>
+<li>git commit –amend   修改提交信息</li>
+</ul>
+<p>###3.远程仓库的同步  （github）</p>
+<ul>
+<li><a href="https://github.com/CarolineHJQ1991/git-tutorial">https://github.com/CarolineHJQ1991/git-tutorial</a></li>
+</ul>
+<p><img src="/images/cloneURL.png" alt="clone icon"></p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CarolineHJQ1991是你自己命名的github的username，git-<span class="keyword">tutorial</span>是远程仓库，和你本地的仓库命名最好一致</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">获取</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/CarolineHJQ1991/2015/11/17/Github实践-Git-Command/" data-id="cih6aqlfo0001qo2wq0dltikp" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/10/18/hello-world/" class="article-date">
@@ -98,7 +170,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/CarolineHJQ1991/2015/10/18/hello-world/" data-id="cih30d4g90000gb2w24sa0jdz" class="article-share-link">Share</a>
+      <a data-url="https://github.com/CarolineHJQ1991/2015/10/18/hello-world/" data-id="cih6aqlfb0000qo2wfju6abjb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -116,14 +188,28 @@
     
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -133,6 +219,10 @@
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/11/17/Github实践-Git-Command/">Github实践&amp;Git Command</a>
+          </li>
         
           <li>
             <a href="/2015/10/18/hello-world/">Hello World</a>
