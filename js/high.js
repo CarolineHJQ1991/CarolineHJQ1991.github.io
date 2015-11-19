@@ -117,9 +117,9 @@ function high_benjamin(css) {
         //随机选歌  
         var number = Math.floor(Math.random() * 5);
         if (number == 0) var i = "/music/Blue.mp3";
-        else if (number == 1) var i = "/music/Blue.mp3";
-        else if (number == 2) var i = "/music/Blue.mp3";
-        else if (number == 3) var i = "/music/Blue.mp3";
+        else if (number == 1) var i = "/music/Love You Like A Love Song.mp3";
+        else if (number == 2) var i = "/music/Love You Like A Love Song.mp3";
+        else if (number == 3) var i = "/music/Love You Like A Love Song.mp3";
         else if (number == 4) var i = "/music/Blue.mp3";
         
         var s = "mw-harlem_shake_me";
