@@ -116,11 +116,11 @@ function high_benjamin(css) {
         var r = 350;
         //随机选歌  
         var number = Math.floor(Math.random() * 5);
-        if (number == 0) var i = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake.mp3";
-        else if (number == 1) var i = "http://7xkj6q.com1.z0.glb.clouddn.com/blogDon%20Omar,Lucenzo%20-%20Danza%20Kuduro%20-%20Album%20Version.mp3";
-        else if (number == 2) var i = "http://7xkj6q.com1.z0.glb.clouddn.com/blogAlan%20Walker%20-%20Fade.mp3";
-        else if (number == 3) var i = "http://7xkj6q.com1.z0.glb.clouddn.com/blog7obu%20-%20Hope.mp3";
-        else if (number == 4) var i = "http://7xkj6q.com1.z0.glb.clouddn.com/blogDJ%20Antoine%20-%20Hello%20Romance%20(DJ%20Antoine%20vs%20Mad%20Mark%202k13%20Radio%20Edit).mp3";
+        if (number == 0) var i = "/music/Blue.mp3";
+        else if (number == 1) var i = "/music/Blue.mp3";
+        else if (number == 2) var i = "/music/Blue.mp3";
+        else if (number == 3) var i = "/music/Blue.mp3";
+        else if (number == 4) var i = "/music/Blue.mp3";
         
         var s = "mw-harlem_shake_me";
         var o = "im_first";
