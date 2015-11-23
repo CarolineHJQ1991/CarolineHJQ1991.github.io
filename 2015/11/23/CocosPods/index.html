@@ -30,7 +30,7 @@
 
 
 
-  <meta name="keywords" content="iOS," />
+  <meta name="keywords" content="ios," />
 
 
 
@@ -39,29 +39,33 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="1.创建本地仓库
-1 mkdir git-tutorial
-2 cd git-tutorial
-3 git init
-4 git status">
+<meta name="description" content="1 移除原ruby镜像源
+12$ gem sources --remove https://rubygems.org/ $ gem sources -l 可以查看当前还没有源
+2 新增为taobao实时镜像源
+$ gem sources --add https://ruby.taobao.org/
+3 安装Cocoapods
+$ sudo gem install cocoapods">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Github实践&Git Command">
-<meta property="og:url" content="https://github.com/CarolineHJQ1991/2015/11/17/Github实践-Git-Command/index.html">
+<meta property="og:title" content="CocoaPods">
+<meta property="og:url" content="https://github.com/CarolineHJQ1991/2015/11/23/CocosPods/index.html">
 <meta property="og:site_name" content="Caroline.H 's Blog">
-<meta property="og:description" content="1.创建本地仓库
-1 mkdir git-tutorial
-2 cd git-tutorial
-3 git init
-4 git status">
-<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/cloneURL.png">
-<meta property="og:updated_time" content="2015-11-19T15:20:59.000Z">
+<meta property="og:description" content="1 移除原ruby镜像源
+12$ gem sources --remove https://rubygems.org/ $ gem sources -l 可以查看当前还没有源
+2 新增为taobao实时镜像源
+$ gem sources --add https://ruby.taobao.org/
+3 安装Cocoapods
+$ sudo gem install cocoapods">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/RongCloudIMKit.png">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/podsetup.png">
+<meta property="og:updated_time" content="2015-11-23T13:52:10.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Github实践&Git Command">
-<meta name="twitter:description" content="1.创建本地仓库
-1 mkdir git-tutorial
-2 cd git-tutorial
-3 git init
-4 git status">
+<meta name="twitter:title" content="CocoaPods">
+<meta name="twitter:description" content="1 移除原ruby镜像源
+12$ gem sources --remove https://rubygems.org/ $ gem sources -l 可以查看当前还没有源
+2 新增为taobao实时镜像源
+$ gem sources --add https://ruby.taobao.org/
+3 安装Cocoapods
+$ sudo gem install cocoapods">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -71,7 +75,7 @@
   };
 </script>
 
-  <title> Github实践&Git Command | Caroline.H 's Blog </title>
+  <title> CocoaPods | Caroline.H 's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -199,7 +203,7 @@
           
           
             
-              Github实践&Git Command
+              CocoaPods
             
           
         </h1>
@@ -208,8 +212,8 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2015-11-17T14:01:23+08:00" content="2015-11-17">
-            2015-11-17
+          <time itemprop="dateCreated" datetime="2015-11-23T16:39:23+08:00" content="2015-11-23">
+            2015-11-23
           </time>
         </span>
 
@@ -219,8 +223,8 @@
           
             <span class="post-comments-count">
               &nbsp; | &nbsp;
-              <a href="/2015/11/17/Github实践-Git-Command/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/17/Github实践-Git-Command/" itemprop="commentsCount"></span>
+              <a href="/2015/11/23/CocosPods/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/23/CocosPods/" itemprop="commentsCount"></span>
               </a>
             </span>
           
@@ -234,37 +238,52 @@
       
 
       
-        <span itemprop="articleBody"><h3 id="1-创建本地仓库">1.创建本地仓库</h3><ul>
-<li>1 mkdir git-tutorial</li>
-<li>2 cd git-tutorial</li>
-<li>3 git init</li>
-<li>4 git status <a id="more"></a></li>
+        <span itemprop="articleBody"><p><strong>1 移除原ruby镜像源</strong></p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>gem sources --remove <span class="symbol">https:</span>/<span class="regexp">/rubygems.org/</span> </span><br><span class="line"><span class="variable">$ </span>gem sources -l 可以查看当前还没有源</span><br></pre></td></tr></table></figure>
+<p><strong>2 新增为taobao实时镜像源</strong></p>
+<pre><code>$ gem sources --<span class="built_in">add</span> http<span class="variable">s:</span>//<span class="keyword">ruby</span>.taobao.org/
+</code></pre><p><strong>3 安装Cocoapods</strong></p>
+<pre><code>$ sudo gem <span class="keyword">install</span> cocoapods 
+</code></pre> <a id="more"></a>
+<p><strong>注意：如果安装出现问题请按以下步骤重新进行</strong></p>
+<pre><code><span class="char">$ </span>sudo rm -rf ~/.cocoapods/
+<span class="char">$ </span>sudo gem update --system
+<span class="char">$ </span>ping github.com 看能否ping通
+<span class="char">$ </span>git config --global http.postBuffer <span class="number">24288000</span> 
+<span class="char">$ </span>pod setup
+新开一个窗口
+<span class="char">$ </span>cd ~/.cocoapods
+<span class="char">$ </span>du -sh *
+<span class="char">$ </span>pod search <span class="class">RongCloudIMKit</span>
+</code></pre><p><img src="/images/RongCloudIMKit.png" alt="RongCloud result"><br><img src="/images/podsetup.png" alt="setup result">    </p>
+<p><strong>4.在项目中引用cocoaPods</strong></p>
+<p>创建一个single exampl,在工程中创建一个空文件(new-&gt;newfile-&gt;other-&gt;empty) ,命名 ‘Podfile’,在里面写 ‘pod RongCloudIMKit’</p>
+<p>终端-&gt;进入项目路径  (CloudIMTest)</p>
+<pre><code>$ pod <span class="keyword">install</span>
+</code></pre><p><code>执行完成后显示如下</code></p>
+<pre><code>Updating local specs <span class="keyword">repositories</span>
+Analyzing <span class="keyword">dependencies</span>
+Downloading <span class="keyword">dependencies</span>
+Using RongCloudIMKit (<span class="number">2.3</span>.<span class="number">7</span>)
+Generating Pods <span class="keyword">project</span>
+Integrating client <span class="keyword">project</span>
+Sending stats
+Pod installation complete! There is <span class="number">1</span> dependency <span class="keyword">from</span>     the Podfile and <span class="number">1</span> total
+pod installed.    
+</code></pre><p>安装过pod后，以后我们打开工程要用项目目录下得 xcworkspace 后缀的文件</p>
+<p><strong>空挡补充时间(优秀第三方库)</strong></p>
+<ul>
+<li>REALM第三方库，可以替代SQLite or CoreData的移动平台的数据库</li>
+<li>JSQMessagesViewController 很有名的一个聊天的viewController</li>
+<li>JSONModel (OC版)解析json数据的库非常有名</li>
+<li>SwiftyJSON (Swift版)解析json数据的库非常有名</li>
+<li>FontAwesome ,酷炫字体</li>
+<li>iOS charts 图表</li>
+<li>HanekeSwift 图片缓存库</li>
+<li>spring 动画的一个库</li>
+<li>spinner 转圈的那个菊花</li>
+<li>sweet alert IOS 漂亮的提示</li>
 </ul>
-<h3 id="2-在仓库中创建一个文件_(本地git仓库操作)">2.在仓库中创建一个文件 (本地git仓库操作)</h3><ul>
-<li>touch README.md</li>
-<li>git status  显示没有被跟踪</li>
-<li>git add README.md  添加文件到仓库中</li>
-<li>git status  b被跟踪</li>
-<li>git commit -m “description” 提交</li>
-<li>git log  直到当前的提交日志</li>
-<li>git log –pretty=short  显示精简日志</li>
-<li>git log -p README.md</li>
-<li>git diff   工作区和暂存区的区别</li>
-<li>git diff HEAD 当前要提交和上次提交的区别</li>
-<li>git checkout -b feature-A == (git branch feature-A git checkout feature-A) 创建特性A分支</li>
-<li>git checkout master  切换分支</li>
-<li>git merge –no-ff feature-A (要在主分支合并) 非快速提交,会有历史</li>
-<li>git log –graph 图表显示</li>
-<li>git relog   显示所有历史记录</li>
-<li>git reset –hard comment id  回转到想要的历史提交</li>
-<li>git commit –amend   修改提交信息</li>
-</ul>
-<h3 id="3-远程仓库的同步_（github）">3.远程仓库的同步  （github）</h3><ul>
-<li><a href="https://github.com/CarolineHJQ1991/git-tutorial">https://github.com/CarolineHJQ1991/git-tutorial</a></li>
-</ul>
-<p><img src="/images/cloneURL.png" alt="clone icon"></p>
-<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CarolineHJQ1991是你自己命名的github的username，git-<span class="keyword">tutorial</span>是远程仓库，和你本地的仓库命名最好一致</span><br></pre></td></tr></table></figure>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">获取</span><br></pre></td></tr></table></figure>
 </span>
       
     </div>
@@ -273,7 +292,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/iOS/" rel="tag">#iOS</a>
+            <a href="/tags/ios/" rel="tag">#ios</a>
           
         </div>
       
@@ -282,11 +301,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/11/23/CocosPods/" rel="prev">CocoaPods</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/11/17/Github实践-Git-Command/" rel="next">Github实践&Git Command</a>
             
           </div>
         </div>
@@ -301,10 +320,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2015/11/17/Github实践-Git-Command/"
-     data-title="Github实践&Git Command"
+        <div class="ds-share flat" data-thread-key="2015/11/23/CocosPods/"
+     data-title="CocoaPods"
      data-content=""
-     data-url="https://github.com/CarolineHJQ1991/2015/11/17/Github实践-Git-Command/">
+     data-url="https://github.com/CarolineHJQ1991/2015/11/23/CocosPods/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -334,8 +353,8 @@
         
           <div class="comments" id="comments">
             
-              <div class="ds-thread" data-thread-key="2015/11/17/Github实践-Git-Command/"
-                   data-title="Github实践&Git Command" data-url="https://github.com/CarolineHJQ1991/2015/11/17/Github实践-Git-Command/">
+              <div class="ds-thread" data-thread-key="2015/11/23/CocosPods/"
+                   data-title="CocoaPods" data-url="https://github.com/CarolineHJQ1991/2015/11/23/CocosPods/">
               </div>
             
           </div>
@@ -452,7 +471,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-创建本地仓库"><span class="nav-number">1.</span> <span class="nav-text">1.创建本地仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-在仓库中创建一个文件_(本地git仓库操作)"><span class="nav-number">2.</span> <span class="nav-text">2.在仓库中创建一个文件 (本地git仓库操作)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-远程仓库的同步_（github）"><span class="nav-number">3.</span> <span class="nav-text">3.远程仓库的同步  （github）</span></a></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
