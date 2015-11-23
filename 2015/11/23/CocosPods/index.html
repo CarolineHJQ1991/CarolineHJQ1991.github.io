@@ -39,33 +39,24 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="1 移除原ruby镜像源
-12$ gem sources --remove https://rubygems.org/ $ gem sources -l 可以查看当前还没有源
-2 新增为taobao实时镜像源
-$ gem sources --add https://ruby.taobao.org/
-3 安装Cocoapods
-$ sudo gem install cocoapods">
+<meta name="description" content="1 移除原ruby镜像源12$ gem sources --remove https://rubygems.org/ $ gem sources -l 可以查看当前还没有源
+2 新增为taobao实时镜像源$ gem sources --add https://ruby.taobao.org/
+3 安装Cocoapods$ sudo gem install cocoapods">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CocoaPods">
 <meta property="og:url" content="https://github.com/CarolineHJQ1991/2015/11/23/CocosPods/index.html">
 <meta property="og:site_name" content="Caroline.H 's Blog">
-<meta property="og:description" content="1 移除原ruby镜像源
-12$ gem sources --remove https://rubygems.org/ $ gem sources -l 可以查看当前还没有源
-2 新增为taobao实时镜像源
-$ gem sources --add https://ruby.taobao.org/
-3 安装Cocoapods
-$ sudo gem install cocoapods">
+<meta property="og:description" content="1 移除原ruby镜像源12$ gem sources --remove https://rubygems.org/ $ gem sources -l 可以查看当前还没有源
+2 新增为taobao实时镜像源$ gem sources --add https://ruby.taobao.org/
+3 安装Cocoapods$ sudo gem install cocoapods">
 <meta property="og:image" content="https://github.com/CarolineHJQ1991/images/RongCloudIMKit.png">
 <meta property="og:image" content="https://github.com/CarolineHJQ1991/images/podsetup.png">
-<meta property="og:updated_time" content="2015-11-23T16:44:46.000Z">
+<meta property="og:updated_time" content="2015-11-23T17:14:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CocoaPods">
-<meta name="twitter:description" content="1 移除原ruby镜像源
-12$ gem sources --remove https://rubygems.org/ $ gem sources -l 可以查看当前还没有源
-2 新增为taobao实时镜像源
-$ gem sources --add https://ruby.taobao.org/
-3 安装Cocoapods
-$ sudo gem install cocoapods">
+<meta name="twitter:description" content="1 移除原ruby镜像源12$ gem sources --remove https://rubygems.org/ $ gem sources -l 可以查看当前还没有源
+2 新增为taobao实时镜像源$ gem sources --add https://ruby.taobao.org/
+3 安装Cocoapods$ sudo gem install cocoapods">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -238,15 +229,11 @@ $ sudo gem install cocoapods">
       
 
       
-        <span itemprop="articleBody"><p><strong>1 移除原ruby镜像源</strong></p>
-<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>gem sources --remove <span class="symbol">https:</span>/<span class="regexp">/rubygems.org/</span> </span><br><span class="line"><span class="variable">$ </span>gem sources -l 可以查看当前还没有源</span><br></pre></td></tr></table></figure>
-<p><strong>2 新增为taobao实时镜像源</strong></p>
-<pre><code>$ gem sources --<span class="built_in">add</span> http<span class="variable">s:</span>//<span class="keyword">ruby</span>.taobao.org/
-</code></pre><p><strong>3 安装Cocoapods</strong></p>
-<pre><code>$ sudo gem <span class="keyword">install</span> cocoapods 
+        <span itemprop="articleBody"><h4 id="1_移除原ruby镜像源">1 移除原ruby镜像源</h4><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>gem sources --remove <span class="symbol">https:</span>/<span class="regexp">/rubygems.org/</span> </span><br><span class="line"><span class="variable">$ </span>gem sources -l 可以查看当前还没有源</span><br></pre></td></tr></table></figure>
+<h4 id="2_新增为taobao实时镜像源">2 新增为taobao实时镜像源</h4><pre><code>$ gem sources --<span class="built_in">add</span> http<span class="variable">s:</span>//<span class="keyword">ruby</span>.taobao.org/
+</code></pre><h4 id="3_安装Cocoapods">3 安装Cocoapods</h4><pre><code>$ sudo gem <span class="keyword">install</span> cocoapods 
 </code></pre> <a id="more"></a>
-<p><strong>注意：如果安装出现问题请按以下步骤重新进行</strong></p>
-<pre><code><span class="char">$ </span>sudo rm -rf ~/.cocoapods/
+<h4 id="注意：如果安装出现问题请按以下步骤重新进行">注意：如果安装出现问题请按以下步骤重新进行</h4><pre><code><span class="char">$ </span>sudo rm -rf ~/.cocoapods/
 <span class="char">$ </span>sudo gem update --system
 <span class="char">$ </span>ping github.com 看能否ping通
 <span class="char">$ </span>git config --global http.postBuffer <span class="number">24288000</span> 
@@ -256,8 +243,7 @@ $ sudo gem install cocoapods">
 <span class="char">$ </span>du -sh *
 <span class="char">$ </span>pod search <span class="class">RongCloudIMKit</span>
 </code></pre><p><img src="/images/RongCloudIMKit.png" alt="RongCloud result"><br><img src="/images/podsetup.png" alt="setup result">    </p>
-<p><strong>4.在项目中引用cocoaPods</strong></p>
-<p>创建一个single exampl,在工程中创建一个空文件(new-&gt;newfile-&gt;other-&gt;empty) ,命名 ‘Podfile’,在里面写 ‘pod RongCloudIMKit’</p>
+<h4 id="4-在项目中引用cocoaPods">4.在项目中引用cocoaPods</h4><p>创建一个single exampl,在工程中创建一个空文件(new-&gt;newfile-&gt;other-&gt;empty) ,命名 ‘Podfile’,在里面写 ‘pod RongCloudIMKit’</p>
 <p>终端-&gt;进入项目路径  (CloudIMTest)</p>
 <pre><code>$ pod <span class="keyword">install</span>
 </code></pre><p><code>执行完成后显示如下</code></p>
@@ -271,8 +257,7 @@ Sending stats
 Pod installation complete! There is <span class="number">1</span> dependency <span class="keyword">from</span>     the Podfile and <span class="number">1</span> total
 pod installed.    
 </code></pre><p>安装过pod后，以后我们打开工程要用项目目录下得 .xcworkspace文件</p>
-<p><strong>空挡补充时间(优秀第三方库)</strong></p>
-<ul>
+<h4 id="空挡补充时间(优秀第三方库)">空挡补充时间(优秀第三方库)</h4><ul>
 <li>REALM第三方库，可以替代SQLite or CoreData的移动平台的数据库</li>
 <li>JSQMessagesViewController 很有名的一个聊天的viewController</li>
 <li>JSONModel (OC版)解析json数据的库非常有名</li>
@@ -474,7 +459,7 @@ pod installed.
           <div class="post-toc">
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1_移除原ruby镜像源"><span class="nav-number">1.</span> <span class="nav-text">1 移除原ruby镜像源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2_新增为taobao实时镜像源"><span class="nav-number">2.</span> <span class="nav-text">2 新增为taobao实时镜像源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3_安装Cocoapods"><span class="nav-number">3.</span> <span class="nav-text">3 安装Cocoapods</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注意：如果安装出现问题请按以下步骤重新进行"><span class="nav-number">4.</span> <span class="nav-text">注意：如果安装出现问题请按以下步骤重新进行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-在项目中引用cocoaPods"><span class="nav-number">5.</span> <span class="nav-text">4.在项目中引用cocoaPods</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#空挡补充时间(优秀第三方库)"><span class="nav-number">6.</span> <span class="nav-text">空挡补充时间(优秀第三方库)</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
