@@ -39,19 +39,25 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="11月24日项目IMTest ConversationView 用户的头像无法显示
-1234567Application Transport Security has blocked a cleartext HTTP (http://) resource load since it is insecure. Temporary exceptions can be configured via yo">
+<meta name="description" content="Alcatraz是Xcode的插件包管理工具，很多优秀的插件都能在上面找到，今天我就来说说如何安装Alcatraz以及推荐几个优秀的插件。
+安装Alcatraz1、关闭Xcode
+2、如果你之前安装过Alcatraz，卸载它，运行命令：
+1$ rm -rf ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins/Alcatraz">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS错误总结">
-<meta property="og:url" content="https://github.com/CarolineHJQ1991/2015/11/24/iOS错误总结/index.html">
+<meta property="og:title" content="Xcode7安装Alcatraz以及插件介绍">
+<meta property="og:url" content="https://github.com/CarolineHJQ1991/2015/11/27/Xcode7安装Alcatraz以及插件介绍/index.html">
 <meta property="og:site_name" content="Caroline.H 's Blog">
-<meta property="og:description" content="11月24日项目IMTest ConversationView 用户的头像无法显示
-1234567Application Transport Security has blocked a cleartext HTTP (http://) resource load since it is insecure. Temporary exceptions can be configured via yo">
-<meta property="og:updated_time" content="2015-11-24T14:42:50.000Z">
+<meta property="og:description" content="Alcatraz是Xcode的插件包管理工具，很多优秀的插件都能在上面找到，今天我就来说说如何安装Alcatraz以及推荐几个优秀的插件。
+安装Alcatraz1、关闭Xcode
+2、如果你之前安装过Alcatraz，卸载它，运行命令：
+1$ rm -rf ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins/Alcatraz">
+<meta property="og:updated_time" content="2015-11-28T06:58:47.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS错误总结">
-<meta name="twitter:description" content="11月24日项目IMTest ConversationView 用户的头像无法显示
-1234567Application Transport Security has blocked a cleartext HTTP (http://) resource load since it is insecure. Temporary exceptions can be configured via yo">
+<meta name="twitter:title" content="Xcode7安装Alcatraz以及插件介绍">
+<meta name="twitter:description" content="Alcatraz是Xcode的插件包管理工具，很多优秀的插件都能在上面找到，今天我就来说说如何安装Alcatraz以及推荐几个优秀的插件。
+安装Alcatraz1、关闭Xcode
+2、如果你之前安装过Alcatraz，卸载它，运行命令：
+1$ rm -rf ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins/Alcatraz">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -61,7 +67,7 @@
   };
 </script>
 
-  <title> iOS错误总结 | Caroline.H 's Blog </title>
+  <title> Xcode7安装Alcatraz以及插件介绍 | Caroline.H 's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -189,7 +195,7 @@
           
           
             
-              iOS错误总结
+              Xcode7安装Alcatraz以及插件介绍
             
           
         </h1>
@@ -198,8 +204,8 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2015-11-24T22:39:00+08:00" content="2015-11-24">
-            2015-11-24
+          <time itemprop="dateCreated" datetime="2015-11-27T21:14:29+08:00" content="2015-11-27">
+            2015-11-27
           </time>
         </span>
 
@@ -209,8 +215,8 @@
           
             <span class="post-comments-count">
               &nbsp; | &nbsp;
-              <a href="/2015/11/24/iOS错误总结/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/24/iOS错误总结/" itemprop="commentsCount"></span>
+              <a href="/2015/11/27/Xcode7安装Alcatraz以及插件介绍/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/27/Xcode7安装Alcatraz以及插件介绍/" itemprop="commentsCount"></span>
               </a>
             </span>
           
@@ -224,9 +230,21 @@
       
 
       
-        <span itemprop="articleBody"><h3 id="11月24日">11月24日</h3><p><code>项目IMTest ConversationView 用户的头像无法显示</code></p>
-<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Application Transport Security has blocked a cleartext HTTP (http://) resource <span class="built_in">load</span> since it is insecure. Temporary exceptions can be configured via your app's Info.plist file.</span><br><span class="line"></span><br><span class="line">解决办法:在Info.plist中加入下面这段</span><br><span class="line"><span class="variable">&lt;key&gt;</span>NSAppTransportSecurity<span class="variable">&lt;/key&gt;</span>  </span><br><span class="line"> <span class="variable">&lt;dict&gt;</span>  </span><br><span class="line">    <span class="variable">&lt;key&gt;</span>NSAllowsArbitraryLoads<span class="variable">&lt;/key&gt;</span><span class="variable">&lt;true/&gt;</span>  </span><br><span class="line"> <span class="variable">&lt;/dict&gt;</span></span><br></pre></td></tr></table></figure>
-<a id="more"></a>
+        <span itemprop="articleBody"><p>Alcatraz是Xcode的插件包管理工具，很多优秀的插件都能在上面找到，今天我就来说说如何安装Alcatraz以及推荐几个优秀的插件。</p>
+<h4 id="安装Alcatraz">安装Alcatraz</h4><p>1、关闭Xcode</p>
+<p>2、如果你之前安装过Alcatraz，卸载它，运行命令：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rm -rf ~<span class="regexp">/Library/</span>Application\ Support<span class="regexp">/Developer/</span>Shared<span class="regexp">/Xcode/</span>Plug-ins<span class="regexp">/Alcatraz.xcplugin</span></span><br></pre></td></tr></table></figure>
+<p>3、最关键的一步，运行命令</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">find</span> ~<span class="regexp">/Library/</span>Application\ Support<span class="regexp">/Developer/</span>Shared<span class="regexp">/Xcode/</span>Plug-ins -name Info.plist -maxdepth <span class="number">3</span> | xargs -I&#123;&#125; defaults <span class="keyword">write</span> &#123;&#125; DVTPlugInCompatibilityUUIDs -array-add defaults <span class="keyword">read</span> <span class="regexp">/Applications/</span>Xcode.app<span class="regexp">/Contents/I</span>nfo DVTPlugInCompatibilityUUID</span><br><span class="line"></span><br><span class="line">$ sudo xcode-select --reset</span><br></pre></td></tr></table></figure>
+<p>4、打开Xcode</p>
+<p>5、安装Alcatraz</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>curl -fsSL <span class="symbol">https:</span>/<span class="regexp">/raw.github.com/supermarin</span><span class="regexp">/Alcatraz/master</span><span class="regexp">/Scripts/install</span>.sh | sh</span><br></pre></td></tr></table></figure>
+<p>6、重启Xcode</p>
+<p>下面我就来介绍几款我用的还不错的插件</p>
+<h4 id="插件介绍">插件介绍</h4><p><strong>9.CocoaPods</strong></p>
+<p>Xcode自动管理pod文件，以及install和update</p>
+<p><strong>8.SCXcodeMiniMap</strong></p>
+<p>一个Xcode插件，可以在当前的窗口内创建一个代码迷你地图，并在屏幕上高亮提示。<br>Github地址: SCXcodeMiniMap</p>
 </span>
       
     </div>
@@ -244,13 +262,13 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/11/27/Xcode7安装Alcatraz以及插件介绍/" rel="prev">Xcode7安装Alcatraz以及插件介绍</a>
+              <a href="/2015/11/28/自定义-urlScheme/" rel="prev">自定义 urlScheme</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/11/24/批量更新第三方库/" rel="next">批量更新第三方库</a>
+              <a href="/2015/11/24/iOS错误总结/" rel="next">iOS错误总结</a>
             
           </div>
         </div>
@@ -265,10 +283,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2015/11/24/iOS错误总结/"
-     data-title="iOS错误总结"
+        <div class="ds-share flat" data-thread-key="2015/11/27/Xcode7安装Alcatraz以及插件介绍/"
+     data-title="Xcode7安装Alcatraz以及插件介绍"
      data-content=""
-     data-url="https://github.com/CarolineHJQ1991/2015/11/24/iOS错误总结/">
+     data-url="https://github.com/CarolineHJQ1991/2015/11/27/Xcode7安装Alcatraz以及插件介绍/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -298,8 +316,8 @@
         
           <div class="comments" id="comments">
             
-              <div class="ds-thread" data-thread-key="2015/11/24/iOS错误总结/"
-                   data-title="iOS错误总结" data-url="https://github.com/CarolineHJQ1991/2015/11/24/iOS错误总结/">
+              <div class="ds-thread" data-thread-key="2015/11/27/Xcode7安装Alcatraz以及插件介绍/"
+                   data-title="Xcode7安装Alcatraz以及插件介绍" data-url="https://github.com/CarolineHJQ1991/2015/11/27/Xcode7安装Alcatraz以及插件介绍/">
               </div>
             
           </div>
@@ -416,7 +434,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#11月24日"><span class="nav-number">1.</span> <span class="nav-text">11月24日</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装Alcatraz"><span class="nav-number">1.</span> <span class="nav-text">安装Alcatraz</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#插件介绍"><span class="nav-number">2.</span> <span class="nav-text">插件介绍</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
