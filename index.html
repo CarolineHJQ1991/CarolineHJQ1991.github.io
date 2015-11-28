@@ -225,26 +225,17 @@
 
       
         
-          <span itemprop="articleBody"><blockquote>
+          <blockquote>
 <p>iPhone / iOS SDK 最酷的特性之一就是应用将其自身”绑定”到一个自定义 URL scheme 上，该 scheme 用于从浏览器或其他应用中启动本应用。</p>
 </blockquote>
 <h4 id="注册自定义_URL_Scheme">注册自定义 URL Scheme</h4><p>注册自定义 URL Scheme 的第一步是创建 URL Scheme — 在 Xcode Project Navigator 中找到并点击工程 info.plist 文件。当该文件显示在右边窗口，在列表上点击鼠标右键，选择 Add Row:</p>
 <p>向下滚动弹出的列表并选择 URL types。</p>
-<p><img src="/images/CustomURLScheme/1.png" alt="Add URL types"></p>
-<p>点击左边剪头打开列表，可以看到 Item 0，一个字典实体。展开 Item 0，可以看到 URL Identifier，一个字符串对象。该字符串是你自定义的 URL scheme 的名字。建议采用反转域名的方法保证该名字的唯一性，比如 com.yourCompany.yourApp。</p>
-<p><img src="/images/CustomURLScheme/2.png" alt="Add URL Identifier"></p>
-<p>点击 Item 0 新增一行，从下拉列表中选择 URL Schemes，敲击键盘回车键完成插入。</p>
-<p><img src="/images/CustomURLScheme/3.png" alt="Add URL Scheme"></p>
-<p><code>注意: URL Schemes 是一个数组，允许应用定义多个 URL schemes。</code></p>
-<p>展开该数据并点击 Item 0。你将在这里定义自定义 URL scheme 的名字。只需要名字，不要在后面追加 :// — 比如，如果你输入 caroline，你的自定义 url 就是 caroline:// </p>
-<p><img src="/images/CustomURLScheme/4.png" alt="Add URL Scheme item0"></p>
-<p>此时，整个定义如下图：</p>
-<p><img src="/images/CustomURLScheme/5.png" alt="URL Scheme Structure"></p>
-<p>虽然我赞同 Xcode 使用描述性的名字的目的，不过看到创建的实际的 key 也是非常有用的。这里有一个方便的技巧，右键点击 plist 并选择 Show Raw Keys/Values，就能看到以下效果： </p>
-<p><img src="/images/CustomURLScheme/6.png" alt="URL Scheme Structure key in fact"></p>
-<p>还有另一种有用的输出格式，XML，因为可以非常容易的看到字典和原始数组及其包括的实体的结构。点击 plist 并选择 Open As – Source Code: </p>
-<p><img src="/images/CustomURLScheme/7.png" alt="URL Scheme Structure xib"></p>
-</span>
+<p><img src="/images/CustomURLScheme/1.png" alt="Add URL types"><br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/11/28/自定义-urlScheme/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
