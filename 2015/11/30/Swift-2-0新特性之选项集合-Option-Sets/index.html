@@ -50,7 +50,8 @@
 位掩码如果你从未使用过位掩码，你可能会问，这到底是什么鬼？请容我来稍微解释一下。
 假设我们在写一个角色扮演的游戏（比如说boombeach(海岛奇兵)），角色可能拥有比如满级野人，加血雕像，生命药水等等，你的第一反应可能是用 Bool 属性来对各种设备又还是">
 <meta property="og:image" content="https://github.com/CarolineHJQ1991/images/OptionSets/位掩码.png">
-<meta property="og:updated_time" content="2015-11-30T13:19:58.000Z">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/OptionSets/for简化语句.png">
+<meta property="og:updated_time" content="2015-11-30T13:35:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swift 2.0新特性之选项集合(Option Sets)">
 <meta name="twitter:description" content="Swift 2.0增加了一个很厉害的新特性，其名为选项集合(Option Sets)，这个特性让我们可以用炒鸡简单的方式来对位掩码进行操作。
@@ -256,8 +257,11 @@
 <p>不可行的<code>self.possibleInputs.subtractInPlace(Inputs.password)</code></p>
 <p>4.每项最终判断完成时<br><code>self.doneButtonOK?.enabled = self.possibleInputs.isAllOK()</code></p>
 <p>5.搞定！</p>
-<p><strong><code>Tips:
-测试OptionSets 可以使用 playGround</code></strong></p>
+<p><strong><code>Tips:</code></strong></p>
+<p>1、测试OptionSets 可以使用 playGround`</p>
+<p>2、上文中有一处，大家注意到没：</p>
+<p><img src="images/OptionSets/for简化语句.png" alt="for新语法"></p>
+<p>这个我也是从老外那儿看来的。是不是直观很多。</p>
 </span>
       
     </div>
