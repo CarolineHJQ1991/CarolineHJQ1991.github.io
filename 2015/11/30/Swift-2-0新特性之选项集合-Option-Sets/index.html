@@ -39,24 +39,23 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="1 移除原ruby镜像源12$ gem sources --remove https://rubygems.org/ $ gem sources -l 可以查看当前还没有源
-2 新增为taobao实时镜像源$ gem sources --add https://ruby.taobao.org/
-3 安装Cocoapods$ sudo gem install cocoapods">
+<meta name="description" content="Swift 2.0增加了一个很厉害的新特性，其名为选项集合(Option Sets)，这个特性让我们可以用炒鸡简单的方式来对位掩码进行操作。
+位掩码如果你从未使用过位掩码，你可能会问，这到底是什么鬼？请容我来稍微解释一下。
+假设我们在写一个角色扮演的游戏（比如说boombeach(海岛奇兵)），角色可能拥有比如满级野人，加血雕像，生命药水等等，你的第一反应可能是用 Bool 属性来对各种设备又还是">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CocoaPods">
-<meta property="og:url" content="https://github.com/CarolineHJQ1991/2015/11/23/CocosPods/index.html">
+<meta property="og:title" content="Swift 2.0新特性之选项集合(Option Sets)">
+<meta property="og:url" content="https://github.com/CarolineHJQ1991/2015/11/30/Swift-2-0新特性之选项集合-Option-Sets/index.html">
 <meta property="og:site_name" content="Caroline.H 's Blog">
-<meta property="og:description" content="1 移除原ruby镜像源12$ gem sources --remove https://rubygems.org/ $ gem sources -l 可以查看当前还没有源
-2 新增为taobao实时镜像源$ gem sources --add https://ruby.taobao.org/
-3 安装Cocoapods$ sudo gem install cocoapods">
-<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/RongCloudIMKit.png">
-<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/podsetup.png">
-<meta property="og:updated_time" content="2015-11-28T06:58:13.000Z">
+<meta property="og:description" content="Swift 2.0增加了一个很厉害的新特性，其名为选项集合(Option Sets)，这个特性让我们可以用炒鸡简单的方式来对位掩码进行操作。
+位掩码如果你从未使用过位掩码，你可能会问，这到底是什么鬼？请容我来稍微解释一下。
+假设我们在写一个角色扮演的游戏（比如说boombeach(海岛奇兵)），角色可能拥有比如满级野人，加血雕像，生命药水等等，你的第一反应可能是用 Bool 属性来对各种设备又还是">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/OptionSets/位掩码.png">
+<meta property="og:updated_time" content="2015-11-30T13:19:58.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CocoaPods">
-<meta name="twitter:description" content="1 移除原ruby镜像源12$ gem sources --remove https://rubygems.org/ $ gem sources -l 可以查看当前还没有源
-2 新增为taobao实时镜像源$ gem sources --add https://ruby.taobao.org/
-3 安装Cocoapods$ sudo gem install cocoapods">
+<meta name="twitter:title" content="Swift 2.0新特性之选项集合(Option Sets)">
+<meta name="twitter:description" content="Swift 2.0增加了一个很厉害的新特性，其名为选项集合(Option Sets)，这个特性让我们可以用炒鸡简单的方式来对位掩码进行操作。
+位掩码如果你从未使用过位掩码，你可能会问，这到底是什么鬼？请容我来稍微解释一下。
+假设我们在写一个角色扮演的游戏（比如说boombeach(海岛奇兵)），角色可能拥有比如满级野人，加血雕像，生命药水等等，你的第一反应可能是用 Bool 属性来对各种设备又还是">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -66,7 +65,7 @@
   };
 </script>
 
-  <title> CocoaPods | Caroline.H 's Blog </title>
+  <title> Swift 2.0新特性之选项集合(Option Sets) | Caroline.H 's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -194,7 +193,7 @@
           
           
             
-              CocoaPods
+              Swift 2.0新特性之选项集合(Option Sets)
             
           
         </h1>
@@ -203,8 +202,8 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2015-11-23T16:39:23+08:00" content="2015-11-23">
-            2015-11-23
+          <time itemprop="dateCreated" datetime="2015-11-30T20:46:02+08:00" content="2015-11-30">
+            2015-11-30
           </time>
         </span>
 
@@ -214,8 +213,8 @@
           
             <span class="post-comments-count">
               &nbsp; | &nbsp;
-              <a href="/2015/11/23/CocosPods/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/23/CocosPods/" itemprop="commentsCount"></span>
+              <a href="/2015/11/30/Swift-2-0新特性之选项集合-Option-Sets/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/30/Swift-2-0新特性之选项集合-Option-Sets/" itemprop="commentsCount"></span>
               </a>
             </span>
           
@@ -229,53 +228,36 @@
       
 
       
-        <span itemprop="articleBody"><h4 id="1_移除原ruby镜像源">1 移除原ruby镜像源</h4><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>gem sources --remove <span class="symbol">https:</span>/<span class="regexp">/rubygems.org/</span> </span><br><span class="line"><span class="variable">$ </span>gem sources -l 可以查看当前还没有源</span><br></pre></td></tr></table></figure>
-<h4 id="2_新增为taobao实时镜像源">2 新增为taobao实时镜像源</h4><pre><code>$ gem sources --<span class="built_in">add</span> http<span class="variable">s:</span>//<span class="keyword">ruby</span>.taobao.org/
-</code></pre><h4 id="3_安装Cocoapods">3 安装Cocoapods</h4><pre><code>$ sudo gem <span class="keyword">install</span> cocoapods 
-</code></pre> <a id="more"></a>
-<h4 id="注意：如果安装出现问题请按以下步骤重新进行">注意：如果安装出现问题请按以下步骤重新进行</h4><pre><code><span class="char">$ </span>sudo rm -rf ~/.cocoapods/
-<span class="char">$ </span>sudo gem update --system
-<span class="char">$ </span>ping github.com 看能否ping通
-<span class="char">$ </span>git config --global http.postBuffer <span class="number">24288000</span> 
-<span class="char">$ </span>pod setup
-新开一个窗口
-<span class="char">$ </span>cd ~/.cocoapods
-<span class="char">$ </span>du -sh *
-<span class="char">$ </span>pod search <span class="class">RongCloudIMKit</span>
-</code></pre><p><img src="/images/RongCloudIMKit.png" alt="RongCloud result"><br><img src="/images/podsetup.png" alt="setup result">    </p>
-<h4 id="4-在项目中引用cocoaPods">4.在项目中引用cocoaPods</h4><p>创建一个single exampl,在工程中创建一个空文件(new-&gt;newfile-&gt;other-&gt;empty) ,命名 ‘Podfile’,在里面写 ‘pod RongCloudIMKit’</p>
-<p>终端-&gt;进入项目路径  (CloudIMTest)</p>
-<pre><code>$ pod <span class="keyword">install</span>
-</code></pre><p><code>执行完成后显示如下</code></p>
-<pre><code>Updating local specs <span class="keyword">repositories</span>
-Analyzing <span class="keyword">dependencies</span>
-Downloading <span class="keyword">dependencies</span>
-Using RongCloudIMKit (<span class="number">2.3</span>.<span class="number">7</span>)
-Generating Pods <span class="keyword">project</span>
-Integrating client <span class="keyword">project</span>
-Sending stats
-Pod installation complete! There is <span class="number">1</span> dependency <span class="keyword">from</span>     the Podfile and <span class="number">1</span> total
-pod installed.    
-</code></pre><p>安装过pod后，以后我们打开工程要用项目目录下得 .xcworkspace文件</p>
-<h4 id="空挡补充时间(优秀第三方库)">空挡补充时间(优秀第三方库)</h4><ul>
-<li>REALM第三方库，可以替代SQLite or CoreData的移动平台的数据库</li>
-<li>JSQMessagesViewController 很有名的一个聊天的viewController</li>
-<li>JSONModel (OC版)解析json数据的库非常有名</li>
-<li>SwiftyJSON (Swift版)解析json数据的库非常有名</li>
-<li>FontAwesome ,酷炫字体</li>
-<li>iOS charts 图表</li>
-<li>HanekeSwift 图片缓存库</li>
-<li>spring 动画的一个库</li>
-<li>spinner 转圈的那个菊花</li>
-<li>sweet alert IOS 漂亮的提示</li>
-<li>KxMenu </li>
-<li>YALSideMenu 侧边栏的一个库</li>
-<li>RESideMenu 像QQ的一个库</li>
-<li>MessageDisplayKit 完全仿照微信的样子做的库</li>
-<li>KYCircleMenu  中心有五个圆的菜单</li>
-<li>OAStackView 空间布局 移植到iOS7，ios8</li>
-</ul>
-<hr>
+        <span itemprop="articleBody"><p>Swift 2.0增加了一个很厉害的新特性，其名为选项集合(Option Sets)，这个特性让我们可以用炒鸡简单的方式来对位掩码进行操作。</p>
+<h3 id="位掩码">位掩码</h3><p>如果你从未使用过位掩码，你可能会问，这到底是什么鬼？<br>请容我来稍微解释一下。</p>
+<p>假设我们在写一个角色扮演的游戏（比如说boombeach(海岛奇兵)），角色可能拥有比如满级野人，加血雕像，生命药水等等，你的第一反应可能是用 Bool 属性来对各种设备又还是没有进行表示，类似下面这样：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable"><span class="keyword">var</span> hasWildman</span> = <span class="literal">true</span>  <span class="comment">// 野人</span></span><br><span class="line"><span class="variable"><span class="keyword">var</span> hasStatue</span> = <span class="literal">true</span>  <span class="comment">// 雕像</span></span><br><span class="line"><span class="variable"><span class="keyword">var</span> hasPotionOfLife</span> = <span class="literal">false</span>  <span class="comment">// 生命药水</span></span><br></pre></td></tr></table></figure>
+<p>其实，还可以有另一种做法，就是定义一个整数并使用它的比特位来进行表示。由于每个比特位只能存储 0 或者 1，可以使用它来对每个装备进行表示，这就是所谓的位掩码。如下图所示：</p>
+<p><img src="/images/OptionSets/位掩码.png" alt="位掩码"></p>
+<h3 id="远古时期的位掩码操作方法">远古时期的位掩码操作方法</h3><a id="more"></a>
+<p>其实操作位掩码对 Swift 来说也不是什么新鲜事了，早在 Swift 1.2 就有一个 RawOptionSetType 类型用来定义位掩码。不过由于其定义方法过于繁琐，甚至有点反人类，在这里就不进行展示了。如果实在有兴趣，可以自行 Google，或者直接上官网。</p>
+<p>这里只稍微讲一下使用定义好的位掩码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> gameLevel: <span class="type">GameLevel</span> = .<span class="type">Wildman</span> | .<span class="type">Statue</span></span><br><span class="line"><span class="keyword">if</span> gameLevel &amp; .<span class="type">Statue</span> != <span class="literal">nil</span> &#123;</span><br><span class="line">    <span class="built_in">println</span>(<span class="string">"得好雕像者，得天下"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果对位操作符用得比较少，这种代码看起来的确会令人比较头疼。如果代码更加复杂，状态更多的话，我们可能得花更多的时间来理解这段代码到底是在进行什么操作。</p>
+<h3 id="新型的位掩码操作方法">新型的位掩码操作方法</h3><p>在 Swift 2.0 的新时代，位掩码的操作方式大大改善了，只因它推出了一个新的 OptionSetType 类型。</p>
+<p>要定义位掩码相当简单，只需要定义一个结构体，并让它遵守 OptionSetType 协议就行了：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> GameLevel: OptionSetType &#123;</span><br><span class="line">    let rawValue: Int</span><br><span class="line">    <span class="keyword">static</span> let Wildman = GameLevel(rawValue: <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">static</span> let Statue = GameLevel(rawValue: <span class="number">1</span> &lt;&lt; <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">static</span> let PotionOfLife = GameLevel(rawValue: <span class="number">1</span> &lt;&lt; <span class="number">2</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里声明了一个 rawValue 的属性，这个 Int 类型的属性就是用来存储所有要表示的比特位。同时还使用位移操作定义了三个类型，使用位移操作可以方便地指定整数中的哪个位用来表示哪个属性，而不用手动进行计算。</p>
+<p>定义好类型之后，我们可以像使用普通的 Set 集合类型一样来使用它，Swift 在底层会自己使用位掩码来处理，作为使用者，我们不必操心：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> gameLevel: <span class="type">GameLevel</span> = [.<span class="type">Wildman</span>, .<span class="type">Statue</span>]</span><br><span class="line"><span class="keyword">if</span> gameLevel.<span class="built_in">contains</span>(.<span class="type">PotionOfLife</span>) &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"得药水者，好冲杯"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这段代码与上面一小节的代码实现了相同的功能。但是这段代码看起来更加简洁明了，同时写起来也更加顺手，我们直接使用了高层的 API 来对底层的比特位进行操作，这种好处是显而易见的。</p>
+<h3 id="Show_Me_The_Code">Show Me The Code</h3><p>下面我们使用一个小 Demo 来进行下实际操作。<br>假设我们模仿用户注册，有三个必填项(username,password,email),完成之后可以点Done，完成注册。但在这个我想要做一个约束，三项必填，只要有一项不符合，Done按钮呈灰色。</p>
+<p>之前我有试过用 <code>var (usernameOK,passwordOK,emailOK) = (false,false,false)</code> ,然后在每一项后面判断，太繁琐了。如果有100项，我要配100项吗?过程此处不再赘述。</p>
+<p>So,我找到了OptionSets</p>
+<p>1.新建空swift文件</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Foundation</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Inputs</span>: <span class="title">OptionSetType</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> rawValue: <span class="type">Int</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">let</span> username = <span class="type">Inputs</span>(rawValue: <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">let</span> password = <span class="type">Inputs</span>(rawValue: <span class="number">1</span> &lt;&lt; <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">let</span> email = <span class="type">Inputs</span>(rawValue: <span class="number">1</span> &lt;&lt; <span class="number">2</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Inputs</span> </span>&#123;</span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">isAllOK</span><span class="params">()</span></span> -&gt; <span class="type">Bool</span> &#123;</span><br><span class="line">    <span class="comment">//第一种方法</span></span><br><span class="line">        <span class="comment">//return self == [.username,.password,.email]</span></span><br><span class="line">    <span class="comment">//第二种方法</span></span><br><span class="line">        <span class="comment">//return self.rawValue == 0b111</span></span><br><span class="line">    <span class="comment">//最终采用方法</span></span><br><span class="line">        <span class="comment">//选项的数目</span></span><br><span class="line">        <span class="keyword">let</span> <span class="built_in">count</span> = <span class="number">3</span></span><br><span class="line">        <span class="comment">//被找到的数目</span></span><br><span class="line">        <span class="keyword">var</span> found = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> time <span class="keyword">in</span> <span class="number">0</span>..&lt;<span class="built_in">count</span> <span class="keyword">where</span> <span class="built_in">contains</span>(<span class="type">Inputs</span>(rawValue: <span class="number">1</span> &lt;&lt; time )) &#123;</span><br><span class="line">            found++</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> found == <span class="built_in">count</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//MASK: 直接进行判断,不用函数名</span></span><br><span class="line"><span class="comment">//extension Inputs: BooleanType &#123;</span></span><br><span class="line"><span class="comment">//    var boolValue: Bool &#123;</span></span><br><span class="line"><span class="comment">//        return self.rawValue == 0b111</span></span><br><span class="line"><span class="comment">//    &#125;</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br></pre></td></tr></table></figure>
+<p>2.在注册页面控制器加入 <code>var possibleInputs: Inputs = []</code></p>
+<p>3.每项可行的后面加入 <code>self.possibleInputs.unionInPlace(Inputs.password)</code></p>
+<p>不可行的<code>self.possibleInputs.subtractInPlace(Inputs.password)</code></p>
+<p>4.每项最终判断完成时<br><code>self.doneButtonOK?.enabled = self.possibleInputs.isAllOK()</code></p>
+<p>5.搞定！</p>
+<p><strong><code>Tips:
+测试OptionSets 可以使用 playGround</code></strong></p>
 </span>
       
     </div>
@@ -293,13 +275,11 @@ pod installed.
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/11/24/WeChat-Swift/" rel="prev">WeChat_Swift</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/11/17/Github实践-Git-Command/" rel="next">Github实践&Git Command</a>
+              <a href="/2015/11/28/自定义-urlScheme/" rel="next">自定义 urlScheme</a>
             
           </div>
         </div>
@@ -314,10 +294,10 @@ pod installed.
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2015/11/23/CocosPods/"
-     data-title="CocoaPods"
+        <div class="ds-share flat" data-thread-key="2015/11/30/Swift-2-0新特性之选项集合-Option-Sets/"
+     data-title="Swift 2.0新特性之选项集合(Option Sets)"
      data-content=""
-     data-url="https://github.com/CarolineHJQ1991/2015/11/23/CocosPods/">
+     data-url="https://github.com/CarolineHJQ1991/2015/11/30/Swift-2-0新特性之选项集合-Option-Sets/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -347,8 +327,8 @@ pod installed.
         
           <div class="comments" id="comments">
             
-              <div class="ds-thread" data-thread-key="2015/11/23/CocosPods/"
-                   data-title="CocoaPods" data-url="https://github.com/CarolineHJQ1991/2015/11/23/CocosPods/">
+              <div class="ds-thread" data-thread-key="2015/11/30/Swift-2-0新特性之选项集合-Option-Sets/"
+                   data-title="Swift 2.0新特性之选项集合(Option Sets)" data-url="https://github.com/CarolineHJQ1991/2015/11/30/Swift-2-0新特性之选项集合-Option-Sets/">
               </div>
             
           </div>
@@ -388,7 +368,7 @@ pod installed.
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-count">8</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -465,7 +445,7 @@ pod installed.
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1_移除原ruby镜像源"><span class="nav-number">1.</span> <span class="nav-text">1 移除原ruby镜像源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2_新增为taobao实时镜像源"><span class="nav-number">2.</span> <span class="nav-text">2 新增为taobao实时镜像源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3_安装Cocoapods"><span class="nav-number">3.</span> <span class="nav-text">3 安装Cocoapods</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注意：如果安装出现问题请按以下步骤重新进行"><span class="nav-number">4.</span> <span class="nav-text">注意：如果安装出现问题请按以下步骤重新进行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-在项目中引用cocoaPods"><span class="nav-number">5.</span> <span class="nav-text">4.在项目中引用cocoaPods</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#空挡补充时间(优秀第三方库)"><span class="nav-number">6.</span> <span class="nav-text">空挡补充时间(优秀第三方库)</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#位掩码"><span class="nav-number">1.</span> <span class="nav-text">位掩码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#远古时期的位掩码操作方法"><span class="nav-number">2.</span> <span class="nav-text">远古时期的位掩码操作方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新型的位掩码操作方法"><span class="nav-number">3.</span> <span class="nav-text">新型的位掩码操作方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Show_Me_The_Code"><span class="nav-number">4.</span> <span class="nav-text">Show Me The Code</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>

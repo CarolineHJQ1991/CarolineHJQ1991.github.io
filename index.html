@@ -187,6 +187,85 @@
           
           
             
+              <a class="post-title-link" href="/2015/11/30/Swift-2-0新特性之选项集合-Option-Sets/" itemprop="url">
+                Swift 2.0新特性之选项集合(Option Sets)
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-11-30T20:46:02+08:00" content="2015-11-30">
+            2015-11-30
+          </time>
+        </span>
+
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2015/11/30/Swift-2-0新特性之选项集合-Option-Sets/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/30/Swift-2-0新特性之选项集合-Option-Sets/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>Swift 2.0增加了一个很厉害的新特性，其名为选项集合(Option Sets)，这个特性让我们可以用炒鸡简单的方式来对位掩码进行操作。</p>
+<h3 id="位掩码">位掩码</h3><p>如果你从未使用过位掩码，你可能会问，这到底是什么鬼？<br>请容我来稍微解释一下。</p>
+<p>假设我们在写一个角色扮演的游戏（比如说boombeach(海岛奇兵)），角色可能拥有比如满级野人，加血雕像，生命药水等等，你的第一反应可能是用 Bool 属性来对各种设备又还是没有进行表示，类似下面这样：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable"><span class="keyword">var</span> hasWildman</span> = <span class="literal">true</span>  <span class="comment">// 野人</span></span><br><span class="line"><span class="variable"><span class="keyword">var</span> hasStatue</span> = <span class="literal">true</span>  <span class="comment">// 雕像</span></span><br><span class="line"><span class="variable"><span class="keyword">var</span> hasPotionOfLife</span> = <span class="literal">false</span>  <span class="comment">// 生命药水</span></span><br></pre></td></tr></table></figure>
+<p>其实，还可以有另一种做法，就是定义一个整数并使用它的比特位来进行表示。由于每个比特位只能存储 0 或者 1，可以使用它来对每个装备进行表示，这就是所谓的位掩码。如下图所示：</p>
+<p><img src="/images/OptionSets/位掩码.png" alt="位掩码"></p>
+<h3 id="远古时期的位掩码操作方法">远古时期的位掩码操作方法</h3>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/11/30/Swift-2-0新特性之选项集合-Option-Sets/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2015/11/28/自定义-urlScheme/" itemprop="url">
                 自定义 urlScheme
               </a>
@@ -573,7 +652,7 @@
           
           
             
-              <a class="post-title-link" href="/2015/11/23/CocosPods/" itemprop="url">
+              <a class="post-title-link" href="/2015/11/23/CocoaPods/" itemprop="url">
                 CocoaPods
               </a>
             
@@ -595,8 +674,8 @@
           
             <span class="post-comments-count">
               &nbsp; | &nbsp;
-              <a href="/2015/11/23/CocosPods/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/23/CocosPods/" itemprop="commentsCount"></span>
+              <a href="/2015/11/23/CocoaPods/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/23/CocoaPods/" itemprop="commentsCount"></span>
               </a>
             </span>
           
@@ -616,7 +695,7 @@
 </code></pre><h4 id="3_安装Cocoapods">3 安装Cocoapods</h4><pre><code>$ sudo gem <span class="keyword">install</span> cocoapods 
 </code></pre>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/11/23/CocosPods/#more" rel="contents">
+            <a class="btn" href="/2015/11/23/CocoaPods/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -749,7 +828,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-count">8</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

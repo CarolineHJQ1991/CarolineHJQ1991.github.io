@@ -39,25 +39,24 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="Alcatraz是Xcode的插件包管理工具，很多优秀的插件都能在上面找到，今天我就来说说如何安装Alcatraz以及推荐几个优秀的插件。
-安装Alcatraz1、关闭Xcode
-2、如果你之前安装过Alcatraz，卸载它，运行命令：
-1$ rm -rf ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins/Alcatraz">
+<meta name="description" content="1 移除原ruby镜像源12$ gem sources --remove https://rubygems.org/ $ gem sources -l 可以查看当前还没有源
+2 新增为taobao实时镜像源$ gem sources --add https://ruby.taobao.org/
+3 安装Cocoapods$ sudo gem install cocoapods">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Xcode7安装Alcatraz以及插件介绍">
-<meta property="og:url" content="https://github.com/CarolineHJQ1991/2015/11/27/Xcode7安装Alcatraz以及插件介绍/index.html">
+<meta property="og:title" content="CocoaPods">
+<meta property="og:url" content="https://github.com/CarolineHJQ1991/2015/11/23/CocoaPods/index.html">
 <meta property="og:site_name" content="Caroline.H 's Blog">
-<meta property="og:description" content="Alcatraz是Xcode的插件包管理工具，很多优秀的插件都能在上面找到，今天我就来说说如何安装Alcatraz以及推荐几个优秀的插件。
-安装Alcatraz1、关闭Xcode
-2、如果你之前安装过Alcatraz，卸载它，运行命令：
-1$ rm -rf ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins/Alcatraz">
-<meta property="og:updated_time" content="2015-11-28T06:58:47.000Z">
+<meta property="og:description" content="1 移除原ruby镜像源12$ gem sources --remove https://rubygems.org/ $ gem sources -l 可以查看当前还没有源
+2 新增为taobao实时镜像源$ gem sources --add https://ruby.taobao.org/
+3 安装Cocoapods$ sudo gem install cocoapods">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/RongCloudIMKit.png">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/podsetup.png">
+<meta property="og:updated_time" content="2015-11-29T19:23:17.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Xcode7安装Alcatraz以及插件介绍">
-<meta name="twitter:description" content="Alcatraz是Xcode的插件包管理工具，很多优秀的插件都能在上面找到，今天我就来说说如何安装Alcatraz以及推荐几个优秀的插件。
-安装Alcatraz1、关闭Xcode
-2、如果你之前安装过Alcatraz，卸载它，运行命令：
-1$ rm -rf ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins/Alcatraz">
+<meta name="twitter:title" content="CocoaPods">
+<meta name="twitter:description" content="1 移除原ruby镜像源12$ gem sources --remove https://rubygems.org/ $ gem sources -l 可以查看当前还没有源
+2 新增为taobao实时镜像源$ gem sources --add https://ruby.taobao.org/
+3 安装Cocoapods$ sudo gem install cocoapods">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -67,7 +66,7 @@
   };
 </script>
 
-  <title> Xcode7安装Alcatraz以及插件介绍 | Caroline.H 's Blog </title>
+  <title> CocoaPods | Caroline.H 's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -195,7 +194,7 @@
           
           
             
-              Xcode7安装Alcatraz以及插件介绍
+              CocoaPods
             
           
         </h1>
@@ -204,8 +203,8 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2015-11-27T21:14:29+08:00" content="2015-11-27">
-            2015-11-27
+          <time itemprop="dateCreated" datetime="2015-11-23T16:39:23+08:00" content="2015-11-23">
+            2015-11-23
           </time>
         </span>
 
@@ -215,8 +214,8 @@
           
             <span class="post-comments-count">
               &nbsp; | &nbsp;
-              <a href="/2015/11/27/Xcode7安装Alcatraz以及插件介绍/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/27/Xcode7安装Alcatraz以及插件介绍/" itemprop="commentsCount"></span>
+              <a href="/2015/11/23/CocoaPods/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/23/CocoaPods/" itemprop="commentsCount"></span>
               </a>
             </span>
           
@@ -230,21 +229,60 @@
       
 
       
-        <span itemprop="articleBody"><p>Alcatraz是Xcode的插件包管理工具，很多优秀的插件都能在上面找到，今天我就来说说如何安装Alcatraz以及推荐几个优秀的插件。</p>
-<h4 id="安装Alcatraz">安装Alcatraz</h4><p>1、关闭Xcode</p>
-<p>2、如果你之前安装过Alcatraz，卸载它，运行命令：</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rm -rf ~<span class="regexp">/Library/</span>Application\ Support<span class="regexp">/Developer/</span>Shared<span class="regexp">/Xcode/</span>Plug-ins<span class="regexp">/Alcatraz.xcplugin</span></span><br></pre></td></tr></table></figure>
-<p>3、最关键的一步，运行命令</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">find</span> ~<span class="regexp">/Library/</span>Application\ Support<span class="regexp">/Developer/</span>Shared<span class="regexp">/Xcode/</span>Plug-ins -name Info.plist -maxdepth <span class="number">3</span> | xargs -I&#123;&#125; defaults <span class="keyword">write</span> &#123;&#125; DVTPlugInCompatibilityUUIDs -array-add defaults <span class="keyword">read</span> <span class="regexp">/Applications/</span>Xcode.app<span class="regexp">/Contents/I</span>nfo DVTPlugInCompatibilityUUID</span><br><span class="line"></span><br><span class="line">$ sudo xcode-select --reset</span><br></pre></td></tr></table></figure>
-<p>4、打开Xcode</p>
-<p>5、安装Alcatraz</p>
-<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>curl -fsSL <span class="symbol">https:</span>/<span class="regexp">/raw.github.com/supermarin</span><span class="regexp">/Alcatraz/master</span><span class="regexp">/Scripts/install</span>.sh | sh</span><br></pre></td></tr></table></figure>
-<p>6、重启Xcode</p>
-<p>下面我就来介绍几款我用的还不错的插件</p>
-<h4 id="插件介绍">插件介绍</h4><p><strong>9.CocoaPods</strong></p>
-<p>Xcode自动管理pod文件，以及install和update</p>
-<p><strong>8.SCXcodeMiniMap</strong></p>
-<p>一个Xcode插件，可以在当前的窗口内创建一个代码迷你地图，并在屏幕上高亮提示。<br>Github地址: SCXcodeMiniMap</p>
+        <span itemprop="articleBody"><h4 id="1_移除原ruby镜像源">1 移除原ruby镜像源</h4><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>gem sources --remove <span class="symbol">https:</span>/<span class="regexp">/rubygems.org/</span> </span><br><span class="line"><span class="variable">$ </span>gem sources -l 可以查看当前还没有源</span><br></pre></td></tr></table></figure>
+<h4 id="2_新增为taobao实时镜像源">2 新增为taobao实时镜像源</h4><pre><code>$ gem sources --<span class="built_in">add</span> http<span class="variable">s:</span>//<span class="keyword">ruby</span>.taobao.org/
+</code></pre><h4 id="3_安装Cocoapods">3 安装Cocoapods</h4><pre><code>$ sudo gem <span class="keyword">install</span> cocoapods 
+</code></pre> <a id="more"></a>
+<h4 id="注意：如果安装出现问题请按以下步骤重新进行">注意：如果安装出现问题请按以下步骤重新进行</h4><pre><code><span class="char">$ </span>sudo rm -rf ~/.cocoapods/
+<span class="char">$ </span>sudo gem update --system
+<span class="char">$ </span>ping github.com 看能否ping通
+<span class="char">$ </span>git config --global http.postBuffer <span class="number">24288000</span> 
+<span class="char">$ </span>pod setup
+新开一个窗口
+<span class="char">$ </span>cd ~/.cocoapods
+<span class="char">$ </span>du -sh *
+<span class="char">$ </span>pod search <span class="class">RongCloudIMKit</span>
+</code></pre><p><img src="/images/RongCloudIMKit.png" alt="RongCloud result"><br><img src="/images/podsetup.png" alt="setup result">    </p>
+<h4 id="4-在项目中引用cocoaPods">4.在项目中引用cocoaPods</h4><p>创建一个single exampl,在工程中创建一个空文件(new-&gt;newfile-&gt;other-&gt;empty) ,命名 ‘Podfile’,在里面写 ‘pod RongCloudIMKit’</p>
+<p>终端-&gt;进入项目路径  (CloudIMTest)</p>
+<pre><code>$ pod <span class="keyword">install</span>
+</code></pre><p><code>执行完成后显示如下</code></p>
+<pre><code>Updating local specs <span class="keyword">repositories</span>
+Analyzing <span class="keyword">dependencies</span>
+Downloading <span class="keyword">dependencies</span>
+Using RongCloudIMKit (<span class="number">2.3</span>.<span class="number">7</span>)
+Generating Pods <span class="keyword">project</span>
+Integrating client <span class="keyword">project</span>
+Sending stats
+Pod installation complete! There is <span class="number">1</span> dependency <span class="keyword">from</span>     the Podfile and <span class="number">1</span> total
+pod installed.    
+</code></pre><p>安装过pod后，以后我们打开工程要用项目目录下得 .xcworkspace文件</p>
+<h4 id="5-更新pod更新库太慢">5.更新pod更新库太慢</h4><p><code>pod update命令后面加一个参数 --no-repo-update(不读取总cocoapods库列表)</code></p>
+<h4 id="空挡补充时间(优秀第三方库)">空挡补充时间(优秀第三方库)</h4><ul>
+<li>REALM第三方库，可以替代SQLite or CoreData的移动平台的数据库</li>
+<li>JSQMessagesViewController 很有名的一个聊天的viewController</li>
+<li>JSONModel (OC版)解析json数据的库非常有名</li>
+<li>SwiftyJSON (Swift版)解析json数据的库非常有名</li>
+<li>FontAwesome ,酷炫字体</li>
+<li>iOS charts 图表</li>
+<li>HanekeSwift 图片缓存库</li>
+<li>spring 动画的一个库</li>
+<li>spinner 转圈的那个菊花</li>
+<li>sweet alert IOS 漂亮的提示</li>
+<li>KxMenu </li>
+<li>YALSideMenu 侧边栏的一个库</li>
+<li>RESideMenu 像QQ的一个库</li>
+<li>MessageDisplayKit 完全仿照微信的样子做的库</li>
+<li>KYCircleMenu  中心有五个圆的菜单</li>
+<li>OAStackView 空间布局 移植到iOS7，ios8</li>
+<li>MBProgressHUD  进度的平视显示器，用户体验更直观</li>
+<li>swiftnotice  </li>
+<li>UITextBox  占位符自动跳跃到右边的文本框</li>
+<li>一篇blog   www.cnblogs.com/daguo/archive/2012/11/28/2792378/html</li>
+<li>nspredicate</li>
+<li>AJWValidator</li>
+</ul>
+<hr>
 </span>
       
     </div>
@@ -262,13 +300,13 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/11/28/自定义-urlScheme/" rel="prev">自定义 urlScheme</a>
+              <a href="/2015/11/24/WeChat-Swift/" rel="prev">WeChat_Swift</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/11/24/iOS错误总结/" rel="next">iOS错误总结</a>
+              <a href="/2015/11/17/Github实践-Git-Command/" rel="next">Github实践&Git Command</a>
             
           </div>
         </div>
@@ -283,10 +321,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2015/11/27/Xcode7安装Alcatraz以及插件介绍/"
-     data-title="Xcode7安装Alcatraz以及插件介绍"
+        <div class="ds-share flat" data-thread-key="2015/11/23/CocoaPods/"
+     data-title="CocoaPods"
      data-content=""
-     data-url="https://github.com/CarolineHJQ1991/2015/11/27/Xcode7安装Alcatraz以及插件介绍/">
+     data-url="https://github.com/CarolineHJQ1991/2015/11/23/CocoaPods/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -316,8 +354,8 @@
         
           <div class="comments" id="comments">
             
-              <div class="ds-thread" data-thread-key="2015/11/27/Xcode7安装Alcatraz以及插件介绍/"
-                   data-title="Xcode7安装Alcatraz以及插件介绍" data-url="https://github.com/CarolineHJQ1991/2015/11/27/Xcode7安装Alcatraz以及插件介绍/">
+              <div class="ds-thread" data-thread-key="2015/11/23/CocoaPods/"
+                   data-title="CocoaPods" data-url="https://github.com/CarolineHJQ1991/2015/11/23/CocoaPods/">
               </div>
             
           </div>
@@ -434,7 +472,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装Alcatraz"><span class="nav-number">1.</span> <span class="nav-text">安装Alcatraz</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#插件介绍"><span class="nav-number">2.</span> <span class="nav-text">插件介绍</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1_移除原ruby镜像源"><span class="nav-number">1.</span> <span class="nav-text">1 移除原ruby镜像源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2_新增为taobao实时镜像源"><span class="nav-number">2.</span> <span class="nav-text">2 新增为taobao实时镜像源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3_安装Cocoapods"><span class="nav-number">3.</span> <span class="nav-text">3 安装Cocoapods</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注意：如果安装出现问题请按以下步骤重新进行"><span class="nav-number">4.</span> <span class="nav-text">注意：如果安装出现问题请按以下步骤重新进行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-在项目中引用cocoaPods"><span class="nav-number">5.</span> <span class="nav-text">4.在项目中引用cocoaPods</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-更新pod更新库太慢"><span class="nav-number">6.</span> <span class="nav-text">5.更新pod更新库太慢</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#空挡补充时间(优秀第三方库)"><span class="nav-number">7.</span> <span class="nav-text">空挡补充时间(优秀第三方库)</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
