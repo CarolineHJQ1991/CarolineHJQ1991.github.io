@@ -1,0 +1,784 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="我是韩球球，目前是一名由JAVA->IOS的developer，希望成为内外兼修，才德兼备的女子，追求卓越，一直在通往梦想的桥梁上走着......                             [生如夏花之绚烂，死如秋叶之静美]" />
+
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="经典观察者模式经典观察者模式被认为是对象的行为模式，又叫发布-订阅(Publish/Subscribe)模式、模型-视图(Model/View)模式、源-监听器(Source/Listener)模式或从属者(Dependents)模式。经典观察者模式定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态上发生变化时，会通知所有观察者对象，使它们能够自动更新自己或者做">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式之观察者模式">
+<meta property="og:url" content="https://github.com/CarolineHJQ1991/2015/12/01/设计模式之观察者模式/index.html">
+<meta property="og:site_name" content="Caroline.H 's Blog">
+<meta property="og:description" content="经典观察者模式经典观察者模式被认为是对象的行为模式，又叫发布-订阅(Publish/Subscribe)模式、模型-视图(Model/View)模式、源-监听器(Source/Listener)模式或从属者(Dependents)模式。经典观察者模式定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态上发生变化时，会通知所有观察者对象，使它们能够自动更新自己或者做">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/设计模式/推模型.jpg">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/设计模式/NSNotificationCenter.jpg">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/设计模式/removeObserver1.jpg">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/设计模式/removeObserver2.jpg">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/设计模式/KVO实现过程1.png">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/设计模式/KVO实现过程2.png">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/设计模式/拉模型.png">
+<meta property="og:updated_time" content="2015-12-01T15:50:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="设计模式之观察者模式">
+<meta name="twitter:description" content="经典观察者模式经典观察者模式被认为是对象的行为模式，又叫发布-订阅(Publish/Subscribe)模式、模型-视图(Model/View)模式、源-监听器(Source/Listener)模式或从属者(Dependents)模式。经典观察者模式定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态上发生变化时，会通知所有观察者对象，使它们能够自动更新自己或者做">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'always'
+  };
+</script>
+
+  <title> 设计模式之观察者模式 | Caroline.H 's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">Caroline.H 's Blog</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            <i class="menu-item-icon icon-next-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+
+      <li class="menu-item menu-item-high"> 
+      <script src="/js/high.js"></script>
+      <a href="javascript:void(0);" onclick="high_benjamin('/css/high.css')" rel="section">
+      <i class="menu-item-icon icon-high"></i><br />
+        点我High
+      </a>
+      </li>
+
+      
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <form class="site-search-form">
+    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+  </form>
+
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'au9bfYPd66oNfFwx6nZp','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              设计模式之观察者模式
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-01T23:44:15+08:00" content="2015-12-01">
+            2015-12-01
+          </time>
+        </span>
+
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2015/12/01/设计模式之观察者模式/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/01/设计模式之观察者模式/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h2 id="经典观察者模式">经典观察者模式</h2><p>经典观察者模式被认为是对象的行为模式，又叫发布-订阅(Publish/Subscribe)模式、模型-视图(Model/View)模式、源-监听器(Source/Listener)模式或从属者(Dependents)模式。经典观察者模式定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态上发生变化时，会通知所有观察者对象，使它们能够自动更新自己或者做出相应的一些动作。在文章一开始举的例子就是典型观察者模式的应用。</p>
+<p>而在IOS开发中我们可能会接触到的经典观察者模式的实现方式，有这么几种：NSNotificationCenter、KVO、Delegate等</p>
+<hr>
+<a id="more"></a>
+<h3 id="感知通知方式">感知通知方式</h3><p>在经典观察者模式中，因为观察者感知到主题对象变化方式的不同，又分为推模型和拉模型两种方式。</p>
+<h4 id="推模型">推模型</h4><p><img src="/images/设计模式/推模型.jpg" alt="推模型"></p>
+<p>主题对象向观察者推送主题的详细信息，不管观察者是否需要，推送的信息通常是主题对象的全部或者部分数据。推模型实现了观察者和主题对象的解耦，两者之间没有过度的依赖关系。但是推模型每次都会以广播的方式，向所有观察者发送通知。所有观察者被动的接受通知。当通知的内容过多时，多个观察者同时接收，可能会对网络、内存（有些时候还会涉及IO）有较大影响。</p>
+<p>在IOS中典型的推模型实现方式为NSNotificationCenter和KVO。</p>
+<h5 id="NSNotificationCenter">NSNotificationCenter</h5><p>NSnotificationCenter是一种典型的有调度中心的观察者模式实现方式。以NSNotificationCenter为中心，观察者往Center中注册对某个主题对象的变化感兴趣，主题对象通过NSNotificationCenter进行变化广播。这种模型就是文章开始发布订阅报纸在OC中的一种类似实现。所有的观察和监听行为都向同一个中心注册，所有对象的变化也都通过同一个中心向外广播。</p>
+<p>SNotificationCenter就像一个枢纽一样，处在整个观察者模式的核心位置，调度着消息在观察者和监听者之间传递。</p>
+<p><img src="/images/设计模式/NSNotificationCenter.jpg" alt="NSNotificationCenter"></p>
+<p>一次完整的观察过程如上图所示。整个过程中，关键的类有这么几个（介绍顺序按照完成顺序）：</p>
+<p>1、观察者Observer，一般继承自NSObject，通过NSNotificationCenter的addObserver:selector:name:object接口来注册对某一类型通知感兴趣.在注册时候一定要注意，NSNotificationCenter不会对观察者进行引用计数+1的操作，我们在程序中释放观察者的时候，一定要去报从center中将其注销了。</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="typename">void</span>) <span class="string">handleMessage:</span>(NSNotification*)nc&#123;</span><br><span class="line">     </span><br><span class="line"><span class="comment">//解析消息内容</span></span><br><span class="line"> NSDictionary* userInfo = [nc userInfo];</span><br><span class="line"> &#125;</span><br><span class="line"> - (<span class="typename">void</span>) commonInit</span><br><span class="line"> &#123;</span><br><span class="line">     </span><br><span class="line"><span class="comment">//注册观察者</span></span><br><span class="line">     [[NSNotificationCenter defaultCenter] <span class="string">addObserver:</span>self <span class="string">selector:</span><span class="annotation">@selector</span>(<span class="string">handleMessage:</span>) <span class="string">name:</span>kDZTestNotificatonMessage <span class="string">object:</span>nil];</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>2、通知中心NSNotificationCenter，通知的枢纽。<br>3、主题对象，被观察的对象，通过postNotificationName:object:userInfo:发送某一类型通知，广播改变。</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">-</span> (void) <span class="tag">postMessage</span></span><br><span class="line"> &#123;</span><br><span class="line">     <span class="attr_selector">[[NSNotificationCenter defaultCenter]</span> <span class="tag">postNotificationName</span><span class="pseudo">:kDZTestNotificatonMessage</span> <span class="tag">object</span><span class="pseudo">:Nil</span> <span class="tag">userInfo</span>:@&#123;&#125;];</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>4、通知对象NSNotification，当有通知来的时候，Center会调用观察者注册的接口来广播通知，同时传递存储着更改内容的NSNotification对象。</p>
+<h5 id="apple版实现的NotificationCenter让我用起来不太爽的几个小问题">apple版实现的NotificationCenter让我用起来不太爽的几个小问题</h5><p>在使用NSNotificationCenter的时候，从编程的角度来讲我们往往不止是希望能够做到功能实现，还能希望编码效率和整个工程的可维护性良好。而Apple提供的以NSNotificationCenter为中心的观察者模式实现，在可维护性和效率上存在以下缺点：</p>
+<p>1、每个注册的地方需要同时注册一个函数，这将会带来大量的编码工作。仔细分析能够发现，其实我们每个观察者每次注册的函数几乎都是雷同的。这就是种变相的CtrlCV，是典型的丑陋和难维护的代码。<br>2、每个观察者的回调函数，都需要对主题对象发送来的消息进行解包的操作。从UserInfo中通过KeyValue的方式，将消息解析出来，而后进行操作。试想一下，工程中有100个地方，同时对前面中在响应变化的函数中进行了解包的操作。而后期需求变化需要多传一个内容的时候，将会是一场维护上的灾难。<br>3、当大规模使用观察者模式的时候，我们往往在dealloc处加上一句:<br>[[NSNotificationCenter defaultCenter] removeObserver:self]<br>而在实际使用过程中，会发现该函数的性能是比较低下的。在整个启动过程中，进行了10000次RemoveObserver操作：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="at_rule">@<span class="keyword">implementation</span> DZMessage</span><br><span class="line"> - (void) dealloc</span><br><span class="line"> </span>&#123;</span><br><span class="line">    <span class="attr_selector">[[NSNotificationCenter defaultCenter]</span> <span class="rule"><span class="attribute">removeObserver</span>:<span class="value">self]</span></span>;</span><br><span class="line"> &#125;</span><br><span class="line"> ....</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span> ; i &amp;lt; <span class="number">10000</span>; i++) &#123;</span><br><span class="line">      DZMessage* message = [DZMessage <span class="keyword">new</span>];</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>通过下图可以看出这一过程消耗了23.4%的CPU，说明这一函数的效率还是很低的。</p>
+<p><img src="/images/设计模式/removeObserver1.jpg" alt=""></p>
+<p>这还是只有一种消息类型的存在下有这样的结果，如果整个NotificationCenter中混杂着多种消息类型，那么恐怕对于性能来说将会是灾难性的。</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="typename">int</span> i = <span class="number">0</span> ; i &amp;lt; <span class="number">10000</span>; i++) &#123;</span><br><span class="line">      DZMessage* message = [DZMessage <span class="keyword">new</span>];</span><br><span class="line">      [[NSNotificationCenter defaultCenter] <span class="string">addObserver:</span>self <span class="string">selector:</span><span class="annotation">@selector</span>(handle) <span class="string">name:</span>[@(i) stringValue] <span class="string">object:</span>nil];</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>增加了多种消息类型之后，RemoveObserver占用了启动过程中63.9%的CPU消耗。</p>
+<p><img src="/images/设计模式/removeObserver2.jpg" alt=""></p>
+<p>而由于Apple没有提供Center的源码，所以修改这个Center几乎不可能了。</p>
+<h5 id="改进版的有中心观察者模式（DZNotificationCenter）">改进版的有中心观察者模式（DZNotificationCenter）</h5><p> 在设计的时候考虑到以上用起来不爽的地方，进行了优化：<br>1、将解包到执行函数的操作进行了封装，只需要提供某消息类型的解包block和消息类型对应的protocol，当有消息到达的时候，消息中心会进行统一解包，并直接调用观察者相应的函数。<br>2、对观察者的维护机制进行优化（还未做完），提升查找和删除观察者的效率。<br>DZNotificationCenter的用法和NSNotificationCenter在注册和注销观察者的地方是一样的，不一样的地方在于，你在使用的时候需要提供解析消息的block。你可以通过两种方式来提供。</p>
+<ul>
+<li>直接注册的方式</li>
+</ul>
+<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="collection">[DZDefaultNotificationCenter addDecodeNotificationBlock:<span class="comment">^SEL</span><span class="list">(<span class="keyword">NSDictionary</span> *userInfo, NSMutableArray *__autoreleasing *params)</span> <span class="collection">&#123;</span><br><span class="line">      NSString* key = userInfo<span class="collection">[@<span class="string">"key"</span>]</span><span class="comment">;</span></span><br><span class="line">      if <span class="list">(<span class="keyword">params</span> != NULL)</span> <span class="collection">&#123;</span><br><span class="line">          *params = <span class="collection">[NSMutableArray new]</span><span class="comment">;</span></span><br><span class="line">      &#125;</span></span><br><span class="line">      <span class="collection">[*params  addObject:key]</span><span class="comment">;</span></span><br><span class="line">      return @selector<span class="list">(<span class="keyword">handleTestMessageWithKey:</span>)</span><span class="comment">;</span></span><br><span class="line">  &#125;</span> forMessage:kDZMessageTest]</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>实现DZNotificationInitDelegaete协议，当整个工程中大规模使用观察者的时候，建议使用该方式。这样有利于统一管理所有的解析方式。</li>
+</ul>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">- (DZDecodeNotificationBlock) decodeNotification:(<span class="built_in">NSString</span> *)message forCenter:(DZNotificationCenter *)center</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (message == kDZMessageTest) &#123;</span><br><span class="line">        <span class="keyword">return</span> ^(<span class="built_in">NSDictionary</span>* userInfo, <span class="built_in">NSMutableArray</span>* __autoreleasing* params)&#123;</span><br><span class="line">            <span class="built_in">NSString</span>* key = userInfo[<span class="string">@"key"</span>];</span><br><span class="line">            <span class="keyword">if</span> (params != <span class="literal">NULL</span>) &#123;</span><br><span class="line">                *params = [<span class="built_in">NSMutableArray</span> new];</span><br><span class="line">            &#125;</span><br><span class="line">            [*params  addObject:key];</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">@selector</span>(handlePortMessage:);</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在使用的过程中为了，能够保证在观察者处能够回调相同的函数，可以实现针对某一消息类型的protocol</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="at_rule">@<span class="keyword">protocol</span> DZTestMessageInterface &amp;lt</span>;<span class="tag">NSObject</span>&amp;<span class="tag">gt</span>;</span><br><span class="line"><span class="tag">-</span> (<span class="tag">void</span>) <span class="rule"><span class="attribute">handleTestMessageWithKey</span>:<span class="value">(NSString*)key</span></span>;</span><br><span class="line"><span class="at_rule">@<span class="keyword">end</span></span></span><br></pre></td></tr></table></figure>
+<p>这样就能够保证，在使用观察者的地方不用反复的拼函数名和解析消息内容了。</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@interface DZViewController () &amp;lt;DZTestMessageInterface&amp;gt;</span><br><span class="line">@end</span><br><span class="line">@implementation DZViewController</span><br><span class="line"><span class="code">....</span><br><span class="line">- (void) handleTestMessageWithKey:(NSString *)key</span><br><span class="line">&#123;</span><br><span class="line">    self.showLabel.text = [NSString stringWithFormat:@"get message with %@", key];</span><br><span class="line">&#125;</span><br><span class="line">....</span></span><br></pre></td></tr></table></figure>
+<h5 id="KVO">KVO</h5><p>KVO的全称是Key-Value Observer，即键值观察。是一种没有中心枢纽的观察者模式的实现方式。一个主题对象管理所有依赖于它的观察者对象，并且在自身状态发生改变的时候主动通知观察者对象。 让我们先看一个完整的示例：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> NSString* const kKVOPathKey = @<span class="string">"key"</span>;</span><br><span class="line"><span class="annotation">@implementation</span> DZKVOTest</span><br><span class="line">- (<span class="typename">void</span>) <span class="string">setMessage:</span>(DZMessage *)message</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (message != _message) &#123;</span><br><span class="line">        <span class="keyword">if</span> (_message) &#123;</span><br><span class="line">            [_message <span class="string">removeObserver:</span>self <span class="string">forKeyPath:</span>kKVOPathKey];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (message) &#123;</span><br><span class="line">            [message <span class="string">addObserver:</span>self <span class="string">forKeyPath:</span>kKVOPathKey <span class="string">options:</span>NSKeyValueObservingOptionNew <span class="string">context:</span>Nil];</span><br><span class="line">        &#125;</span><br><span class="line">        _message = message;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">- (<span class="typename">void</span>) <span class="string">observeValueForKeyPath:</span>(NSString *)keyPath <span class="string">ofObject:</span>(id)object <span class="string">change:</span>(NSDictionary *)change <span class="string">context:</span>(<span class="typename">void</span> *)context</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> ([keyPath <span class="string">isEqual:</span>kKVOPathKey] &amp;amp;&amp;amp; object == _message) &#123;</span><br><span class="line">        NSLog(@<span class="string">"get %@"</span>,change);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">- (<span class="typename">void</span>) postMessage</span><br><span class="line">&#123;</span><br><span class="line">    _message.key = @<span class="string">"asdfasd"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="annotation">@end</span></span><br></pre></td></tr></table></figure>
+<p>完成一次完整的改变通知过程，经过以下几次过程:</p>
+<p>1、注册观察者[message addObserver:self forKeyPath:kKVOPathKey options:NSKeyValueObservingOptionNew context:Nil];<br>2、更改主题对象属性的值，即触发发送更改的通知 _message.key = @”asdfasd”;<br>3、在制定的回调函数中，处理收到的更改通知</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="typename">void</span>) <span class="string">observeValueForKeyPath:</span>(NSString *)keyPath <span class="string">ofObject:</span>(id)object <span class="string">change:</span>(NSDictionary *)change <span class="string">context:</span>(<span class="typename">void</span> *)context</span><br><span class="line">&#123;</span><br><span class="line"> <span class="keyword">if</span> ([keyPath <span class="string">isEqual:</span>kKVOPathKey] &amp;amp;&amp;amp; object == _message) &#123;</span><br><span class="line">     NSLog(@<span class="string">"get %@"</span>,change);</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>4、注销观察者 [_message removeObserver:self forKeyPath:kKVOPathKey];</p>
+<h6 id="KVO实现原理">KVO实现原理</h6><p>一般情况下对于使用Property的属性，objc会为其自动添加键值观察功能，你只需要写一句@property (noatomic, assign) float age 就能够获得age的键值观察功能。而为了更深入的探讨一下，KVO的实现原理我们先手动实现一下KVO：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">DZKVOManual</span></span></span><br><span class="line">- (<span class="keyword">void</span>) setAge:(<span class="keyword">int</span>)age</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="keyword">self</span> willChangeValueForKey:kKVOPathAge];</span><br><span class="line">    <span class="keyword">if</span> (age !=_age) &#123;</span><br><span class="line">        _age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    [<span class="keyword">self</span> didChangeValueForKey:kKVOPathAge];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//经验证  会先去调用automaticallyNotifiesObserversForKey:当该函数没有时才会调用automaticallyNotifiesObserversOfAge。这个函数应该是编译器，自动增加的一个函数，使用xcode能够自动提示出来。的确很强大。</span></span><br><span class="line"><span class="comment">//+(BOOL) automaticallyNotifiesObserversOfAge</span></span><br><span class="line"><span class="comment">//&#123;</span></span><br><span class="line"><span class="comment">//    return NO;</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line">+ (<span class="built_in">BOOL</span>) automaticallyNotifiesObserversForKey:(<span class="built_in">NSString</span> *)key</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (key ==kKVOPathAge) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NO</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> [<span class="keyword">super</span> automaticallyNotifiesObserversForKey:key];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<p>首先，需要手动实现属性的 setter 方法，并在设置操作的前后分别调用 willChangeValueForKey: 和 didChangeValueForKey方法，这两个方法用于通知系统该 key 的属性值即将和已经变更了；</p>
+<p>其次，要实现类方法 automaticallyNotifiesObserversForKey，并在其中设置对该 key 不自动发送通知（返回 NO 即可）。这里要注意，对其它非手动实现的 key，要转交给 super 来处理。</p>
+<p>在这里的手动实现，主要是手动实现了主题对象变更向外广播的过程。后续如何广播到观察者和观察者如何响应我们没有实现，其实这两个过程apple已经封装的很好了，猜测一下的话，应该是主题对象会维护一个观察者的队列，当本身属性发生变动，接受到通知的时候，找到相关属性的观察者队列，依次调用observeValueForKeyPath:(NSString <em>)keyPath ofObject:(id)object change:(NSDictionary </em>)change context:(void *)context来广播更改。 还有一个疑问，就是在自动实现KVO的时候，系统是否和我们手动实现做了同样的事情呢？</p>
+<h6 id="自动实现KVO及其原理">自动实现KVO及其原理</h6><p>我们仔细来观察一下在使用KVO的过程中类DZMessage的一个实例发生了什么变化： 在使用KVO之前：</p>
+<p><img src="/images/设计模式/KVO实现过程1.png" alt=""></p>
+<p>当调用Setter方法，并打了断点的时候：</p>
+<p><img src="/images/设计模式/KVO实现过程2.png" alt=""></p>
+<p>神奇的发现类的isa指针发生了变化，我们原本的类叫做DZMessage，而使用KVO后类名变成了NSKVONotifying_DZMessage。这说明objc在运行时对我们的类做了些什么。</p>
+<p>我们从Apple的文档Key-Value Observing Implementation Details找到了一些线索。</p>
+<p>Automatic key-value observing is implemented using a technique called isa-swizzling. The isa pointer, as the name suggests, points to the object’s class which maintains a dispatch table.This dispatch table essentially contains pointers to the methods the class implements, among other data. When an observer is registered for an attribute of an object the isa pointer of the observed object is modified, pointing to an intermediate class rather than at the true class. As a result the value of the isa pointer does not necessarily reflect the actual class of the instance. You should never rely on the isa pointer to determine class membership. Instead, you should use the class method to determine the class of an object instance.</p>
+<p>当某一个类的实例第一次使用KVO的时候，系统就会在运行期间动态的创建该类的一个派生类，该类的命名规则一般是以NSKVONotifying为前缀，以原本的类名为后缀。并且将原型的对象的isa指针指向该派生类。同时在派生类中重载了使用KVO的属性的setter方法，在重载的setter方法中实现真正的通知机制，正如前面我们手动实现KVO一样。这么做是基于设置属性会调用 setter 方法，而通过重写就获得了 KVO 需要的通知机制。当然前提是要通过遵循 KVO 的属性设置方式来变更属性值，如果仅是直接修改属性对应的成员变量，是无法实现 KVO 的。</p>
+<p>同时派生类还重写了 class 方法以“欺骗”外部调用者它就是起初的那个类。因此这个对象就成为该派生类的对象了，因而在该对象上对 setter 的调用就会调用重写的 setter，从而激活键值通知机制。此外，派生类还重写了 dealloc 方法来释放资源。</p>
+<hr>
+<h4 id="拉模型">拉模型</h4><p><img src="/images/设计模式/拉模型.png" alt=""></p>
+<p>拉模型是指主题对象在通知观察者的时候，只传递少量信息或者只是通知变化。如果观察者需求要更具体的信息，由观察者主动从主题对象中拉取数据。相比推模型来说，拉模型更加自由，观察者只要知道有情况发生就好了，至于什么时候获取、获取那些内容、甚至是否获取都可以自主决定。但是，却存在两个问题：</p>
+<ul>
+<li>如果某个观察者响应过慢，可能会漏掉之前通知的内容</li>
+<li>观察者必须保存一个对目标对象的引用，而且还需要了解主题对象的结构，这就使观察者产生了对主题对象的依赖。</li>
+</ul>
+<p>可能每种设计模式都会存在或多或少的一些弊端，但是他们的确能够解决问题，也有更多有用的地方。在使用的时候，就需要我们权衡利弊，做出一个合适的选择。而工程师的价值就体现在，能够在纷繁复杂的工具世界中找到最有效的那个。而如果核桃没被砸开，不是你手力气不大的问题，而是你选错了工具，谁让你非得用门缝夹，不用锤子呢！</p>
+<p>当然，上面那段属于题外话。言归正传，在OBJC编程中，典型的一种拉模型的实现是delegate。可能很多人会不同意我的观点，说delegate应当是委托模式。好吧，我不否认，delegate的确是委托模式的一种极度典型的实现方式。但是这并不妨碍，他也是一种观察者模式。其实本来各种设计模式之间就不是泾渭分明的。在使用和解释的时候，只要你能够说得通，而且能够解决问题就好了，没必要纠缠他们的名字。而在通知变化这个事情上delegate的确是能够解决问题的。</p>
+<p>我们来看一个使用delegate实现拉模型的观察者的例子：</p>
+<ul>
+<li>先实现一个delegate方便注册观察者，和回调函数</li>
+</ul>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@class</span> <span class="title">DZClient</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">@protocol</span> <span class="title">DZClientChangedDelegate</span> &amp;<span class="title">lt</span>;<span class="title">NSObject</span>&amp;<span class="title">gt</span>;</span></span><br><span class="line">- (<span class="keyword">void</span>) client:(DZClient*)client didChangedContent:(<span class="built_in">NSString</span>*)key;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">DZClient</span> : <span class="title">NSObject</span></span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">weak</span>) <span class="keyword">id</span>&amp;lt;DZClientChangedDelegate&amp;gt; delegate;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="built_in">NSString</span>* key;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure></span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/12/01/使用IBInspectable和IBDesignable实现实时预览/" rel="prev">使用IBInspectable和IBDesignable实现实时预览</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/01/IOS开发第三方库收藏/" rel="next">IOS开发第三方库收藏</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/12/01/设计模式之观察者模式/"
+     data-title="设计模式之观察者模式"
+     data-content=""
+     data-url="https://github.com/CarolineHJQ1991/2015/12/01/设计模式之观察者模式/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+            <!-- 多说热评文章-->
+            <p>热评文章</p>
+            <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+        
+
+        
+          <div class="comments" id="comments">
+            
+              <div class="ds-thread" data-thread-key="2015/12/01/设计模式之观察者模式/"
+                   data-title="设计模式之观察者模式" data-url="https://github.com/CarolineHJQ1991/2015/12/01/设计模式之观察者模式/">
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/avatar.png" alt="Caroline.H" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Caroline.H</p>
+        </div>
+        <p class="site-description motion-element" style="color:pink"itemprop="description">我是韩球球，目前是一名由JAVA->IOS的developer，希望成为内外兼修，才德兼备的女子，追求卓越，一直在通往梦想的桥梁上走着......                             [生如夏花之绚烂，死如秋叶之静美]</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/CarolineHJQ1991" target="_blank">GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/benjamin_whx" target="_blank">CSDN</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/b64b58a43e1c/latest_articles" target="_blank">简书</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">Links</p>
+            
+              <span class="links-of-author-item">
+              <a href="http://blog.zhowkev.in/" target="_blank">Kevin</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://blog.csdn.net/biggercoffee/" target="_blank">Coffee大神</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#经典观察者模式"><span class="nav-number">1.</span> <span class="nav-text">经典观察者模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#感知通知方式"><span class="nav-number">1.1.</span> <span class="nav-text">感知通知方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#推模型"><span class="nav-number">1.1.1.</span> <span class="nav-text">推模型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#NSNotificationCenter"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">NSNotificationCenter</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#apple版实现的NotificationCenter让我用起来不太爽的几个小问题"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">apple版实现的NotificationCenter让我用起来不太爽的几个小问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#改进版的有中心观察者模式（DZNotificationCenter）"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">改进版的有中心观察者模式（DZNotificationCenter）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#KVO"><span class="nav-number">1.1.1.4.</span> <span class="nav-text">KVO</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#KVO实现原理"><span class="nav-number">1.1.1.4.1.</span> <span class="nav-text">KVO实现原理</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#自动实现KVO及其原理"><span class="nav-number">1.1.1.4.2.</span> <span class="nav-text">自动实现KVO及其原理</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#拉模型"><span class="nav-number">1.1.2.</span> <span class="nav-text">拉模型</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Caroline.H</span>
+  <script async src="/js/count.js"></script>
+  
+  
+  <span id="busuanzi_container_site_uv">
+    本站访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
+
+</div>
+
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"caroline"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+    
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>

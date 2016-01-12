@@ -39,29 +39,25 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="iPhone / iOS SDK 最酷的特性之一就是应用将其自身”绑定”到一个自定义 URL scheme 上，该 scheme 用于从浏览器或其他应用中启动本应用。
-
-注册自定义 URL Scheme注册自定义 URL Scheme 的第一步是创建 URL Scheme — 在 Xcode Project Navigator 中找到并点击工程 info.plist 文件。当该文件显示在右边窗口，">
+<meta name="description" content="1、建立项目名称 标识 版本 Readme
+2、建立相应目录123456789101112131415GlobalController	Page	Widget	CellModelNetworkDBUtilityThirdSDKDefineResource	Config	Image	Xib
+3、日志输出宏在Define.h文件中定义。在 NewsReader-prefix.pch中
+#import">
 <meta property="og:type" content="article">
-<meta property="og:title" content="自定义 urlScheme">
-<meta property="og:url" content="https://github.com/CarolineHJQ1991/2015/11/28/自定义-urlScheme/index.html">
+<meta property="og:title" content="NewsReader项目step by step">
+<meta property="og:url" content="https://github.com/CarolineHJQ1991/2015/12/09/NewsReader项目step-by-step/index.html">
 <meta property="og:site_name" content="Caroline.H 's Blog">
-<meta property="og:description" content="iPhone / iOS SDK 最酷的特性之一就是应用将其自身”绑定”到一个自定义 URL scheme 上，该 scheme 用于从浏览器或其他应用中启动本应用。
-
-注册自定义 URL Scheme注册自定义 URL Scheme 的第一步是创建 URL Scheme — 在 Xcode Project Navigator 中找到并点击工程 info.plist 文件。当该文件显示在右边窗口，">
-<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/CustomURLScheme/1.png">
-<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/CustomURLScheme/2.png">
-<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/CustomURLScheme/3.png">
-<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/CustomURLScheme/4.png">
-<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/CustomURLScheme/5.png">
-<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/CustomURLScheme/6.png">
-<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/CustomURLScheme/7.png">
-<meta property="og:updated_time" content="2015-11-28T08:17:09.000Z">
+<meta property="og:description" content="1、建立项目名称 标识 版本 Readme
+2、建立相应目录123456789101112131415GlobalController	Page	Widget	CellModelNetworkDBUtilityThirdSDKDefineResource	Config	Image	Xib
+3、日志输出宏在Define.h文件中定义。在 NewsReader-prefix.pch中
+#import">
+<meta property="og:updated_time" content="2015-12-10T18:19:20.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="自定义 urlScheme">
-<meta name="twitter:description" content="iPhone / iOS SDK 最酷的特性之一就是应用将其自身”绑定”到一个自定义 URL scheme 上，该 scheme 用于从浏览器或其他应用中启动本应用。
-
-注册自定义 URL Scheme注册自定义 URL Scheme 的第一步是创建 URL Scheme — 在 Xcode Project Navigator 中找到并点击工程 info.plist 文件。当该文件显示在右边窗口，">
+<meta name="twitter:title" content="NewsReader项目step by step">
+<meta name="twitter:description" content="1、建立项目名称 标识 版本 Readme
+2、建立相应目录123456789101112131415GlobalController	Page	Widget	CellModelNetworkDBUtilityThirdSDKDefineResource	Config	Image	Xib
+3、日志输出宏在Define.h文件中定义。在 NewsReader-prefix.pch中
+#import">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -71,7 +67,7 @@
   };
 </script>
 
-  <title> 自定义 urlScheme | Caroline.H 's Blog </title>
+  <title> NewsReader项目step by step | Caroline.H 's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -199,7 +195,7 @@
           
           
             
-              自定义 urlScheme
+              NewsReader项目step by step
             
           
         </h1>
@@ -208,8 +204,8 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2015-11-28T09:59:49+08:00" content="2015-11-28">
-            2015-11-28
+          <time itemprop="dateCreated" datetime="2015-12-09T09:21:27+08:00" content="2015-12-09">
+            2015-12-09
           </time>
         </span>
 
@@ -219,8 +215,8 @@
           
             <span class="post-comments-count">
               &nbsp; | &nbsp;
-              <a href="/2015/11/28/自定义-urlScheme/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/28/自定义-urlScheme/" itemprop="commentsCount"></span>
+              <a href="/2015/12/09/NewsReader项目step-by-step/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/09/NewsReader项目step-by-step/" itemprop="commentsCount"></span>
               </a>
             </span>
           
@@ -234,26 +230,18 @@
       
 
       
-        <span itemprop="articleBody"><blockquote>
-<p>iPhone / iOS SDK 最酷的特性之一就是应用将其自身”绑定”到一个自定义 URL scheme 上，该 scheme 用于从浏览器或其他应用中启动本应用。</p>
-</blockquote>
-<h4 id="注册自定义_URL_Scheme">注册自定义 URL Scheme</h4><p>注册自定义 URL Scheme 的第一步是创建 URL Scheme — 在 Xcode Project Navigator 中找到并点击工程 info.plist 文件。当该文件显示在右边窗口，在列表上点击鼠标右键，选择 Add Row:</p>
-<p>向下滚动弹出的列表并选择 URL types。</p>
-<p><img src="/images/CustomURLScheme/1.png" alt="Add URL types"><br><a id="more"></a></p>
-<p>点击左边剪头打开列表，可以看到 Item 0，一个字典实体。展开 Item 0，可以看到 URL Identifier，一个字符串对象。该字符串是你自定义的 URL scheme 的名字。建议采用反转域名的方法保证该名字的唯一性，比如 com.yourCompany.yourApp。</p>
-<p><img src="/images/CustomURLScheme/2.png" alt="Add URL Identifier"></p>
-<p>点击 Item 0 新增一行，从下拉列表中选择 URL Schemes，敲击键盘回车键完成插入。</p>
-<p><img src="/images/CustomURLScheme/3.png" alt="Add URL Scheme"></p>
-<p><code>注意: URL Schemes 是一个数组，允许应用定义多个 URL schemes。</code></p>
-<p>展开该数据并点击 Item 0。你将在这里定义自定义 URL scheme 的名字。只需要名字，不要在后面追加 :// — 比如，如果你输入 caroline，你的自定义 url 就是 caroline:// </p>
-<p><img src="/images/CustomURLScheme/4.png" alt="Add URL Scheme item0"></p>
-<p>此时，整个定义如下图：</p>
-<p><img src="/images/CustomURLScheme/5.png" alt="URL Scheme Structure"></p>
-<p>虽然我赞同 Xcode 使用描述性的名字的目的，不过看到创建的实际的 key 也是非常有用的。这里有一个方便的技巧，右键点击 plist 并选择 Show Raw Keys/Values，就能看到以下效果： </p>
-<p><img src="/images/CustomURLScheme/6.png" alt="URL Scheme Structure key in fact"></p>
-<p>还有另一种有用的输出格式，XML，因为可以非常容易的看到字典和原始数组及其包括的实体的结构。点击 plist 并选择 Open As – Source Code: </p>
-<p><img src="/images/CustomURLScheme/7.png" alt="URL Scheme Structure xib"></p>
-</span>
+        <span itemprop="articleBody"><h3 id="1、建立项目">1、建立项目</h3><p>名称 标识 版本 Readme</p>
+<h3 id="2、建立相应目录">2、建立相应目录</h3><figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Global</span></span><br><span class="line">Controller</span><br><span class="line">	Page</span><br><span class="line">	Widget</span><br><span class="line">	Cell</span><br><span class="line">Model</span><br><span class="line">Network</span><br><span class="line">DB</span><br><span class="line">Utility</span><br><span class="line">ThirdSDK</span><br><span class="line"><span class="class"><span class="keyword">Define</span></span><br><span class="line"><span class="title">Resource</span></span><br><span class="line">	<span class="title">Config</span></span><br><span class="line">	<span class="title">Image</span></span><br><span class="line">	<span class="title">Xib</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="3、日志输出宏">3、日志输出宏</h3><p>在Define.h文件中定义。在 NewsReader-prefix.pch中</p>
+<p><code>#import &quot;Define.h&quot;</code></p>
+<p>在target中的Build Settings -&gt; prefix header设定.pch文件的路径</p>
+<a id="more"></a>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="id">#if</span> (DEBUG || TESTCASE)</span><br><span class="line"><span class="id">#define</span> <span class="tag">FxLog</span>(format, ...) <span class="tag">NSLog</span>(format, ## __VA_ARGS__)</span><br><span class="line"><span class="id">#else</span></span><br><span class="line"><span class="id">#define</span> <span class="tag">FxLog</span>(format, ...)</span><br><span class="line"><span class="id">#endif</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 日志输出宏</span></span><br><span class="line"><span class="id">#define</span> <span class="tag">BASE_LOG</span>(cls,sel) <span class="tag">FxLog</span>(@<span class="string">"%@-%@"</span>,<span class="function">NSStringFromClass</span>(cls), <span class="tag">NSStringFromSelector</span>(sel))</span><br><span class="line"><span class="id">#define</span> <span class="tag">BASE_ERROR_LOG</span>(cls,sel,error) <span class="tag">FxLog</span>(@<span class="string">"ERROR:%@-%@-%@"</span>,<span class="function">NSStringFromClass</span>(cls), <span class="tag">NSStringFromSelector</span>(sel), <span class="tag">error</span>)</span><br><span class="line"><span class="id">#define</span> <span class="tag">BASE_INFO_LOG</span>(cls,sel,info) <span class="tag">FxLog</span>(@<span class="string">"INFO:%@-%@-%@"</span>,<span class="function">NSStringFromClass</span>(cls), <span class="tag">NSStringFromSelector</span>(sel), <span class="tag">info</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 日志输出函数</span></span><br><span class="line"><span class="id">#if</span> (DEBUG || TESTCASE)</span><br><span class="line"><span class="id">#define</span> <span class="tag">BASE_LOG_FUN</span>()         <span class="tag">BASE_LOG</span>([self class], _cmd)</span><br><span class="line"><span class="id">#define</span> <span class="tag">BASE_ERROR_FUN</span>(error)  <span class="tag">BASE_ERROR_LOG</span>([self class],_cmd,error)</span><br><span class="line"><span class="id">#define</span> <span class="tag">BASE_INFO_FUN</span>(info)    <span class="tag">BASE_INFO_LOG</span>([self class],_cmd,info)</span><br><span class="line"><span class="id">#else</span></span><br><span class="line"><span class="id">#define</span> <span class="tag">BASE_LOG_FUN</span>()</span><br><span class="line"><span class="id">#define</span> <span class="tag">BASE_ERROR_FUN</span>(error)</span><br><span class="line"><span class="id">#define</span> <span class="tag">BASE_INFO_FUN</span>(info)</span><br><span class="line"><span class="id">#endif</span></span><br></pre></td></tr></table></figure>
+<h3 id="4、设备类型宏">4、设备类型宏</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">/ 设备类型判断</span><br><span class="line"><span class="hexcolor">#def</span>ine IsiPad     (<span class="function"><span class="title">UI_USER_INTERFACE_IDIOM</span><span class="params">()</span></span> == UIUserInterfaceIdiomPad)</span><br><span class="line"><span class="hexcolor">#def</span>ine IsiPhone   (<span class="function"><span class="title">UI_USER_INTERFACE_IDIOM</span><span class="params">()</span></span> == UIUserInterfaceIdiomPhone)</span><br><span class="line"><span class="hexcolor">#def</span>ine IsRetain   ([[UIScreen mainScreen] scale] &gt;= <span class="number">2.0</span>)</span><br><span class="line"><span class="hexcolor">#def</span>ine ScreenWidth ([[UIScreen mainScreen] bounds]<span class="class">.size</span><span class="class">.width</span>)</span><br><span class="line"><span class="hexcolor">#def</span>ine ScreenHeight ([[UIScreen mainScreen] bounds]<span class="class">.size</span><span class="class">.height</span>)</span><br><span class="line"><span class="hexcolor">#def</span>ine ScreenMaxLength (<span class="function"><span class="title">MAX</span><span class="params">(ScreenWidth, ScreenHeight)</span></span>)</span><br><span class="line"><span class="hexcolor">#def</span>ine ScreenMinLength (<span class="function"><span class="title">MIN</span><span class="params">(ScreenWidth, ScreenHeight)</span></span>)</span><br><span class="line"></span><br><span class="line"><span class="hexcolor">#def</span>ine IsiPhone4   (IsiPhone &amp;&amp; ScreenMaxLength &lt; <span class="number">568.0</span>)</span><br><span class="line"><span class="hexcolor">#def</span>ine IsiPhone5   (IsiPhone &amp;&amp; ScreenMaxLength == <span class="number">568.0</span>)</span><br><span class="line"><span class="hexcolor">#def</span>ine IsiPhone6   (IsiPhone &amp;&amp; ScreenMaxLength == <span class="number">667.0</span>)</span><br><span class="line"><span class="hexcolor">#def</span>ine IsiPhone6P  (IsiPhone &amp;&amp; ScreenMaxLength == <span class="number">736.0</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="5、发布版本设置">5、发布版本设置</h3><pre><code><span class="title">Appstore</span>
+ADHoc
+Enterprise
+</code></pre><h3 id="6、加入启动图和图标">6、加入启动图和图标</h3></span>
       
     </div>
 
@@ -270,13 +258,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/11/30/Swift-2-0新特性之选项集合-Option-Sets/" rel="prev">Swift 2.0新特性之选项集合(Option Sets)</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/11/27/Xcode7安装Alcatraz以及插件介绍/" rel="next">Xcode7安装Alcatraz以及插件介绍</a>
+              <a href="/2015/12/01/使用IBInspectable和IBDesignable实现实时预览/" rel="next">使用IBInspectable和IBDesignable实现实时预览</a>
             
           </div>
         </div>
@@ -291,10 +277,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2015/11/28/自定义-urlScheme/"
-     data-title="自定义 urlScheme"
+        <div class="ds-share flat" data-thread-key="2015/12/09/NewsReader项目step-by-step/"
+     data-title="NewsReader项目step by step"
      data-content=""
-     data-url="https://github.com/CarolineHJQ1991/2015/11/28/自定义-urlScheme/">
+     data-url="https://github.com/CarolineHJQ1991/2015/12/09/NewsReader项目step-by-step/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -324,8 +310,8 @@
         
           <div class="comments" id="comments">
             
-              <div class="ds-thread" data-thread-key="2015/11/28/自定义-urlScheme/"
-                   data-title="自定义 urlScheme" data-url="https://github.com/CarolineHJQ1991/2015/11/28/自定义-urlScheme/">
+              <div class="ds-thread" data-thread-key="2015/12/09/NewsReader项目step-by-step/"
+                   data-title="NewsReader项目step by step" data-url="https://github.com/CarolineHJQ1991/2015/12/09/NewsReader项目step-by-step/">
               </div>
             
           </div>
@@ -438,7 +424,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#注册自定义_URL_Scheme"><span class="nav-number">1.</span> <span class="nav-text">注册自定义 URL Scheme</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、建立项目"><span class="nav-number">1.</span> <span class="nav-text">1、建立项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、建立相应目录"><span class="nav-number">2.</span> <span class="nav-text">2、建立相应目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、日志输出宏"><span class="nav-number">3.</span> <span class="nav-text">3、日志输出宏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、设备类型宏"><span class="nav-number">4.</span> <span class="nav-text">4、设备类型宏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、发布版本设置"><span class="nav-number">5.</span> <span class="nav-text">5、发布版本设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6、加入启动图和图标"><span class="nav-number">6.</span> <span class="nav-text">6、加入启动图和图标</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>

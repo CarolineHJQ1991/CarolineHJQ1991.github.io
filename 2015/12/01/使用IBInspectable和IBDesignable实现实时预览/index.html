@@ -30,7 +30,7 @@
 
 
 
-  <meta name="keywords" content="iOS," />
+  <meta name="keywords" content="ios," />
 
 
 
@@ -39,29 +39,29 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="iPhone / iOS SDK 最酷的特性之一就是应用将其自身”绑定”到一个自定义 URL scheme 上，该 scheme 用于从浏览器或其他应用中启动本应用。
+<meta name="description" content="Xcode6提供了这样一个激动人心的feature，在设计项目的时候建立一个自定义的界面来使你可以配置自定义的属性并控制它们实时显示出来，用IBInspectable和IBDesignable来完成。
 
-注册自定义 URL Scheme注册自定义 URL Scheme 的第一步是创建 URL Scheme — 在 Xcode Project Navigator 中找到并点击工程 info.plist 文件。当该文件显示在右边窗口，">
+IBInspectable
+IBInspectable 属性提供了访问旧功能的新方式：用户自定义的运行时属性。从目前的身份检查器（identity inspector）中访问，这些属性在 Inte">
 <meta property="og:type" content="article">
-<meta property="og:title" content="自定义 urlScheme">
-<meta property="og:url" content="https://github.com/CarolineHJQ1991/2015/11/28/自定义-urlScheme/index.html">
+<meta property="og:title" content="使用IBInspectable和IBDesignable实现实时预览">
+<meta property="og:url" content="https://github.com/CarolineHJQ1991/2015/12/01/使用IBInspectable和IBDesignable实现实时预览/index.html">
 <meta property="og:site_name" content="Caroline.H 's Blog">
-<meta property="og:description" content="iPhone / iOS SDK 最酷的特性之一就是应用将其自身”绑定”到一个自定义 URL scheme 上，该 scheme 用于从浏览器或其他应用中启动本应用。
+<meta property="og:description" content="Xcode6提供了这样一个激动人心的feature，在设计项目的时候建立一个自定义的界面来使你可以配置自定义的属性并控制它们实时显示出来，用IBInspectable和IBDesignable来完成。
 
-注册自定义 URL Scheme注册自定义 URL Scheme 的第一步是创建 URL Scheme — 在 Xcode Project Navigator 中找到并点击工程 info.plist 文件。当该文件显示在右边窗口，">
-<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/CustomURLScheme/1.png">
-<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/CustomURLScheme/2.png">
-<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/CustomURLScheme/3.png">
-<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/CustomURLScheme/4.png">
-<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/CustomURLScheme/5.png">
-<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/CustomURLScheme/6.png">
-<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/CustomURLScheme/7.png">
-<meta property="og:updated_time" content="2015-11-28T08:17:09.000Z">
+IBInspectable
+IBInspectable 属性提供了访问旧功能的新方式：用户自定义的运行时属性。从目前的身份检查器（identity inspector）中访问，这些属性在 Inte">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/keyPath.png">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/update.png">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/roundImage.png">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/calculator.gif">
+<meta property="og:updated_time" content="2015-12-01T15:44:39.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="自定义 urlScheme">
-<meta name="twitter:description" content="iPhone / iOS SDK 最酷的特性之一就是应用将其自身”绑定”到一个自定义 URL scheme 上，该 scheme 用于从浏览器或其他应用中启动本应用。
+<meta name="twitter:title" content="使用IBInspectable和IBDesignable实现实时预览">
+<meta name="twitter:description" content="Xcode6提供了这样一个激动人心的feature，在设计项目的时候建立一个自定义的界面来使你可以配置自定义的属性并控制它们实时显示出来，用IBInspectable和IBDesignable来完成。
 
-注册自定义 URL Scheme注册自定义 URL Scheme 的第一步是创建 URL Scheme — 在 Xcode Project Navigator 中找到并点击工程 info.plist 文件。当该文件显示在右边窗口，">
+IBInspectable
+IBInspectable 属性提供了访问旧功能的新方式：用户自定义的运行时属性。从目前的身份检查器（identity inspector）中访问，这些属性在 Inte">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -71,7 +71,7 @@
   };
 </script>
 
-  <title> 自定义 urlScheme | Caroline.H 's Blog </title>
+  <title> 使用IBInspectable和IBDesignable实现实时预览 | Caroline.H 's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -199,7 +199,7 @@
           
           
             
-              自定义 urlScheme
+              使用IBInspectable和IBDesignable实现实时预览
             
           
         </h1>
@@ -208,19 +208,34 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2015-11-28T09:59:49+08:00" content="2015-11-28">
-            2015-11-28
+          <time itemprop="dateCreated" datetime="2015-12-01T23:44:26+08:00" content="2015-12-01">
+            2015-12-01
           </time>
         </span>
 
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/IOS开发/" itemprop="url" rel="index">
+                  <span itemprop="name">IOS开发</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
         
 
         
           
             <span class="post-comments-count">
               &nbsp; | &nbsp;
-              <a href="/2015/11/28/自定义-urlScheme/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/28/自定义-urlScheme/" itemprop="commentsCount"></span>
+              <a href="/2015/12/01/使用IBInspectable和IBDesignable实现实时预览/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/01/使用IBInspectable和IBDesignable实现实时预览/" itemprop="commentsCount"></span>
               </a>
             </span>
           
@@ -235,24 +250,31 @@
 
       
         <span itemprop="articleBody"><blockquote>
-<p>iPhone / iOS SDK 最酷的特性之一就是应用将其自身”绑定”到一个自定义 URL scheme 上，该 scheme 用于从浏览器或其他应用中启动本应用。</p>
+<p>Xcode6提供了这样一个激动人心的feature，在设计项目的时候建立一个自定义的界面来使你可以配置自定义的属性并控制它们实时显示出来，用IBInspectable和IBDesignable来完成。</p>
 </blockquote>
-<h4 id="注册自定义_URL_Scheme">注册自定义 URL Scheme</h4><p>注册自定义 URL Scheme 的第一步是创建 URL Scheme — 在 Xcode Project Navigator 中找到并点击工程 info.plist 文件。当该文件显示在右边窗口，在列表上点击鼠标右键，选择 Add Row:</p>
-<p>向下滚动弹出的列表并选择 URL types。</p>
-<p><img src="/images/CustomURLScheme/1.png" alt="Add URL types"><br><a id="more"></a></p>
-<p>点击左边剪头打开列表，可以看到 Item 0，一个字典实体。展开 Item 0，可以看到 URL Identifier，一个字符串对象。该字符串是你自定义的 URL scheme 的名字。建议采用反转域名的方法保证该名字的唯一性，比如 com.yourCompany.yourApp。</p>
-<p><img src="/images/CustomURLScheme/2.png" alt="Add URL Identifier"></p>
-<p>点击 Item 0 新增一行，从下拉列表中选择 URL Schemes，敲击键盘回车键完成插入。</p>
-<p><img src="/images/CustomURLScheme/3.png" alt="Add URL Scheme"></p>
-<p><code>注意: URL Schemes 是一个数组，允许应用定义多个 URL schemes。</code></p>
-<p>展开该数据并点击 Item 0。你将在这里定义自定义 URL scheme 的名字。只需要名字，不要在后面追加 :// — 比如，如果你输入 caroline，你的自定义 url 就是 caroline:// </p>
-<p><img src="/images/CustomURLScheme/4.png" alt="Add URL Scheme item0"></p>
-<p>此时，整个定义如下图：</p>
-<p><img src="/images/CustomURLScheme/5.png" alt="URL Scheme Structure"></p>
-<p>虽然我赞同 Xcode 使用描述性的名字的目的，不过看到创建的实际的 key 也是非常有用的。这里有一个方便的技巧，右键点击 plist 并选择 Show Raw Keys/Values，就能看到以下效果： </p>
-<p><img src="/images/CustomURLScheme/6.png" alt="URL Scheme Structure key in fact"></p>
-<p>还有另一种有用的输出格式，XML，因为可以非常容易的看到字典和原始数组及其包括的实体的结构。点击 plist 并选择 Open As – Source Code: </p>
-<p><img src="/images/CustomURLScheme/7.png" alt="URL Scheme Structure xib"></p>
+<p><strong>IBInspectable</strong></p>
+<p>IBInspectable 属性提供了访问旧功能的新方式：用户自定义的运行时属性。从目前的身份检查器（identity inspector）中访问，这些属性在 Interface Builder 被整合到 Xcode 之前就可用了。他们提供了一个强有力的机制来配置一个 NIB，XIB，或者 storyboard 实例中的任何键值编码（key-value coded）属性</p>
+<a id="more"></a>
+<p><img src="/images/keyPath.png" width="400" height="150" alt="keyPath.png" align="center"></p>
+<p>虽然功能强大，运行时属性可能会使工作很繁琐。一个属性的关键字路径，类型和属性值需要在每个实例设置，没有任何自动完成或输入提示，这就需要前往文档或自定义子类的源代码仔细检查设置。 IBInspectable 属性彻底的解决了这个问题：在 Xcode 6，你现在可以指定任何属性作为可检查项并为你的自定义类建立了一个用户界面。</p>
+<p>如果我们想要单纯的让项目中的view都改变某个样式，并且可以在inspect中显示出来，但是storyboard并不会实时更新的话，扩展UIView，重写属性即可。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">MARK</span>: - 扩展<span class="type">UIView</span>，能出现在inspect栏里</span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">UIView</span> </span>&#123;</span><br><span class="line">    <span class="preprocessor">@IBInspectable</span> <span class="keyword">var</span> cornalRadius: <span class="type">CGFloat</span> &#123;</span><br><span class="line">        <span class="keyword">get</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> layer.cornerRadius</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">set</span> &#123;</span><br><span class="line">            layer.cornerRadius = newValue</span><br><span class="line">            layer.masksToBounds = newValue &gt; <span class="number">0</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可检查属性仅仅是用户定义的运行时属性顶部的接口，所以支持相同的类型列表：布尔，字符串和数字（即，NSNumber 或任何数值类型），以及 CGPoint、CGSize、CGRect、UIColor 和 NSRange，额外增加了 UIImage。</p>
+<p>这样所有view都可以改变圆角半径了。</p>
+<p>但是我们想实时预览，并且可以指定某个view改变，就要用到<code>IBDesignable</code>了</p>
+<p><strong>IBDesignable</strong></p>
+<p>如果这还不够，IBDesignable 自定义视图也在 Xcode 6 中亮相了。当应用到 UIView 或 NSView 子类中的时候，@ IBDesignable 让 Interface Builder 知道它应该在画布上直接渲染视图。你会看到你的自定义视图在每次更改后不必编译并运行你的应用程序就会显示。</p>
+<p>标记一个自定义视图为 IBDesignable，只需在类名前加上 @IBDesignable 的前缀（或是 Objective-C 里的 IB_DESIGNABLE 宏）。你的初始化、布置和绘制方法将被用来在画布上渲染你的自定义视图：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> UIKit</span><br><span class="line"></span><br><span class="line"><span class="comment">/// 实时渲染自定义类</span></span><br><span class="line"><span class="preprocessor">@IBDesignable</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RoundImageView</span>: <span class="title">UIImageView</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/// 自定义圆角半径</span></span><br><span class="line">    <span class="preprocessor">@IBInspectable</span> <span class="keyword">var</span> cornerRadius: <span class="type">CGFloat</span> = <span class="number">0</span> &#123;</span><br><span class="line">        <span class="keyword">didSet</span>&#123;</span><br><span class="line">            layer.cornerRadius = cornerRadius</span><br><span class="line">            layer.masksToBounds = cornerRadius &gt; <span class="number">0</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/// 自定义边框宽度</span></span><br><span class="line">    <span class="preprocessor">@IBInspectable</span> <span class="keyword">var</span> borderWidth: <span class="type">CGFloat</span> = <span class="number">0</span> &#123;</span><br><span class="line">        <span class="keyword">didSet</span>&#123;</span><br><span class="line">            layer.borderWidth = borderWidth</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/// 自定义边框颜色</span></span><br><span class="line">    <span class="preprocessor">@IBInspectable</span> <span class="keyword">var</span> borderColor: <span class="type">UIColor</span>? &#123;</span><br><span class="line">        <span class="keyword">didSet</span>&#123;</span><br><span class="line">            layer.borderColor = borderColor?.<span class="type">CGColor</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>写完后，切回storyboard，点击<code>show the identity inspector</code>，选中要改变属性的view，指定它的Class为自定义的Class，接着会看到<code>designables updating</code></p>
+<p><img src="/images/update.png" alt="update.png"></p>
+<p>最后的效果如下图所示：</p>
+<p><img src="/images/roundImage.png" alt="roundImage.png"></p>
+<p><strong>IBCalculatorConstructorSet</strong></p>
+<p>把自定义 IBDesignable 视图和视图里的 IBInspectable 属性结合在一起，你能干点啥？作为一个例子，让我们更新老式经典 Apple folklore：在“Steve Jobs Roll Your Own Calculator Construction Set”，Xcode 6 的风格：</p>
+<p><img src="/images/calculator.gif" alt="calculator.gif"></p>
+<p>是不是很激动，赶紧去试试吧!</p>
+<p>参考文章：<a href="http://www.cocoachina.com/ios/20150227/11202.html" target="_blank" rel="external">IBInspectable / IBDesignable</a></p>
 </span>
       
     </div>
@@ -261,7 +283,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/iOS/" rel="tag">#iOS</a>
+            <a href="/tags/ios/" rel="tag">#ios</a>
           
         </div>
       
@@ -270,13 +292,13 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/11/30/Swift-2-0新特性之选项集合-Option-Sets/" rel="prev">Swift 2.0新特性之选项集合(Option Sets)</a>
+              <a href="/2015/12/09/NewsReader项目step-by-step/" rel="prev">NewsReader项目step by step</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/11/27/Xcode7安装Alcatraz以及插件介绍/" rel="next">Xcode7安装Alcatraz以及插件介绍</a>
+              <a href="/2015/12/01/设计模式之观察者模式/" rel="next">设计模式之观察者模式</a>
             
           </div>
         </div>
@@ -291,10 +313,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2015/11/28/自定义-urlScheme/"
-     data-title="自定义 urlScheme"
+        <div class="ds-share flat" data-thread-key="2015/12/01/使用IBInspectable和IBDesignable实现实时预览/"
+     data-title="使用IBInspectable和IBDesignable实现实时预览"
      data-content=""
-     data-url="https://github.com/CarolineHJQ1991/2015/11/28/自定义-urlScheme/">
+     data-url="https://github.com/CarolineHJQ1991/2015/12/01/使用IBInspectable和IBDesignable实现实时预览/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -324,8 +346,8 @@
         
           <div class="comments" id="comments">
             
-              <div class="ds-thread" data-thread-key="2015/11/28/自定义-urlScheme/"
-                   data-title="自定义 urlScheme" data-url="https://github.com/CarolineHJQ1991/2015/11/28/自定义-urlScheme/">
+              <div class="ds-thread" data-thread-key="2015/12/01/使用IBInspectable和IBDesignable实现实时预览/"
+                   data-title="使用IBInspectable和IBDesignable实现实时预览" data-url="https://github.com/CarolineHJQ1991/2015/12/01/使用IBInspectable和IBDesignable实现实时预览/">
               </div>
             
           </div>
@@ -438,7 +460,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#注册自定义_URL_Scheme"><span class="nav-number">1.</span> <span class="nav-text">注册自定义 URL Scheme</span></a></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
