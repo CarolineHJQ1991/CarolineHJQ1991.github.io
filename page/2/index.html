@@ -187,8 +187,8 @@
           
           
             
-              <a class="post-title-link" href="/2015/11/24/WeChat-Swift/" itemprop="url">
-                WeChat_Swift
+              <a class="post-title-link" href="/2015/12/29/iOS内存优化-持续更新/" itemprop="url">
+                iOS内存优化(持续更新)
               </a>
             
           
@@ -198,19 +198,34 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2015-11-24T00:43:51+08:00" content="2015-11-24">
-            2015-11-24
+          <time itemprop="dateCreated" datetime="2015-12-29T23:28:45+08:00" content="2015-12-29">
+            2015-12-29
           </time>
         </span>
 
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                  <span itemprop="name">iOS开发</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
         
 
         
           
             <span class="post-comments-count">
               &nbsp; | &nbsp;
-              <a href="/2015/11/24/WeChat-Swift/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/24/WeChat-Swift/" itemprop="commentsCount"></span>
+              <a href="/2015/12/29/iOS内存优化-持续更新/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/29/iOS内存优化-持续更新/" itemprop="commentsCount"></span>
               </a>
             </span>
           
@@ -225,16 +240,13 @@
 
       
         
-          <h4 id="创建项目并为项目配置pod文件">创建项目并为项目配置pod文件</h4><p><code>此处不再赘述，详情请见CocoaPods的搭建</code></p>
-<h4 id="搭建swift_和_OC_的_Bridge">搭建swift 和 OC 的 Bridge</h4><p><code>由于swift还没有盛行的时候，所有我们必须要知道桥接，以防公司需要</code></p>
-<ul>
-<li>创建OC文件命名’ BridgeHeader ‘-&gt; 自动生成’CloudIMTest-Bridging-Header.h’</li>
-<li>‘#import <RongIMKit/RongIMKit.h>‘</li>
-<li>测试没问题就没错</li>
-</ul>
-<h4 id="先去融云网站获取’Token’_and_‘App_key’">先去融云网站获取’Token’ and ‘App key’</h4>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;在iphone开发过程中，代码中的内存泄露我们很容易用内存检测工具leaks 检测出来，并一一改之，但有些是因为ios 的缺陷和用法上的错误，leaks 检测工具并不能检测出来，你只会看到大量的内存被使用，最后收到didReceiveMemoryWarning，最终导致程序崩溃。以下是开发过程中遇到的一些问题和网上的一些资料，总结了一下：</p>
+<p><h3 style="color:green;" id="1">UIImage如何加载图片</h3><br>用UIImage加载本地图像最常用的是下面三种：</p>
+<p><strong>1、imageNamed</strong></p>
+<pre><code><span class="built_in">UIImage</span> *image = [<span class="built_in">UIImage</span> imageNamed: imageName];
+</code></pre><p>这种方式初学者用的最多，因为方便，但是它会把每次加载出来的图片放入内存中缓存起来，如果图片非常多，非常容易造成程序卡，甚至崩溃。但是如果有一些图片要经常被使用，那么使用这个方法效率会很高。一般不使用。</p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/11/24/WeChat-Swift/#more" rel="contents">
+            <a class="btn" href="/2015/12/29/iOS内存优化-持续更新/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -267,8 +279,8 @@
           
           
             
-              <a class="post-title-link" href="/2015/11/23/CocoaPods/" itemprop="url">
-                CocoaPods
+              <a class="post-title-link" href="/2015/12/09/NewsReader项目step-by-step/" itemprop="url">
+                NewsReader项目step by step
               </a>
             
           
@@ -278,8 +290,8 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2015-11-23T16:39:23+08:00" content="2015-11-23">
-            2015-11-23
+          <time itemprop="dateCreated" datetime="2015-12-09T09:21:27+08:00" content="2015-12-09">
+            2015-12-09
           </time>
         </span>
 
@@ -289,8 +301,8 @@
           
             <span class="post-comments-count">
               &nbsp; | &nbsp;
-              <a href="/2015/11/23/CocoaPods/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/23/CocoaPods/" itemprop="commentsCount"></span>
+              <a href="/2015/12/09/NewsReader项目step-by-step/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/09/NewsReader项目step-by-step/" itemprop="commentsCount"></span>
               </a>
             </span>
           
@@ -305,12 +317,452 @@
 
       
         
-          <h4 id="1_移除原ruby镜像源">1 移除原ruby镜像源</h4><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>gem sources --remove <span class="symbol">https:</span>/<span class="regexp">/rubygems.org/</span> </span><br><span class="line"><span class="variable">$ </span>gem sources -l 可以查看当前还没有源</span><br></pre></td></tr></table></figure>
-<h4 id="2_新增为taobao实时镜像源">2 新增为taobao实时镜像源</h4><pre><code>$ gem sources --<span class="built_in">add</span> http<span class="variable">s:</span>//<span class="keyword">ruby</span>.taobao.org/
-</code></pre><h4 id="3_安装Cocoapods">3 安装Cocoapods</h4><pre><code>$ sudo gem <span class="keyword">install</span> cocoapods 
+          <h3 id="1、建立项目">1、建立项目</h3><p>名称 标识 版本 Readme</p>
+<h3 id="2、建立相应目录">2、建立相应目录</h3><figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Global</span></span><br><span class="line">Controller</span><br><span class="line">	Page</span><br><span class="line">	Widget</span><br><span class="line">	Cell</span><br><span class="line">Model</span><br><span class="line">Network</span><br><span class="line">DB</span><br><span class="line">Utility</span><br><span class="line">ThirdSDK</span><br><span class="line"><span class="class"><span class="keyword">Define</span></span><br><span class="line"><span class="title">Resource</span></span><br><span class="line">	<span class="title">Config</span></span><br><span class="line">	<span class="title">Image</span></span><br><span class="line">	<span class="title">Xib</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="3、日志输出宏">3、日志输出宏</h3><p>在Define.h文件中定义。在 NewsReader-prefix.pch中</p>
+<p><code>#import &quot;Define.h&quot;</code></p>
+<p>在target中的Build Settings -&gt; prefix header设定.pch文件的路径</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/09/NewsReader项目step-by-step/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2015/12/03/iOS图片轮播UIScrollView-UIPageControl/" itemprop="url">
+                iOS图片轮播UIScrollView+UIPageControl
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-03T23:13:21+08:00" content="2015-12-03">
+            2015-12-03
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                  <span itemprop="name">iOS开发</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2015/12/03/iOS图片轮播UIScrollView-UIPageControl/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/03/iOS图片轮播UIScrollView-UIPageControl/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>该方法实现了图片的轮播效果：</p>
+<p><img src="/images/pictureLoop.gif" alt="pictureLoop"></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/03/iOS图片轮播UIScrollView-UIPageControl/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2015/12/01/使用IBInspectable和IBDesignable实现实时预览/" itemprop="url">
+                使用IBInspectable和IBDesignable实现实时预览
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-01T23:44:26+08:00" content="2015-12-01">
+            2015-12-01
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/IOS开发/" itemprop="url" rel="index">
+                  <span itemprop="name">IOS开发</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2015/12/01/使用IBInspectable和IBDesignable实现实时预览/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/01/使用IBInspectable和IBDesignable实现实时预览/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>Xcode6提供了这样一个激动人心的feature，在设计项目的时候建立一个自定义的界面来使你可以配置自定义的属性并控制它们实时显示出来，用IBInspectable和IBDesignable来完成。</p>
+</blockquote>
+<p><strong>IBInspectable</strong></p>
+<p>IBInspectable 属性提供了访问旧功能的新方式：用户自定义的运行时属性。从目前的身份检查器（identity inspector）中访问，这些属性在 Interface Builder 被整合到 Xcode 之前就可用了。他们提供了一个强有力的机制来配置一个 NIB，XIB，或者 storyboard 实例中的任何键值编码（key-value coded）属性</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/01/使用IBInspectable和IBDesignable实现实时预览/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2015/12/01/设计模式之观察者模式/" itemprop="url">
+                设计模式之观察者模式
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-01T23:44:15+08:00" content="2015-12-01">
+            2015-12-01
+          </time>
+        </span>
+
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2015/12/01/设计模式之观察者模式/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/01/设计模式之观察者模式/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h2 id="经典观察者模式">经典观察者模式</h2><p>经典观察者模式被认为是对象的行为模式，又叫发布-订阅(Publish/Subscribe)模式、模型-视图(Model/View)模式、源-监听器(Source/Listener)模式或从属者(Dependents)模式。经典观察者模式定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态上发生变化时，会通知所有观察者对象，使它们能够自动更新自己或者做出相应的一些动作。在文章一开始举的例子就是典型观察者模式的应用。</p>
+<p>而在IOS开发中我们可能会接触到的经典观察者模式的实现方式，有这么几种：NSNotificationCenter、KVO、Delegate等</p>
+<hr>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/01/设计模式之观察者模式/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2015/12/01/IOS开发第三方库收藏/" itemprop="url">
+                IOS开发第三方库收藏
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-01T23:43:49+08:00" content="2015-12-01">
+            2015-12-01
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/IOS开发/" itemprop="url" rel="index">
+                  <span itemprop="name">IOS开发</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2015/12/01/IOS开发第三方库收藏/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/01/IOS开发第三方库收藏/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h1 id="UIKit">UIKit</h1><h2 id="UIKitConvenience"><a href="https://github.com/egold/UIKitConvenience">UIKitConvenience</a></h2><p>提供了一个方法去操作子视图或者所有父视图。还可以enable或者disable所有层级中的UIControls</p>
+<h2 id="kxmenu"><a href="https://github.com/kolyvan/kxmenu">kxmenu</a></h2><p>精妙的垂直弹出菜单</p>
+<p><img src="/images/framework/3.gif" alt="kxmenu"></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/01/IOS开发第三方库收藏/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2015/12/01/Xcode7安装Alcatraz以及插件介绍-1/" itemprop="url">
+                Xcode7安装Alcatraz以及插件介绍
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-01T23:42:56+08:00" content="2015-12-01">
+            2015-12-01
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/Mac开发/" itemprop="url" rel="index">
+                  <span itemprop="name">Mac开发</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2015/12/01/Xcode7安装Alcatraz以及插件介绍-1/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/01/Xcode7安装Alcatraz以及插件介绍-1/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>Alcatraz是Xcode的插件包管理工具，很多优秀的插件都能在上面找到，今天我就来说说如何安装Alcatraz以及推荐几个优秀的插件。</p>
+<hr>
+<h2 id="安装Alcatraz">安装Alcatraz</h2><p>1、关闭Xcode</p>
+<p>2、如果你之前安装过Alcatraz，卸载它，运行命令：</p>
+<pre><code>rm -rf ~<span class="regexp">/Library/</span>Application\ Support<span class="regexp">/Developer/</span>Shared<span class="regexp">/Xcode/</span>Plug-ins<span class="regexp">/Alcatraz.xcplugin</span>
 </code></pre>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/11/23/CocoaPods/#more" rel="contents">
+            <a class="btn" href="/2015/12/01/Xcode7安装Alcatraz以及插件介绍-1/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -343,8 +795,8 @@
           
           
             
-              <a class="post-title-link" href="/2015/11/17/Github实践-Git-Command/" itemprop="url">
-                Github实践&Git Command
+              <a class="post-title-link" href="/2015/11/30/Swift-2-0新特性之选项集合-Option-Sets/" itemprop="url">
+                Swift 2.0新特性之选项集合(Option Sets)
               </a>
             
           
@@ -354,8 +806,8 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2015-11-17T14:01:23+08:00" content="2015-11-17">
-            2015-11-17
+          <time itemprop="dateCreated" datetime="2015-11-30T20:46:02+08:00" content="2015-11-30">
+            2015-11-30
           </time>
         </span>
 
@@ -365,8 +817,8 @@
           
             <span class="post-comments-count">
               &nbsp; | &nbsp;
-              <a href="/2015/11/17/Github实践-Git-Command/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/17/Github实践-Git-Command/" itemprop="commentsCount"></span>
+              <a href="/2015/11/30/Swift-2-0新特性之选项集合-Option-Sets/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/30/Swift-2-0新特性之选项集合-Option-Sets/" itemprop="commentsCount"></span>
               </a>
             </span>
           
@@ -381,13 +833,182 @@
 
       
         
-          <h3 id="1-创建本地仓库">1.创建本地仓库</h3><ul>
-<li>1 mkdir git-tutorial</li>
-<li>2 cd git-tutorial</li>
-<li>3 git init</li>
-<li>4 git status
+          <p>Swift 2.0增加了一个很厉害的新特性，其名为选项集合(Option Sets)，这个特性让我们可以用炒鸡简单的方式来对位掩码进行操作。</p>
+<h3 id="位掩码">位掩码</h3><p>如果你从未使用过位掩码，你可能会问，这到底是什么鬼？<br>请容我来稍微解释一下。</p>
+<p>假设我们在写一个角色扮演的游戏（比如说boombeach(海岛奇兵)），角色可能拥有比如满级野人，加血雕像，生命药水等等，你的第一反应可能是用 Bool 属性来对各种设备又还是没有进行表示，类似下面这样：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable"><span class="keyword">var</span> hasWildman</span> = <span class="literal">true</span>  <span class="comment">// 野人</span></span><br><span class="line"><span class="variable"><span class="keyword">var</span> hasStatue</span> = <span class="literal">true</span>  <span class="comment">// 雕像</span></span><br><span class="line"><span class="variable"><span class="keyword">var</span> hasPotionOfLife</span> = <span class="literal">false</span>  <span class="comment">// 生命药水</span></span><br></pre></td></tr></table></figure>
+<p>其实，还可以有另一种做法，就是定义一个整数并使用它的比特位来进行表示。由于每个比特位只能存储 0 或者 1，可以使用它来对每个装备进行表示，这就是所谓的位掩码。如下图所示：</p>
+<p><img src="/images/OptionSets/位掩码.png" alt="位掩码"></p>
+<h3 id="远古时期的位掩码操作方法">远古时期的位掩码操作方法</h3>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/11/17/Github实践-Git-Command/#more" rel="contents">
+            <a class="btn" href="/2015/11/30/Swift-2-0新特性之选项集合-Option-Sets/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2015/11/29/iOS表单验证功能/" itemprop="url">
+                iOS表单验证功能
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-11-29T17:16:18+08:00" content="2015-11-29">
+            2015-11-29
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                  <span itemprop="name">iOS开发</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2015/11/29/iOS表单验证功能/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/29/iOS表单验证功能/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h3 id="第一种实现">第一种实现</h3><h4 id="实现效果">实现效果</h4><p>当输入用户名、密码、邮箱的时候，动态的在textField的右边显示错误信息，并给与颜色警告，一旦输入符合，解除错误信息。一旦三个全部输入符合，注册按钮才可以点击，否则一直disable。</p>
+<p>效果图：<br><img src="/images/formValidate.gif" alt="form"></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/11/29/iOS表单验证功能/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2015/11/28/自定义-urlScheme/" itemprop="url">
+                自定义 urlScheme
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-11-28T09:59:49+08:00" content="2015-11-28">
+            2015-11-28
+          </time>
+        </span>
+
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2015/11/28/自定义-urlScheme/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/28/自定义-urlScheme/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>iPhone / iOS SDK 最酷的特性之一就是应用将其自身”绑定”到一个自定义 URL scheme 上，该 scheme 用于从浏览器或其他应用中启动本应用。</p>
+</blockquote>
+<h4 id="注册自定义_URL_Scheme">注册自定义 URL Scheme</h4><p>注册自定义 URL Scheme 的第一步是创建 URL Scheme — 在 Xcode Project Navigator 中找到并点击工程 info.plist 文件。当该文件显示在右边窗口，在列表上点击鼠标右键，选择 Add Row:</p>
+<p>向下滚动弹出的列表并选择 URL types。</p>
+<p><img src="/images/CustomURLScheme/1.png" alt="Add URL types"><br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/11/28/自定义-urlScheme/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -413,7 +1034,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/">&laquo;</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/">&laquo;</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">&raquo;</a>
   </nav>
 
  </div>
@@ -447,21 +1068,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-count">29</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             
-              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-count">6</span>
               <span class="site-state-item-name">分类</span>
               
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-count">14</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

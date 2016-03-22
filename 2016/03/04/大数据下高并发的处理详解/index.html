@@ -1,0 +1,764 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="我是韩球球，目前是一名由Java->iOS的developer，愿成为内外兼修，才德兼备的女子，追求卓越，一直在通往梦想的桥梁上走着......                             [生如夏花之绚烂，死如秋叶之静美]" />
+
+
+
+  <meta name="keywords" content="高并发," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="对于我们开发的网站，如果网站的访问量非常大的话，那么我们就需要考虑相关的并发访问问题了。而并发问题是绝大部分的程序员头疼的问题，但话又说回来了，既然逃避不掉，那我们就要想想应对措施，今天我们就一起讨论一下常见的并发和同步吧。首先为了更好的理解并发和同步，我们需要首先明白两个重要的概念：同步和异步">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大数据下高并发的处理详解">
+<meta property="og:url" content="https://github.com/CarolineHJQ1991/2016/03/04/大数据下高并发的处理详解/index.html">
+<meta property="og:site_name" content="Caroline.H 's Blog">
+<meta property="og:description" content="对于我们开发的网站，如果网站的访问量非常大的话，那么我们就需要考虑相关的并发访问问题了。而并发问题是绝大部分的程序员头疼的问题，但话又说回来了，既然逃避不掉，那我们就要想想应对措施，今天我们就一起讨论一下常见的并发和同步吧。首先为了更好的理解并发和同步，我们需要首先明白两个重要的概念：同步和异步">
+<meta property="og:updated_time" content="2016-03-04T07:09:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="大数据下高并发的处理详解">
+<meta name="twitter:description" content="对于我们开发的网站，如果网站的访问量非常大的话，那么我们就需要考虑相关的并发访问问题了。而并发问题是绝大部分的程序员头疼的问题，但话又说回来了，既然逃避不掉，那我们就要想想应对措施，今天我们就一起讨论一下常见的并发和同步吧。首先为了更好的理解并发和同步，我们需要首先明白两个重要的概念：同步和异步">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'always'
+  };
+</script>
+
+  <title> 大数据下高并发的处理详解 | Caroline.H 's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">Caroline.H 's Blog</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            <i class="menu-item-icon icon-next-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+
+      <li class="menu-item menu-item-high"> 
+      <script src="/js/high.js"></script>
+      <a href="javascript:void(0);" onclick="high_benjamin('/css/high.css')" rel="section">
+      <i class="menu-item-icon icon-high"></i><br />
+        点我High
+      </a>
+      </li>
+
+      
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <form class="site-search-form">
+    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+  </form>
+
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'au9bfYPd66oNfFwx6nZp','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              大数据下高并发的处理详解
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-03-04T12:37:02+08:00" content="2016-03-04">
+            2016-03-04
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/高并发多线程系列/" itemprop="url" rel="index">
+                  <span itemprop="name">高并发多线程系列</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2016/03/04/大数据下高并发的处理详解/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/04/大数据下高并发的处理详解/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>对于我们开发的网站，如果网站的访问量非常大的话，那么我们就需要考虑相关的并发访问问题了。而并发问题是绝大部分的程序员头疼的问题，但话又说回来了，既然逃避不掉，那我们就要想想应对措施，今天我们就一起讨论一下常见的并发和同步吧。<br>首先为了更好的理解并发和同步，我们需要首先明白两个重要的概念：<strong>同步和异步</strong></p>
+<a id="more"></a>
+<p></p><h4 id="1" style="color:green;">同步和异步的区别和联系</h4><br>所谓同步，就是一个线程执行一个方法或函数的时候，会阻塞其它线程，其他线程要等待它执行完毕才能继续执行。<br>异步，就是多个线程之间没有阻塞，多个线程同时执行。<br>通俗一点来说，同步就是一件事一件事的做，异步就是做一件事，不影响做其他事情。<br>例如：吃饭和说话，只能一件一件的来，因为只有一张嘴。<br>但是吃饭和听音乐是异步的，可以一起进行，因为听音乐并不影响我们吃饭。<p></p>
+<p>对于Java程序员来说，Synchronized最为熟悉了，如果它作用于一个类的话，那么就是一个线程访问类的方法时，其他线程就会阻塞，相反，如果没有这个关键字来修饰的话，不同线程就可以在同一时间访问同一个方法，这就是异步。</p>
+<p></p><h4 id="2" style="color:green;">脏读和不可重复读</h4><br><strong>脏读</strong><br>脏读就是指当一个事务正在访问数据，并且对数据进行了修改，而这种修改还没有提交到数据库中，这是，另外一个事务也访问这个数据，然后使用了这个数据。因为这个数据是还没有提交的数据，那么另外一个事务读取的这个数据是脏数据(Dirty Data)，依据脏数据所做的操作可能是不正确的。<p></p>
+<p><strong>不可重复读</strong><br>在第一个事务读取数据后，第二个事务对数据进行了修改，导致第一个事务结束前再访问这个数据的时候，会发现两次读取到的数据是不一样的，因此称为不可重复读。</p>
+<p></p><h4 id="3" style="color:green;">如何处理并发和同步</h4><br>今天讲的如何处理并发和同同步问题主要是通过锁机制。<br>我们需要明白，锁机制有两个层面。<br>一种是代码层次上的，如果Java中的同步锁Synchronized，另一种是数据库层次上的，比较典型的就是<strong>悲观锁(传统的物理锁)</strong>和<strong>乐观锁</strong><p></p>
+<p><span style="color:red;"><strong>悲观锁</strong></span><br>悲观锁，正如其名，它指的是对数据被外界(包括本系统当前的其他事务，以及来自外部系统的事务处理)修改持保守态度。因此，在这个数据处理过程中，将数据处于锁定状态。<br>悲观锁的实现，往往依靠数据库提供的锁机制(也只有数据库层提供的锁机制才能真正保证数据访问的排他性，否则，即使在本系统中实现了加锁机制，也无法保证外部系统不会修改数据)。<br>一个典型的倚赖数据库的悲观锁调用：</p>
+<pre><code><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">account</span> <span class="keyword">where</span> <span class="keyword">name</span>=”Erica” <span class="keyword">for</span> <span class="keyword">update</span></span>
+</code></pre><p>这条 sql 语句锁定了 account 表中所有符合检索条件（ name=”Erica” ）的记录。<br>本次事务提交之前（事务提交时会释放事务过程中的锁），外界无法修改这些记录。<br>Hibernate 的悲观锁，也是基于数据库的锁机制实现。<br>下面的代码实现了对查询记录的加锁：</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String hqlStr =<span class="string">"from TUser as user where user.name='Erica'"</span>;</span><br><span class="line"><span class="keyword">Query</span> <span class="keyword">query</span> = session.createQuery(hqlStr);</span><br><span class="line"><span class="keyword">query</span>.setLockMode(<span class="string">"user"</span>,LockMode.UPGRADE); <span class="comment">// 加锁</span></span><br><span class="line"><span class="keyword">List</span> userList = <span class="keyword">query</span>.<span class="keyword">list</span>();<span class="comment">// 执行查询，获取数据</span></span><br></pre></td></tr></table></figure>
+<p>观察运行期 Hibernate 生成的 SQL 语句： </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> tuser0_.<span class="keyword">id</span> <span class="keyword">as</span> <span class="keyword">id</span>, tuser0_.<span class="keyword">name</span> <span class="keyword">as</span> <span class="keyword">name</span>, tuser0_.<span class="keyword">group_id</span> <span class="keyword">as</span> <span class="keyword">group_id</span>, tuser0_.user_type <span class="keyword">as</span> user_type, tuser0_.sex <span class="keyword">as</span> sex <span class="keyword">from</span> t_user tuser0_ <span class="keyword">where</span> (tuser0_.<span class="keyword">name</span>=<span class="string">'Erica'</span> ) <span class="keyword">for</span> <span class="keyword">update</span></span></span><br></pre></td></tr></table></figure>
+<p>这里 Hibernate 通过使用数据库的 for update 子句实现了悲观锁机制。<br>Hibernate 的加锁模式有：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">LockMode.NONE ： 无锁机制。 </span><br><span class="line">LockMode.WRITE ： Hibernate 在 <span class="operator"><span class="keyword">Insert</span> 和 <span class="keyword">Update</span> 记录的时候会自动获取</span><br><span class="line">LockMode.<span class="keyword">READ</span> ： Hibernate 在读取记录的时候会自动获取。 </span><br><span class="line">以上这三种锁机制一般由 Hibernate 内部使用，如 Hibernate 为了保证 <span class="keyword">Update</span>过程中对象不会被外界修改，会在 <span class="keyword">save</span> 方法实现中自动为目标对象加上 WRITE 锁。</span><br><span class="line"></span><br><span class="line">LockMode.<span class="keyword">UPGRADE</span> ：利用数据库的 <span class="keyword">for</span> <span class="keyword">update</span> 子句加锁。 </span><br><span class="line">LockMode.UPGRADE_NOWAIT ： <span class="keyword">Oracle</span> 的特定实现，利用 <span class="keyword">Oracle</span> 的 <span class="keyword">for</span> <span class="keyword">update</span> <span class="keyword">nowait</span> 子句实现加锁。 </span><br><span class="line">上面这两种锁机制是我们在应用层较为常用的，加锁一般通过以下方法实现： </span><br><span class="line"></span><br><span class="line">Criteria.setLockMode</span><br><span class="line"><span class="keyword">Query</span>.setLockMode</span><br><span class="line"><span class="keyword">Session</span>.<span class="keyword">lock</span></span></span><br></pre></td></tr></table></figure>
+<p>注意，只有在查询开始之前（也就是 Hiberate 生成 SQL 之前）设定加锁，才会真正通过数据库的锁机制进行加锁处理，否则，数据已经通过不包含 for update子句的 Select SQL 加载进来，所谓数据库加锁也就无从谈起。</p>
+<p>为了更好的理解select… for update的锁表的过程，本人将要以mysql为例，进行相应的讲解<br>开启两个测试窗口，其中一个窗口A执行命令：</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; begin;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line"><span class="header">mysql&gt; select * from empinfo for update;</span><br><span class="line">+--------+----------+------+---------+</span></span><br><span class="line"><span class="header">| Fempno | Fempname | Fage | Fsalary |</span><br><span class="line">+--------+----------+------+---------+</span></span><br><span class="line">| 1233   | sdfs     | NULL |    NULL |</span><br><span class="line"><span class="header">| 324234 | sdf      |   38 |   12121 |</span><br><span class="line">+--------+----------+------+---------+</span></span><br><span class="line">2 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>这个时候打开窗口B执行更新或插入操作：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; update empinfo <span class="built_in">set</span> Fage=<span class="number">12</span> where Fempno=<span class="number">1233</span>;</span><br></pre></td></tr></table></figure>
+<p>这个时候窗口B的更新或插入操作不会执行，会一直在等待，直到A窗口的事务提交了：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; commit;</span><br><span class="line">Query OK, <span class="number">0</span> <span class="function">rows <span class="title">affected</span> <span class="params">(<span class="number">0.00</span> sec)</span></span></span><br></pre></td></tr></table></figure>
+<p>B窗口的更新才开始执行。<br>那么for update到底锁定表还是行呢？</p>
+<p>由于InnoDB预设是Row-Level Lock，所以只有「明确」的指定主键，MySQL才会执行Row lock (只锁住被选取的资料例) ，否则MySQL将会执行Table Lock (将整个资料表单给锁住)。<br>例1: (明确指定主键，并且有此笔资料，row lock)</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> products <span class="keyword">WHERE</span> <span class="keyword">id</span>=<span class="string">'3'</span> <span class="keyword">FOR</span> <span class="keyword">UPDATE</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> products <span class="keyword">WHERE</span> <span class="keyword">id</span>=<span class="string">'3'</span> <span class="keyword">and</span> <span class="keyword">type</span>=<span class="number">1</span> <span class="keyword">FOR</span> <span class="keyword">UPDATE</span>;</span></span><br></pre></td></tr></table></figure>
+<p>例2: (明确指定主键，若查无此笔资料，无lock)</p>
+<pre><code><span class="operator"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> products <span class="keyword">WHERE</span> <span class="keyword">id</span>=<span class="string">'-1'</span> <span class="keyword">FOR</span> <span class="keyword">UPDATE</span>;</span>
+</code></pre><p>例3: (无主键，table lock)</p>
+<pre><code><span class="operator"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> products <span class="keyword">WHERE</span> <span class="keyword">name</span>=<span class="string">'Mouse'</span> <span class="keyword">FOR</span> <span class="keyword">UPDATE</span>;</span>
+</code></pre><p>例4: (主键不明确，table lock)</p>
+<pre><code><span class="operator"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> products <span class="keyword">WHERE</span> <span class="keyword">id</span>&lt;&gt;<span class="string">'3'</span> <span class="keyword">FOR</span> <span class="keyword">UPDATE</span>;</span>
+</code></pre><p>例5: (主键不明确，table lock)</p>
+<pre><code><span class="operator"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> products <span class="keyword">WHERE</span> <span class="keyword">id</span> <span class="keyword">LIKE</span> <span class="string">'3'</span> <span class="keyword">FOR</span> <span class="keyword">UPDATE</span>;</span>
+</code></pre><p>注1: FOR UPDATE仅适用于InnoDB，且必须在交易区块(BEGIN/COMMIT)中才能生效。<br>注2: 要测试锁定的状况，可以利用MySQL的Command Mode ，开二个视窗来做测试。在MySql 5.0中测试确实是这样的<br>另外：MyAsim 只支持表级锁，InnerDB支持行级锁 添加了(行级锁/表级锁)锁的数据不能被其它事务再锁定，也不被其它事务修改(修改、删除） 。是表级锁时，不管是否查询到记录，都会锁定表。<br>到这里，悲观锁机制你应该了解一些了吧~</p>
+<p><span style="color:red;"><strong>乐观锁</strong></span><br>相对悲观锁而言，乐观锁机制采取了更加宽松的加锁机制。悲观锁大多数情况下依 靠数据库的锁机制实现，以保证操作最大程度的独占性。但随之而来的就是数据库 性能的大量开销，特别是对长事务而言，这样的开销往往无法承受。如一个金融系统，当某个操作员读取用户的数据，并在读出的用户数据的基础上进 行修改时（如更改用户帐户余额），如果采用悲观锁机制，也就意味着整个操作过 程中（从操作员读出数据、开始修改直至提交修改结果的全过程，甚至还包括操作 员中途去煮咖啡的时间），数据库记录始终处于加锁状态，可以想见，如果面对几 百上千个并发，这样的情况将导致怎样的后果。乐观锁机制在一定程度上解决了这个问题。乐观锁，大多是基于数据版本   Version ）记录机制实现。何谓数据版本？即为数据增加一个版本标识，在基于数据库表的版本解决方案中，一般是通过为数据库表增加一个 “version” 字段来 实现。 读取出数据时，将此版本号一同读出，之后更新时，对此版本号加一。此时，将提 交数据的版本数据与数据库表对应记录的当前版本信息进行比对，如果提交的数据 版本号大于数据库表当前版本号，则予以更新，否则认为是过期数据。<br>假如数据库中账户余额为100，version为1，操作员A读出余额，并修改为50，而在A操作的同时操作员B也读出了账户余额100，并修改为80，A完成了操作录入系统，version从1加上1变为2，余额修改为50，操作员B也提交了记录，version也变为2，余额则是80，但是此时数据库发现，B提交的version为2，当前版本也是2，不满足 “ 提交版本必须大于记 录当前版本才能执行更新 “ 的乐观锁策略。因此，操作员 B 的提交被驳回。 这样，就避免了操作员 B 用基于version=1 的旧数据修改的结果覆盖操作 员 A 的操作结果的可能。 从上面的例子可以看出，乐观锁机制避免了长事务中的数据库加锁开销（操作员 A和操作员 B 操作过程中，都没有对数据库数据加锁），大大提升了大并发量下的系 统整体性能表现。 需要注意的是，乐观锁机制往往基于系统中的数据存储逻辑，因此也具备一定的局 限性，如在上例中，由于乐观锁机制是在我们的系统中实现，来自外部系统的用户 余额更新操作不受我们系统的控制，因此可能会造成脏数据被更新到数据库中。在 系统设计阶段，我们应该充分考虑到这些情况出现的可能性，并进行相应调整（如 将乐观锁策略在数据库存储过程中实现，对外只开放基于此存储过程的数据更新途 径，而不是将数据库表直接对外公开）。 Hibernate 在其数据访问引擎中内置了乐观锁实现。如果不用考虑外部系统对数 据库的更新操作，利用 Hibernate 提供的透明化乐观锁实现，将大大提升我们的 生产力。</p>
+<p>Hibernate使用乐观锁我只说一下注解的方式：<br>在Entity中加入以下代码</p>
+<figure class="highlight d"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> <span class="keyword">version</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@Version</span></span><br><span class="line"><span class="keyword">@Column</span>(name = <span class="string">"version"</span>,length = <span class="number">11</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">int</span> getVersion() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">version</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> setVersion(<span class="keyword">int</span> <span class="keyword">version</span>) &#123;</span><br><span class="line">    <span class="keyword">this</span>.<span class="keyword">version</span> = <span class="keyword">version</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样就可以轻松实现hibernate乐观锁方式。</p>
+<p></p><h4 id="4" style="color:green;">常见并发同步案例分析</h4><br><span style="color:red;"><strong>案例一:订票系统案例</strong></span><br>某航班只有一张机票，假定有1w个人打开你的网站来订票，问你如何解决并发问题(可扩展到任何高并发网站要考虑的并发读写问题)<br>问题，1w个人来访问，票没出去前要保证大家都能看到有票，不可能一个人在看到票的时候别人就不能看了。到底谁能抢到，那得看这个人的“运气”（网络快慢等）<br>其次考虑的问题，并发，1w个人同时点击购买，到底谁能成交？总共只有一张票。<br>首先我们容易想到和并发相关的几个方案 ：<br>锁同步同步更多指的是应用程序的层面，多个线程进来，只能一个一个的访问，java中指的是syncrinized关键字。锁也有2个层面，一个是java中谈到的对象锁，用于线程同步；另外一个层面是数据库的锁；如果是分布式的系统，显然只能利用数据库端的锁来实现。<br>假定我们采用了同步机制或者数据库物理锁机制，如何保证1w个人还能同时看到有票，显然会牺牲性能，在高并发网站中是不可取的。使用hibernate后我们提出了另外一个概念：乐观锁、悲观锁（即传统的物理锁）；<br>采用乐观锁即可解决此问题。乐观锁意思是不锁定表的情况下，利用业务的控制来解决并发问题，这样即保证数据的并发可读性又保证保存数据的排他性，保证性能的同时解决了并发带来的脏数据问题。<br>hibernate中如何实现乐观锁：<br>前提：在现有表当中增加一个冗余字段，version版本号, long类型<br>原理：<br>1）只有当前版本号》=数据库表版本号，才能提交<br>2）提交成功后，版本号version ++<p></p>
+<p><span style="color:red;"><strong>案例一:案例二、股票交易系统、银行系统，大数据量你是如何考虑的</strong></span><br>首先，股票交易系统的行情表，每几秒钟就有一个行情记录产生，一天下来就有（假定行情3秒一个） 股票数量×20×60*6 条记录，一月下来这个表记录数量多大？ oracle中一张表的记录数超过100w后 查询性能就很差了，如何保证系统性能？<br>再比如，中国移动有上亿的用户量，表如何设计？把所有用于存在于一个表么？<br>所以，大数量的系统，必须考虑表拆分-（表名字不一样，但是结构完全一样），通用的几种方式：（视情况而定）<br>1）按业务分，比如 手机号的表，我们可以考虑 130开头的作为一个表，131开头的另外一张表 以此类推<br>2）利用oracle的表拆分机制做分表<br>3）如果是交易系统，我们可以考虑按时间轴拆分，当日数据一个表，历史数据弄到其它表。这里历史数据的报表和查询不会影响当日交易。<br>此外，我们还得考虑缓存<br>这里的缓存，指的不仅仅是hibernate，hibernate本身提供了一级二级缓存。这里的缓存独立于应用，依然是内存的读取，假如我们能减少数据库频繁的访问，那对系统肯定大大有利的。比如一个电子商务系统的商品搜索，如果某个关键字的商品经常被搜，那就可以考虑这部分商品列表存放到缓存（内存中去），这样不用每次访问数据库，性能大大增加。简单的缓存大家可以理解为自己做一个hashmap，把常访问的数据做一个key，value是第一次从数据库搜索出来的值，下次访问就可以从map里读取，而不读数据库；专业些的目前有独立的缓存框架比如memcached 等，可独立部署成一个缓存服务器。</p>
+<p></p><h4 id="4" style="color:green;">常见的提高高并发下访问的效率的手段</h4><br>首先要了解高并发的的瓶颈在哪里？<br>1、可能是服务器网络带宽不够<br>2.可能web线程连接数不够<br>3.可能数据库连接查询上不去。<br>根据不同的情况，解决思路也不同。<br>1、像第一种情况可以增加网络带宽，DNS域名解析分发多台服务器。<br>2、负载均衡，前置代理服务器nginx、apache等等<br>3、数据库查询优化，读写分离，分表等等<p></p>
+<p>最后复制一些在高并发下面需要常常需要处理的内容:<br>尽量使用缓存，包括用户缓存，信息缓存等，多花点内存来做缓存，可以大量减少与数据库的交互，提高性能。<br>用jprofiler等工具找出性能瓶颈，减少额外的开销。<br>优化数据库查询语句，减少直接使用hibernate等工具的直接生成语句（仅耗时较长的查询做优化）。<br>优化数据库结构，多做索引，提高查询效率。<br>统计的功能尽量做缓存，或按每天一统计或定时统计相关报表，避免需要时进行统计的功能。<br>能使用静态页面的地方尽量使用，减少容器的解析（尽量将动态内容生成静态html来显示）。<br>解决以上问题后，使用服务器集群来解决单台的瓶颈问题。</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/高并发/" rel="tag">#高并发</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/08/排序研究前戏-计算复杂性/" rel="prev">排序研究前戏-计算复杂性</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/05/iOS语法之KVO的使用/" rel="next">iOS语法之KVO的使用</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/03/04/大数据下高并发的处理详解/"
+     data-title="大数据下高并发的处理详解"
+     data-content=""
+     data-url="https://github.com/CarolineHJQ1991/2016/03/04/大数据下高并发的处理详解/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+            <!-- 多说热评文章-->
+            <p>热评文章</p>
+            <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+        
+
+        
+          <div class="comments" id="comments">
+            
+              <div class="ds-thread" data-thread-key="2016/03/04/大数据下高并发的处理详解/"
+                   data-title="大数据下高并发的处理详解" data-url="https://github.com/CarolineHJQ1991/2016/03/04/大数据下高并发的处理详解/">
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/me1.jpg" alt="Caroline.H" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Caroline.H</p>
+        </div>
+        <p class="site-description motion-element" style="color:pink"itemprop="description">我是韩球球，目前是一名由Java->iOS的developer，愿成为内外兼修，才德兼备的女子，追求卓越，一直在通往梦想的桥梁上走着......                             [生如夏花之绚烂，死如秋叶之静美]</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">29</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/CarolineHJQ1991" target="_blank">GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank">CSDN</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank">简书</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">Links</p>
+            
+              <span class="links-of-author-item">
+              <a href="https://www.raywenderlich.com/" target="_blank">Raywenderlich</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://blog.zhowkev.in/" target="_blank">Kevin</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://blog.csdn.net/biggercoffee/" target="_blank">Coffee大神</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1"><span class="nav-number">1.</span> <span class="nav-text">同步和异步的区别和联系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2"><span class="nav-number">2.</span> <span class="nav-text">脏读和不可重复读</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3"><span class="nav-number">3.</span> <span class="nav-text">如何处理并发和同步</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4"><span class="nav-number">4.</span> <span class="nav-text">常见并发同步案例分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4"><span class="nav-number">5.</span> <span class="nav-text">常见的提高高并发下访问的效率的手段</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Caroline.H</span>
+  <script async src="/js/count.js"></script>
+  
+  
+  <span id="busuanzi_container_site_uv">
+    本站访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
+
+</div>
+
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"caroline"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+    
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>

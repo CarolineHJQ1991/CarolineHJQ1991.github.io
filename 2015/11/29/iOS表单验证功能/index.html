@@ -1,0 +1,750 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="我是韩球球，目前是一名由Java->iOS的developer，愿成为内外兼修，才德兼备的女子，追求卓越，一直在通往梦想的桥梁上走着......                             [生如夏花之绚烂，死如秋叶之静美]" />
+
+
+
+  <meta name="keywords" content="iOS,swift," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="第一种实现实现效果当输入用户名、密码、邮箱的时候，动态的在textField的右边显示错误信息，并给与颜色警告，一旦输入符合，解除错误信息。一旦三个全部输入符合，注册按钮才可以点击，否则一直disable。
+效果图：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS表单验证功能">
+<meta property="og:url" content="https://github.com/CarolineHJQ1991/2015/11/29/iOS表单验证功能/index.html">
+<meta property="og:site_name" content="Caroline.H 's Blog">
+<meta property="og:description" content="第一种实现实现效果当输入用户名、密码、邮箱的时候，动态的在textField的右边显示错误信息，并给与颜色警告，一旦输入符合，解除错误信息。一旦三个全部输入符合，注册按钮才可以点击，否则一直disable。
+效果图：">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/formValidate.gif">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/formLink.png">
+<meta property="og:updated_time" content="2016-01-04T04:52:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS表单验证功能">
+<meta name="twitter:description" content="第一种实现实现效果当输入用户名、密码、邮箱的时候，动态的在textField的右边显示错误信息，并给与颜色警告，一旦输入符合，解除错误信息。一旦三个全部输入符合，注册按钮才可以点击，否则一直disable。
+效果图：">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'always'
+  };
+</script>
+
+  <title> iOS表单验证功能 | Caroline.H 's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">Caroline.H 's Blog</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            <i class="menu-item-icon icon-next-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+
+      <li class="menu-item menu-item-high"> 
+      <script src="/js/high.js"></script>
+      <a href="javascript:void(0);" onclick="high_benjamin('/css/high.css')" rel="section">
+      <i class="menu-item-icon icon-high"></i><br />
+        点我High
+      </a>
+      </li>
+
+      
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <form class="site-search-form">
+    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+  </form>
+
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'au9bfYPd66oNfFwx6nZp','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              iOS表单验证功能
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-11-29T17:16:18+08:00" content="2015-11-29">
+            2015-11-29
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                  <span itemprop="name">iOS开发</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2015/11/29/iOS表单验证功能/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/29/iOS表单验证功能/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h3 id="第一种实现">第一种实现</h3><h4 id="实现效果">实现效果</h4><p>当输入用户名、密码、邮箱的时候，动态的在textField的右边显示错误信息，并给与颜色警告，一旦输入符合，解除错误信息。一旦三个全部输入符合，注册按钮才可以点击，否则一直disable。</p>
+<p>效果图：<br><img src="/images/formValidate.gif" alt="form"></p>
+<a id="more"></a>
+<hr>
+<h4 id="代码实现">代码实现</h4><h5 id="Extension">Extension</h5><p>首先扩展UITextField，在里面实现正则判断。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">UITextField</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> notEmpty: <span class="type">Bool</span> &#123;</span><br><span class="line">        <span class="keyword">get</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">self</span>.text != <span class="string">""</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">validate</span><span class="params">(RegEx: String)</span></span> -&gt; <span class="type">Bool</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> predicate = <span class="type">NSPredicate</span>(format: <span class="string">"SELF MATCHES %@"</span>, <span class="type">RegEx</span>)</span><br><span class="line">        <span class="keyword">return</span> predicate.evaluateWithObject(<span class="keyword">self</span>.text)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">validateEmail</span><span class="params">()</span></span> -&gt; <span class="type">Bool</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> regex = <span class="string">"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]&#123;2,4&#125;"</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">self</span>.validate(regex)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">validateUsername</span><span class="params">()</span></span> -&gt; <span class="type">Bool</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">self</span>.validate(<span class="string">"^[A-Za-z0-9]&#123;6,18&#125;"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">validatePassword</span><span class="params">()</span></span> -&gt; <span class="type">Bool</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">self</span>.validate(<span class="string">"^[A-Za-z0-9]&#123;6,18&#125;"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="建立表单Event(Editing_Changed)">建立表单Event(Editing Changed)</h5><p>把三个TextField绑定到一个event事件 -&gt; Editing Changed，在用户编辑的时候，都会进入这个方法，那么我们就在这个方法里面进行验证</p>
+<p><img src="/images/formLink.png" alt="formLink"></p>
+<p>1、viewDidLoad的时候把注册按钮置灰<br>    self.navigationItem.rightBarButtonItem?.enabled = false</p>
+<p>2、edit的时候，进入Editing Changed事件</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">@IBAction func textFieldChanged(sender: <span class="built_in">UITextBox</span>) &#123;</span><br><span class="line">        </span><br><span class="line">        sender<span class="variable">.highlightState</span> = <span class="built_in">UITextBoxHighlightState</span><span class="variable">.Default</span></span><br><span class="line">        <span class="keyword">if</span> sender == labelUsername &#123;</span><br><span class="line">            <span class="keyword">if</span> !sender<span class="variable">.validateUsername</span>() &#123;</span><br><span class="line">                sender<span class="variable">.highlightState</span> = <span class="built_in">UITextBoxHighlightState</span><span class="variable">.Wrong</span>(<span class="string">"用户名长度6到18位(数字字母)"</span>)</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> sender == labelPassword &#123;</span><br><span class="line">            <span class="keyword">if</span> !sender<span class="variable">.validatePassword</span>() &#123;</span><br><span class="line">                sender<span class="variable">.highlightState</span> = <span class="built_in">UITextBoxHighlightState</span><span class="variable">.Wrong</span>(<span class="string">"密码长度6到18位(数字字母)"</span>)</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> !sender<span class="variable">.validateEmail</span>() &#123;</span><br><span class="line">                sender<span class="variable">.highlightState</span> = <span class="built_in">UITextBoxHighlightState</span><span class="variable">.Wrong</span>(<span class="string">"邮箱格式不正确"</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> labelUsername<span class="variable">.notEmpty</span> &amp;&amp; labelPassword<span class="variable">.notEmpty</span> &amp;&amp; labelEmail<span class="variable">.notEmpty</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> labelUsername<span class="variable">.validateUsername</span>() &amp;&amp; labelPassword<span class="variable">.validatePassword</span>() &amp;&amp; labelEmail<span class="variable">.validateEmail</span>() &#123;</span><br><span class="line">                <span class="keyword">self</span><span class="variable">.navigationItem</span><span class="variable">.rightBarButtonItem</span>?<span class="variable">.enabled</span> = <span class="literal">true</span></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">self</span><span class="variable">.navigationItem</span><span class="variable">.rightBarButtonItem</span>?<span class="variable">.enabled</span> = <span class="literal">false</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">self</span><span class="variable">.navigationItem</span><span class="variable">.rightBarButtonItem</span>?<span class="variable">.enabled</span> = <span class="literal">false</span></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>这里的UITextBox是我引入的一个文件，继承与UITextField，并且文本框的类都实现了它，以用来实现正确错误的高亮提醒效果。</p>
+<hr>
+<h3 id="第二种实现">第二种实现</h3><p>这一种实现方便在于不用把textField控件和代码实现Event关联，而且可以在viewdidLoad的时候绑定好校验规则，错误提示，需要引入第三方库<code>AJWValidator</code>，在控制所有控件都符合输入规则后，可以点击注册按钮，这里我们用了Swift2.0的新特性（选项集合）来实现。<br>想了解Option Sets的可以去<a href="http://www.jianshu.com/p/ef14cf0cb37c" target="_blank" rel="external">Swfit 2.0之选项集合(Option Sets)</a>学习一下，这里就不进行讲解了。</p>
+<p>首先，定义一个Inputs的选项集合类，定义了所有需要进行校验的textField，代码如下：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Foundation</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Inputs</span>: <span class="title">OptionSetType</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> rawValue: <span class="type">Int</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">let</span> user = <span class="type">Inputs</span>(rawValue: <span class="number">1</span> &lt;&lt; <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">let</span> pass = <span class="type">Inputs</span>(rawValue: <span class="number">1</span> &lt;&lt; <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">let</span> mail = <span class="type">Inputs</span>(rawValue: <span class="number">1</span> &lt;&lt; <span class="number">2</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//extend bool validate</span></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Inputs</span>: <span class="title">BooleanType</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> boolValue: <span class="type">Bool</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">self</span>.rawValue == <span class="number">0b111</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//check</span></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Inputs</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">isAllOk</span><span class="params">()</span></span> -&gt; <span class="type">Bool</span> &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">let</span> <span class="built_in">count</span> = <span class="number">3</span></span><br><span class="line">        <span class="keyword">var</span> found = <span class="number">0</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> time <span class="keyword">in</span> <span class="number">0</span>..&lt;<span class="built_in">count</span> <span class="keyword">where</span> <span class="keyword">self</span>.<span class="built_in">contains</span>(<span class="type">Inputs</span>(rawValue: <span class="number">1</span> &lt;&lt; time)) &#123;</span><br><span class="line">            found++</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">count</span> == found</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在注册的controller里定义一个空的Option Sets集合变量</p>
+<pre><code><span class="variable"><span class="keyword">var</span> inputs</span>: Inputs = []
+</code></pre><p>在viewDidLoad中进行校验，我把校验单独写在了一个方法中：</p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line">     form 表单校验</span><br><span class="line">     */</span></span><br><span class="line">    func textFieldValid() &#123;</span><br><span class="line">        <span class="keyword">let</span> barButtonItem = <span class="built_in">self</span><span class="built_in">.</span>navigationItem<span class="built_in">.</span>rightBarButtonItem</span><br><span class="line">        <span class="keyword">let</span> vali = AJWValidat<span class="subst">or</span>(<span class="keyword">type</span>: <span class="built_in">.</span><span class="built_in">String</span>)</span><br><span class="line">        vali<span class="built_in">.</span>addValidationToEnsureRangeWithMinimum(<span class="number">6</span>, maximum: <span class="number">18</span>, invalidMessage: <span class="string">"用户名长度6到18位(数字字母)"</span>)</span><br><span class="line">        <span class="built_in">self</span><span class="built_in">.</span>labelUsername<span class="built_in">.</span>ajw_attachValidat<span class="subst">or</span>(vali)</span><br><span class="line">        vali<span class="built_in">.</span>validatorStateChangedHandler = &#123; (newState: AJWValidatorState) <span class="subst">-&gt; </span><span class="literal">Void</span> <span class="keyword">in</span></span><br><span class="line">            switch newState &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="built_in">.</span>ValidationStateValid:</span><br><span class="line">                <span class="built_in">self</span><span class="built_in">.</span>labelUsername<span class="built_in">.</span>highlightState = <span class="built_in">.</span>Default</span><br><span class="line">                <span class="built_in">self</span><span class="built_in">.</span>inputs<span class="built_in">.</span>unionInPlace(Inputs<span class="built_in">.</span>user)</span><br><span class="line">            <span class="keyword">case</span> <span class="built_in">.</span>ValidationStateInvalid:</span><br><span class="line">                <span class="keyword">let</span> errorMsg = vali<span class="built_in">.</span>errorMessages<span class="built_in">.</span>first as? <span class="built_in">String</span></span><br><span class="line">                <span class="built_in">self</span><span class="built_in">.</span>labelUsername<span class="built_in">.</span>highlightState = <span class="built_in">.</span>Wrong(errorMsg<span class="subst">!</span>)</span><br><span class="line">                <span class="built_in">self</span><span class="built_in">.</span>inputs<span class="built_in">.</span>subtractInPlace(Inputs<span class="built_in">.</span>user)</span><br><span class="line">            default:</span><br><span class="line">                break</span><br><span class="line">            &#125;</span><br><span class="line">            barButtonItem<span class="subst">!</span><span class="built_in">.</span>enabled = <span class="built_in">self</span><span class="built_in">.</span>inputs<span class="built_in">.</span>isAllOk()</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">let</span> passVali = AJWValidat<span class="subst">or</span>(<span class="keyword">type</span>: <span class="built_in">.</span><span class="built_in">String</span>)</span><br><span class="line">        passVali<span class="built_in">.</span>addValidationToEnsureRangeWithMinimum(<span class="number">6</span>, maximum: <span class="number">18</span>, invalidMessage: <span class="string">"密码长度6到18位(数字字母)"</span>)</span><br><span class="line">        <span class="built_in">self</span><span class="built_in">.</span>labelPassword<span class="built_in">.</span>ajw_attachValidat<span class="subst">or</span>(passVali)</span><br><span class="line">        passVali<span class="built_in">.</span>validatorStateChangedHandler = &#123; (newState: AJWValidatorState) <span class="subst">-&gt; </span><span class="literal">Void</span> <span class="keyword">in</span></span><br><span class="line">            switch newState &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="built_in">.</span>ValidationStateValid:</span><br><span class="line">                <span class="built_in">self</span><span class="built_in">.</span>labelPassword<span class="built_in">.</span>highlightState = <span class="built_in">.</span>Default</span><br><span class="line">                <span class="built_in">self</span><span class="built_in">.</span>inputs<span class="built_in">.</span>unionInPlace(Inputs<span class="built_in">.</span>pass)</span><br><span class="line">            <span class="keyword">case</span> <span class="built_in">.</span>ValidationStateInvalid:</span><br><span class="line">                <span class="keyword">let</span> errorMsg = passVali<span class="built_in">.</span>errorMessages<span class="built_in">.</span>first as? <span class="built_in">String</span></span><br><span class="line">                <span class="built_in">self</span><span class="built_in">.</span>labelPassword<span class="built_in">.</span>highlightState = <span class="built_in">.</span>Wrong(errorMsg<span class="subst">!</span>)</span><br><span class="line">                <span class="built_in">self</span><span class="built_in">.</span>inputs<span class="built_in">.</span>subtractInPlace(Inputs<span class="built_in">.</span>pass)</span><br><span class="line">            default:</span><br><span class="line">                break</span><br><span class="line">            &#125;</span><br><span class="line">            barButtonItem<span class="subst">!</span><span class="built_in">.</span>enabled = <span class="built_in">self</span><span class="built_in">.</span>inputs<span class="built_in">.</span>isAllOk()</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">let</span> emailVali = AJWValidat<span class="subst">or</span>(<span class="keyword">type</span>: <span class="built_in">.</span><span class="built_in">String</span>)</span><br><span class="line">        emailVali<span class="built_in">.</span>addValidationToEnsureValidEmailWithInvalidMessage(<span class="string">"格式不正确"</span>)</span><br><span class="line">        <span class="built_in">self</span><span class="built_in">.</span>labelEmail<span class="built_in">.</span>ajw_attachValidat<span class="subst">or</span>(emailVali)</span><br><span class="line">        emailVali<span class="built_in">.</span>validatorStateChangedHandler = &#123; (newState: AJWValidatorState) <span class="subst">-&gt; </span><span class="literal">Void</span> <span class="keyword">in</span></span><br><span class="line">            switch newState &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="built_in">.</span>ValidationStateValid:</span><br><span class="line">                <span class="built_in">self</span><span class="built_in">.</span>labelEmail<span class="built_in">.</span>highlightState = <span class="built_in">.</span>Default</span><br><span class="line">                <span class="built_in">self</span><span class="built_in">.</span>inputs<span class="built_in">.</span>unionInPlace(Inputs<span class="built_in">.</span>mail)</span><br><span class="line">            <span class="keyword">case</span> <span class="built_in">.</span>ValidationStateInvalid:</span><br><span class="line">                <span class="keyword">let</span> errorMsg = emailVali<span class="built_in">.</span>errorMessages<span class="built_in">.</span>first as? <span class="built_in">String</span></span><br><span class="line">                <span class="built_in">self</span><span class="built_in">.</span>labelEmail<span class="built_in">.</span>highlightState = <span class="built_in">.</span>Wrong(errorMsg<span class="subst">!</span>)</span><br><span class="line">                <span class="built_in">self</span><span class="built_in">.</span>inputs<span class="built_in">.</span>subtractInPlace(Inputs<span class="built_in">.</span>mail)</span><br><span class="line">            default:</span><br><span class="line">                break</span><br><span class="line">            &#125;</span><br><span class="line">            barButtonItem<span class="subst">!</span><span class="built_in">.</span>enabled = <span class="built_in">self</span><span class="built_in">.</span>inputs<span class="built_in">.</span>isAllOk()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>这样也可以实现实时校验的效果。</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
+          
+            <a href="/tags/swift/" rel="tag">#swift</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/11/30/Swift-2-0新特性之选项集合-Option-Sets/" rel="prev">Swift 2.0新特性之选项集合(Option Sets)</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/11/28/自定义-urlScheme/" rel="next">自定义 urlScheme</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/11/29/iOS表单验证功能/"
+     data-title="iOS表单验证功能"
+     data-content=""
+     data-url="https://github.com/CarolineHJQ1991/2015/11/29/iOS表单验证功能/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+            <!-- 多说热评文章-->
+            <p>热评文章</p>
+            <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+        
+
+        
+          <div class="comments" id="comments">
+            
+              <div class="ds-thread" data-thread-key="2015/11/29/iOS表单验证功能/"
+                   data-title="iOS表单验证功能" data-url="https://github.com/CarolineHJQ1991/2015/11/29/iOS表单验证功能/">
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/me1.jpg" alt="Caroline.H" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Caroline.H</p>
+        </div>
+        <p class="site-description motion-element" style="color:pink"itemprop="description">我是韩球球，目前是一名由Java->iOS的developer，愿成为内外兼修，才德兼备的女子，追求卓越，一直在通往梦想的桥梁上走着......                             [生如夏花之绚烂，死如秋叶之静美]</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">29</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/CarolineHJQ1991" target="_blank">GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank">CSDN</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank">简书</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">Links</p>
+            
+              <span class="links-of-author-item">
+              <a href="https://www.raywenderlich.com/" target="_blank">Raywenderlich</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://blog.zhowkev.in/" target="_blank">Kevin</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://blog.csdn.net/biggercoffee/" target="_blank">Coffee大神</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一种实现"><span class="nav-number">1.</span> <span class="nav-text">第一种实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实现效果"><span class="nav-number">1.1.</span> <span class="nav-text">实现效果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码实现"><span class="nav-number">1.2.</span> <span class="nav-text">代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Extension"><span class="nav-number">1.2.1.</span> <span class="nav-text">Extension</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#建立表单Event(Editing_Changed)"><span class="nav-number">1.2.2.</span> <span class="nav-text">建立表单Event(Editing Changed)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二种实现"><span class="nav-number">2.</span> <span class="nav-text">第二种实现</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Caroline.H</span>
+  <script async src="/js/count.js"></script>
+  
+  
+  <span id="busuanzi_container_site_uv">
+    本站访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
+
+</div>
+
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"caroline"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+    
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>

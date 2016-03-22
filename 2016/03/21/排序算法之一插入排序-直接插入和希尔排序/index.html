@@ -1,0 +1,740 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="我是韩球球，目前是一名由Java->iOS的developer，愿成为内外兼修，才德兼备的女子，追求卓越，一直在通往梦想的桥梁上走着......                             [生如夏花之绚烂，死如秋叶之静美]" />
+
+
+
+  <meta name="keywords" content="数据结构," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="本文的图均引用自http://blog.csdn.net/pzhtpf/article/details/7559896，代码为结合众家思想以及自己的方式而来。
+下面是一些排序的关系图：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="排序算法之一插入排序(直接插入和希尔排序)">
+<meta property="og:url" content="https://github.com/CarolineHJQ1991/2016/03/21/排序算法之一插入排序-直接插入和希尔排序/index.html">
+<meta property="og:site_name" content="Caroline.H 's Blog">
+<meta property="og:description" content="本文的图均引用自http://blog.csdn.net/pzhtpf/article/details/7559896，代码为结合众家思想以及自己的方式而来。
+下面是一些排序的关系图：">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/sort/sort.png">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/sort/insertSort.png">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/sort/shellsort.png">
+<meta property="og:updated_time" content="2016-03-21T03:38:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="排序算法之一插入排序(直接插入和希尔排序)">
+<meta name="twitter:description" content="本文的图均引用自http://blog.csdn.net/pzhtpf/article/details/7559896，代码为结合众家思想以及自己的方式而来。
+下面是一些排序的关系图：">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'always'
+  };
+</script>
+
+  <title> 排序算法之一插入排序(直接插入和希尔排序) | Caroline.H 's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">Caroline.H 's Blog</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            <i class="menu-item-icon icon-next-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+
+      <li class="menu-item menu-item-high"> 
+      <script src="/js/high.js"></script>
+      <a href="javascript:void(0);" onclick="high_benjamin('/css/high.css')" rel="section">
+      <i class="menu-item-icon icon-high"></i><br />
+        点我High
+      </a>
+      </li>
+
+      
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <form class="site-search-form">
+    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+  </form>
+
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'au9bfYPd66oNfFwx6nZp','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              排序算法之一插入排序(直接插入和希尔排序)
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-03-21T11:13:58+08:00" content="2016-03-21">
+            2016-03-21
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/数据结构/" itemprop="url" rel="index">
+                  <span itemprop="name">数据结构</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2016/03/21/排序算法之一插入排序-直接插入和希尔排序/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/21/排序算法之一插入排序-直接插入和希尔排序/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>本文的图均引用自<a href="http://blog.csdn.net/pzhtpf/article/details/7559896" target="_blank" rel="external">http://blog.csdn.net/pzhtpf/article/details/7559896</a>，代码为结合众家思想以及自己的方式而来。</p>
+<p>下面是一些排序的关系图：</p>
+<p><img src="/images/sort/sort.png" alt=""><br><a id="more"></a></p>
+<p></p><h2 id="1" style="color:green;">直接插入排序</h2><br>(1)基本思想：在要排序的一组数中，假设前面(n-1)[n&gt;=2]个数是排好序的，现在要把第n个数插到前面的有序数中，使得这n个数也是排好序的。如此反复循环，知道全部排好顺序。<br>(2)实例：<br><img src="/images/sort/insertSort.png" alt=""><p></p>
+<p>(3)代码实现：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line">     * 插入排序</span><br><span class="line">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> &lt;AnyType extends Comparable&lt;? super AnyType&gt;&gt; <span class="function"><span class="keyword">void</span> <span class="title">insertSort</span><span class="params">(AnyType[] arr)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"原数组为: "</span> + Arrays.toString(arr));</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; arr.length; ++i) &#123;</span><br><span class="line">            AnyType current = arr[i];</span><br><span class="line">            <span class="keyword">int</span> j = i;</span><br><span class="line">            <span class="keyword">for</span> (; j &gt; <span class="number">0</span> &amp;&amp; current.compareTo(arr[j-<span class="number">1</span>]) &lt; <span class="number">0</span>; --j) &#123;</span><br><span class="line">                arr[j] = arr[j-<span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">            arr[j] = current;</span><br><span class="line">            System.out.println(Arrays.toString(arr));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">/**</span><br><span class="line">         原数组为: [23, 1, 42, 5, 2, 23, 12]</span><br><span class="line">         [1, 23, 42, 5, 2, 23, 12]</span><br><span class="line">         [1, 23, 42, 5, 2, 23, 12]</span><br><span class="line">         [1, 5, 23, 42, 2, 23, 12]</span><br><span class="line">         [1, 2, 5, 23, 42, 23, 12]</span><br><span class="line">         [1, 2, 5, 23, 23, 42, 12]</span><br><span class="line">         [1, 2, 5, 12, 23, 23, 42]</span><br><span class="line">         */</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p></p><h2 id="2" style="color:green;">希尔排序(最小增量排序)</h2><br>(1)基本思想：算法先将要排序的一组数按某个增量d(n/2,n为要排序的个数)分成若干组，每组中记录的下标相差d。对每组中全部元素进行直接插入排序，然后再用一个较小的增量(d/2)对它进行分组，在每组中再进行直接插入排序。当增量减到1时，进行直接插入排序后，排序完成。<br>(2)实例：<br><img src="/images/sort/shellsort.png" alt=""><p></p>
+<p>(3)实现：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line">     * 希尔排序</span><br><span class="line">     * 利用增量进行分组，再对分组的数进行直接插入排序</span><br><span class="line">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> &lt;AnyType extends Comparable&lt;? super AnyType&gt;&gt; <span class="function"><span class="keyword">void</span> <span class="title">shellSort</span><span class="params">(AnyType[] arr)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"原数组为: "</span> + Arrays.toString(arr));</span><br><span class="line">        <span class="keyword">int</span> len = arr.length;</span><br><span class="line">        <span class="keyword">int</span> step = len; <span class="comment">// 增量</span></span><br><span class="line">        <span class="keyword">int</span> changeStepCount = <span class="number">0</span>;    <span class="comment">// 增量缩小次数</span></span><br><span class="line">        <span class="keyword">while</span> (step &gt; <span class="number">1</span>) &#123;</span><br><span class="line">            step /= <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (step % <span class="number">2</span> == <span class="number">0</span>) &#123;</span><br><span class="line">                step += <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(<span class="string">"开始第: "</span> + ++changeStepCount + <span class="string">"次循环，目前增量为: "</span> + step);</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> x = <span class="number">0</span>; x &lt; step; x ++) &#123;   <span class="comment">// 总共进行多少次排序（分组）</span></span><br><span class="line">                <span class="comment">// 直接插入排序</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = x+step; i &lt; arr.length; i += step) &#123;</span><br><span class="line">                    AnyType current = arr[i];</span><br><span class="line">                    <span class="keyword">int</span> j = i;</span><br><span class="line">                    <span class="keyword">for</span> (; j &gt;= step &amp;&amp; current.compareTo(arr[j-step]) &lt; <span class="number">0</span>; j -= step) &#123;</span><br><span class="line">                        arr[j] = arr[j-step];</span><br><span class="line">                    &#125;</span><br><span class="line">                    arr[j] = current;</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(Arrays.toString(arr));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span><br><span class="line">         原数组为: [23, 1, 42, 5, 2, 23, 12]</span><br><span class="line">         开始第: 1次循环，目前增量为: 3</span><br><span class="line">         [5, 1, 42, 12, 2, 23, 23]</span><br><span class="line">         [5, 1, 42, 12, 2, 23, 23]</span><br><span class="line">         [5, 1, 23, 12, 2, 42, 23]</span><br><span class="line">         开始第: 2次循环，目前增量为: 1</span><br><span class="line">         [1, 2, 5, 12, 23, 23, 42]</span><br><span class="line">         */</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p></p><h2 id="3" style="color:green;">希尔排序和插入排序的分析</h2>    <p></p>
+<p></p><p style="color:red;">希尔排序以及效率</p><br>&nbsp;&nbsp;&nbsp;&nbsp;希尔排序因计算机科学家Donald L. Shell而得名，他在1959年发现了希尔排序算法。希尔排序基于插入排序，但是增加了一个新的特性，大大地提高了插入排序的执行效率。依靠这个特别的实现机制，希尔排序对于多达几千个数据项的，中等大小规模的数组排序表现良好。希尔排序不像快速排序和其它时间复杂度为O(N*logN)的排序算法那么快，因此对非常大的文件排序，它不是最优选择。但是，希尔排序比选择排序和插入排序这种时间复杂度为O(N2)的排序算法还是要快得多，并且它非常容易实现。它在最坏情况下的执行效率和在平均情况下的执行效率相比没有差很多。<br>&nbsp;&nbsp;&nbsp;&nbsp;迄今为止，除了在一些特殊的情况下，还没有人能够从理论上分析希尔排序的效率。有各种各样基于试验的评估，估计它的时间级从O(N3/2)到O(N7/6)。<p></p>
+<p></p><p style="color:red;">插入排序</p><br>&nbsp;&nbsp;&nbsp;&nbsp;由于希尔排序是基于插入排序的。回想一下在插入排序执行的一半的时候，标记符左边这部分数据项都是排过序的，而标记右边的数据项则没有排过序。这个算法取出标记符所指的数据项，把它存储在一个临时变量里。接着，从刚刚被移除的数据项的左边第一个单元开始，每次把有序数据项向右移动一个单元，直到存储在临时变量里的数据项能够有序回插。<br>&nbsp;&nbsp;&nbsp;&nbsp;下面是插入排序带来的问题。假设一个很小的数据项在很靠近右端的位置上，这里本来应该是值比较大的数据项所在的位置。把这个小数据项移动到在左边的正确位置上，所有的中间数据项都必须向右移动一位。这个步骤对每一个数据项都执行了将近N次的复制。虽不是所有数据项都必须移动N个位置，但是数据项平均移动了N/2个位置，这就是执行了N次N/2个移位，总共是N2/2次复制。因此，插入排序的执行效率是O(N2)。<br>&nbsp;&nbsp;&nbsp;&nbsp;如果能以某种方式不必一个一个地移动所有中间的数据项，就能把较小的数据项移动到左边，那么这个算法的执行效率就会有很大的改进。<p></p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据结构/" rel="tag">#数据结构</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/21/排序算法之二选择排序-简单选择排序和对堆排序/" rel="prev">排序算法之二选择排序-简单选择排序和对堆排序</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/16/CentOS-mysql安装以及使用/" rel="next">CentOS mysql安装以及使用</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/03/21/排序算法之一插入排序-直接插入和希尔排序/"
+     data-title="排序算法之一插入排序(直接插入和希尔排序)"
+     data-content=""
+     data-url="https://github.com/CarolineHJQ1991/2016/03/21/排序算法之一插入排序-直接插入和希尔排序/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+            <!-- 多说热评文章-->
+            <p>热评文章</p>
+            <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+        
+
+        
+          <div class="comments" id="comments">
+            
+              <div class="ds-thread" data-thread-key="2016/03/21/排序算法之一插入排序-直接插入和希尔排序/"
+                   data-title="排序算法之一插入排序(直接插入和希尔排序)" data-url="https://github.com/CarolineHJQ1991/2016/03/21/排序算法之一插入排序-直接插入和希尔排序/">
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/me1.jpg" alt="Caroline.H" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Caroline.H</p>
+        </div>
+        <p class="site-description motion-element" style="color:pink"itemprop="description">我是韩球球，目前是一名由Java->iOS的developer，愿成为内外兼修，才德兼备的女子，追求卓越，一直在通往梦想的桥梁上走着......                             [生如夏花之绚烂，死如秋叶之静美]</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">29</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/CarolineHJQ1991" target="_blank">GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank">CSDN</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank">简书</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">Links</p>
+            
+              <span class="links-of-author-item">
+              <a href="https://www.raywenderlich.com/" target="_blank">Raywenderlich</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://blog.zhowkev.in/" target="_blank">Kevin</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://blog.csdn.net/biggercoffee/" target="_blank">Coffee大神</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1"><span class="nav-number">1.</span> <span class="nav-text">直接插入排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2"><span class="nav-number">2.</span> <span class="nav-text">希尔排序(最小增量排序)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3"><span class="nav-number">3.</span> <span class="nav-text">希尔排序和插入排序的分析</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Caroline.H</span>
+  <script async src="/js/count.js"></script>
+  
+  
+  <span id="busuanzi_container_site_uv">
+    本站访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
+
+</div>
+
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"caroline"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+    
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,757 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="我是韩球球，目前是一名由Java->iOS的developer，愿成为内外兼修，才德兼备的女子，追求卓越，一直在通往梦想的桥梁上走着......                             [生如夏花之绚烂，死如秋叶之静美]" />
+
+
+
+  <meta name="keywords" content="CentOS,Linux," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="前言：如何查看linux服务器的各个状态？版本查询：
+123456789$lsb_release -aLSB Version:	:core-4.1-amd64:core-4.1-noarchDistributor ID:	CentOSDescription:	CentOS Linux release 7.0.1406 (Core) Release:	7.0.1406Codename:	Core$r">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CentOS mysql安装以及使用">
+<meta property="og:url" content="https://github.com/CarolineHJQ1991/2016/03/16/CentOS-mysql安装以及使用/index.html">
+<meta property="og:site_name" content="Caroline.H 's Blog">
+<meta property="og:description" content="前言：如何查看linux服务器的各个状态？版本查询：
+123456789$lsb_release -aLSB Version:	:core-4.1-amd64:core-4.1-noarchDistributor ID:	CentOSDescription:	CentOS Linux release 7.0.1406 (Core) Release:	7.0.1406Codename:	Core$r">
+<meta property="og:updated_time" content="2016-03-21T03:41:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CentOS mysql安装以及使用">
+<meta name="twitter:description" content="前言：如何查看linux服务器的各个状态？版本查询：
+123456789$lsb_release -aLSB Version:	:core-4.1-amd64:core-4.1-noarchDistributor ID:	CentOSDescription:	CentOS Linux release 7.0.1406 (Core) Release:	7.0.1406Codename:	Core$r">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'always'
+  };
+</script>
+
+  <title> CentOS mysql安装以及使用 | Caroline.H 's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">Caroline.H 's Blog</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            <i class="menu-item-icon icon-next-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+
+      <li class="menu-item menu-item-high"> 
+      <script src="/js/high.js"></script>
+      <a href="javascript:void(0);" onclick="high_benjamin('/css/high.css')" rel="section">
+      <i class="menu-item-icon icon-high"></i><br />
+        点我High
+      </a>
+      </li>
+
+      
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <form class="site-search-form">
+    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+  </form>
+
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'au9bfYPd66oNfFwx6nZp','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              CentOS mysql安装以及使用
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-03-16T14:50:34+08:00" content="2016-03-16">
+            2016-03-16
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/Linux/" itemprop="url" rel="index">
+                  <span itemprop="name">Linux</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2016/03/16/CentOS-mysql安装以及使用/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/16/CentOS-mysql安装以及使用/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>前言：<br>如何查看linux服务器的各个状态？<br><strong>版本查询：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$lsb_release -a</span><br><span class="line">LSB Version:	:core-<span class="number">4.1</span>-amd64:core-<span class="number">4.1</span>-noarch</span><br><span class="line">Distributor ID:	CentOS</span><br><span class="line">Description:	CentOS Linux release <span class="number">7.0</span><span class="number">.1406</span> (Core) </span><br><span class="line">Release:	<span class="number">7.0</span><span class="number">.1406</span></span><br><span class="line">Codename:	Core</span><br><span class="line"></span><br><span class="line">$rpm -q centos-release</span><br><span class="line">centos-release-<span class="number">7</span>-<span class="number">0.1406</span>.el7.centos<span class="number">.2</span><span class="number">.5</span>.x86_64</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>这说明是CentOS-7.0 64位系统，要知道Centos 7默认不支持mysql（都是因为钱），所以centos 7默认支持的是mariadb</p>
+<p><span style="color:red;">何为mariadb？(百度百科抄袭的）</span><br>MariaDB数据库管理系统是MySQL的一个分支，主要由开源社区在维护，采用GPL授权许可 MariaDB的目的是完全兼容MySQL，包括API和命令行，使之能轻松成为MySQL的代替品。在存储引擎方面，使用XtraDB来代替MySQL的InnoDB。 MariaDB由MySQL的创始人Michael Widenius主导开发，他早前曾以10亿美元的价格，将自己创建的公司MySQL AB卖给了SUN，此后，随着SUN被甲骨文收购，MySQL的所有权也落入Oracle的手中。MariaDB名称来自Michael Widenius的女儿Maria的名字。</p>
+<p><strong>内存查询：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$<span class="built_in">free</span> -m</span><br><span class="line">             total       used       <span class="built_in">free</span>     shared    buffers     cached</span><br><span class="line">Mem:           <span class="number">992</span>        <span class="number">556</span>        <span class="number">435</span>          <span class="number">6</span>         <span class="number">17</span>        <span class="number">467</span></span><br><span class="line">-/+ buffers/cache:         <span class="number">72</span>        <span class="number">920</span></span><br><span class="line">Swap:            <span class="number">0</span>          <span class="number">0</span>          <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<p>-m的意思是使用兆为单位，也就是total内存为992M，说明是1G的。<br>了解完了系统，下面我们就来安装mysql吧。</p>
+<p>1、查看系统是否安装了MySQL</p>
+<pre><code><span class="variable">$rpm</span> -qa | grep mysql 
+</code></pre><p>2、卸载已安装的MySQL</p>
+<pre><code><span class="variable">$rpm</span> -e --nodeps  mysql-libs-<span class="number">5.1</span>.<span class="number">61</span>-<span class="number">4</span>.el6.x86_64
+</code></pre><p>要将/var/lib/mysql文件夹下的所有文件都删除干净</p>
+<p>3、下载MySQL<br>可以去官网下载mysql，然后传到服务器上，也可以使用wget命令直接在centos中下载，不过速度会很慢，不推荐使用，我是使用迅雷把tar包下载下来之后，上传到服务器上的。<br>下载地址：<a href="http://dev.mysql.com/downloads/mysql/" target="_blank" rel="external">http://dev.mysql.com/downloads/mysql/</a><br>下载完了之后利用scp上传文件到服务器并进入centos进行解压：</p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$scp Desktop/MySQL-<span class="number">5.6.29-1</span>.linux_glibc2.5.x86_64.rpm-bundle.tar root@<span class="number">121.42.169.178</span>:~/Downloads/</span><br><span class="line">root@<span class="number">121.42.169.178</span>'s password: </span><br><span class="line">/etc/profile.d/lang.sh: line 19: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory</span><br><span class="line">MySQL-<span class="number">5.6.29-1</span>.linux_glibc2.5.x86_64.rpm-bundle.tar                                    13%   41MB   1.1MB/s   03:52 ETA</span><br><span class="line"></span><br><span class="line">$tar -xvf MySQL-<span class="number">5.6.29-1</span>.linux_glibc2.5.x86_64.rpm-bundle.tar </span><br><span class="line">MySQL-server-<span class="number">5.6.29-1</span>.linux_glibc2.5.x86_64.rpm</span><br><span class="line">MySQL-shared-<span class="number">5.6.29-1</span>.linux_glibc2.5.x86_64.rpm</span><br><span class="line">MySQL-devel-<span class="number">5.6.29-1</span>.linux_glibc2.5.x86_64.rpm</span><br><span class="line">MySQL-test-<span class="number">5.6.29-1</span>.linux_glibc2.5.x86_64.rpm</span><br><span class="line">MySQL-client-<span class="number">5.6.29-1</span>.linux_glibc2.5.x86_64.rpm</span><br><span class="line">MySQL-embedded-<span class="number">5.6.29-1</span>.linux_glibc2.5.x86_64.rpm</span><br></pre></td></tr></table></figure>
+<p>4、安装MySQL<br>如果一定要在centos 7上安装mysql ，需要卸载MariaDB，否则会冲突。<br>执行查看mariadb的命令，有的话卸载</p>
+<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$rpm</span> -qa | grep mariadb</span><br><span class="line">mariadb-libs-<span class="number">5.5</span>.<span class="number">40</span>-<span class="number">1</span>.el7_<span class="number">0</span>.x86_64</span><br><span class="line"><span class="variable">$rpm</span> -e --nodeps mariadb-libs-<span class="number">5.5</span>.<span class="number">40</span>-<span class="number">1</span>.el7_<span class="number">0</span>.x86_64</span><br></pre></td></tr></table></figure>
+<p>接下来我们可以进行安装mysql了</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$rpm</span> -ivh MySQL-server-<span class="number">5.6</span>.<span class="number">29</span>-<span class="number">1</span><span class="class">.linux_glibc2</span>.<span class="number">5</span><span class="class">.x86_64</span><span class="class">.rpm</span> </span><br><span class="line"><span class="variable">$rpm</span> -ivh MySQL-client-<span class="number">5.6</span>.<span class="number">29</span>-<span class="number">1</span><span class="class">.linux_glibc2</span>.<span class="number">5</span><span class="class">.x86_64</span><span class="class">.rpm</span> </span><br><span class="line"><span class="variable">$rpm</span> -ivh MySQL-devel-<span class="number">5.6</span>.<span class="number">29</span>-<span class="number">1</span><span class="class">.linux_glibc2</span>.<span class="number">5</span><span class="class">.x86_64</span><span class="class">.rpm</span></span><br></pre></td></tr></table></figure>
+<p>安装成功后开启mysql服务</p>
+<pre><code><span class="variable">$sevice</span> mysql <span class="keyword">start</span>
+</code></pre><p>再然后执行：service mysql stop (不要问为什么，因为默认root没有密码，你进不去,所以接下来我们要绕过密码登录)</p>
+<p>执行下面的命令：(也就是，老子不用密码直接登录，这时mysql服务必须关闭状态)</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqld_safe –-user=mysql –-skip-<span class="operator"><span class="keyword">grant</span>-<span class="keyword">tables</span> –-<span class="keyword">skip</span>-networking &amp; mysql -u root mysql</span></span><br></pre></td></tr></table></figure>
+<p>随后回车，输入以下命令：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">$mysql</span><br><span class="line">Welcome to the MySQL monitor.  Commands <span class="operator"><span class="keyword">end</span> <span class="keyword">with</span> ;</span> or \g.</span><br><span class="line">Your MySQL connection id is 1</span><br><span class="line">Server version: 5.6.29 MySQL Community Server (GPL)</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2016, Oracle and/or its affiliates. All rights reserved.</span><br><span class="line"></span><br><span class="line">Oracle is a registered trademark of Oracle Corporation and/or its</span><br><span class="line">affiliates. Other names may be trademarks of their respective</span><br><span class="line">owners.</span><br><span class="line"></span><br><span class="line">Type '<span class="operator"><span class="keyword">help</span>;</span>' or '\h' for <span class="operator"><span class="keyword">help</span>. <span class="keyword">Type</span> <span class="string">'\c'</span> <span class="keyword">to</span> <span class="keyword">clear</span> the <span class="keyword">current</span> <span class="keyword">input</span> <span class="keyword">statement</span>.</span><br><span class="line"></span><br><span class="line">mysql&gt; <span class="keyword">use</span> mysql</span><br><span class="line">Reading <span class="keyword">table</span> information <span class="keyword">for</span> completion <span class="keyword">of</span> <span class="keyword">table</span> <span class="keyword">and</span> <span class="keyword">column</span> <span class="keyword">names</span></span><br><span class="line">You can turn <span class="keyword">off</span> this feature <span class="keyword">to</span> <span class="keyword">get</span> a quicker <span class="keyword">startup</span> <span class="keyword">with</span> -A</span><br><span class="line"></span><br><span class="line"><span class="keyword">Database</span> <span class="keyword">changed</span></span><br><span class="line">mysql&gt; <span class="keyword">update</span> <span class="keyword">user</span> <span class="keyword">set</span> <span class="keyword">password</span>=<span class="keyword">password</span>(<span class="string">"wheet123"</span>) <span class="keyword">where</span> <span class="keyword">user</span>=<span class="string">"root"</span>;</span></span><br><span class="line">Query OK, 4 rows affected (0.00 sec)</span><br><span class="line">Rows matched: 4  Changed: 4  Warnings: 0</span><br></pre></td></tr></table></figure>
+<p>修改完密码后退出mysql服务，重启一下mysql服务</p>
+<pre><code><span class="variable">$service</span> mysql restart
+<span class="variable">$mysql</span> -uroot -p
+</code></pre><p>输入密码后，发现成功进入mysql。<br>至此，安装完毕。<br>参考：<a href="http://www.hishenyi.com/archives/549" target="_blank" rel="external">http://www.hishenyi.com/archives/549</a></p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CentOS/" rel="tag">#CentOS</a>
+          
+            <a href="/tags/Linux/" rel="tag">#Linux</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/21/排序算法之一插入排序-直接插入和希尔排序/" rel="prev">排序算法之一插入排序(直接插入和希尔排序)</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/08/排序研究前戏-计算复杂性/" rel="next">排序研究前戏-计算复杂性</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/03/16/CentOS-mysql安装以及使用/"
+     data-title="CentOS mysql安装以及使用"
+     data-content=""
+     data-url="https://github.com/CarolineHJQ1991/2016/03/16/CentOS-mysql安装以及使用/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+            <!-- 多说热评文章-->
+            <p>热评文章</p>
+            <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+        
+
+        
+          <div class="comments" id="comments">
+            
+              <div class="ds-thread" data-thread-key="2016/03/16/CentOS-mysql安装以及使用/"
+                   data-title="CentOS mysql安装以及使用" data-url="https://github.com/CarolineHJQ1991/2016/03/16/CentOS-mysql安装以及使用/">
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/me1.jpg" alt="Caroline.H" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Caroline.H</p>
+        </div>
+        <p class="site-description motion-element" style="color:pink"itemprop="description">我是韩球球，目前是一名由Java->iOS的developer，愿成为内外兼修，才德兼备的女子，追求卓越，一直在通往梦想的桥梁上走着......                             [生如夏花之绚烂，死如秋叶之静美]</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">29</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/CarolineHJQ1991" target="_blank">GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank">CSDN</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank">简书</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">Links</p>
+            
+              <span class="links-of-author-item">
+              <a href="https://www.raywenderlich.com/" target="_blank">Raywenderlich</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://blog.zhowkev.in/" target="_blank">Kevin</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://blog.csdn.net/biggercoffee/" target="_blank">Coffee大神</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Caroline.H</span>
+  <script async src="/js/count.js"></script>
+  
+  
+  <span id="busuanzi_container_site_uv">
+    本站访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
+
+</div>
+
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"caroline"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+    
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>

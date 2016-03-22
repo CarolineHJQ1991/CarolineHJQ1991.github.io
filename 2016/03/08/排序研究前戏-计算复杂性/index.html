@@ -1,0 +1,732 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="我是韩球球，目前是一名由Java->iOS的developer，愿成为内外兼修，才德兼备的女子，追求卓越，一直在通往梦想的桥梁上走着......                             [生如夏花之绚烂，死如秋叶之静美]" />
+
+
+
+  <meta name="keywords" content="数据结构," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="计算复杂性理论(Computational complexity theory)是理论计算机科学和数学的一个分支，它致力于将可计算问题根据它们本身的复杂性分类，以及将这些类别联系起来。一个可计算问题被认为是一个原则上可以用计算机解决的问题，亦即这个问题可以用一系列机械的数学步骤解决，例如算法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="排序研究前戏-计算复杂性">
+<meta property="og:url" content="https://github.com/CarolineHJQ1991/2016/03/08/排序研究前戏-计算复杂性/index.html">
+<meta property="og:site_name" content="Caroline.H 's Blog">
+<meta property="og:description" content="计算复杂性理论(Computational complexity theory)是理论计算机科学和数学的一个分支，它致力于将可计算问题根据它们本身的复杂性分类，以及将这些类别联系起来。一个可计算问题被认为是一个原则上可以用计算机解决的问题，亦即这个问题可以用一系列机械的数学步骤解决，例如算法。">
+<meta property="og:updated_time" content="2016-03-21T03:39:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="排序研究前戏-计算复杂性">
+<meta name="twitter:description" content="计算复杂性理论(Computational complexity theory)是理论计算机科学和数学的一个分支，它致力于将可计算问题根据它们本身的复杂性分类，以及将这些类别联系起来。一个可计算问题被认为是一个原则上可以用计算机解决的问题，亦即这个问题可以用一系列机械的数学步骤解决，例如算法。">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'always'
+  };
+</script>
+
+  <title> 排序研究前戏-计算复杂性 | Caroline.H 's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">Caroline.H 's Blog</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            <i class="menu-item-icon icon-next-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+
+      <li class="menu-item menu-item-high"> 
+      <script src="/js/high.js"></script>
+      <a href="javascript:void(0);" onclick="high_benjamin('/css/high.css')" rel="section">
+      <i class="menu-item-icon icon-high"></i><br />
+        点我High
+      </a>
+      </li>
+
+      
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <form class="site-search-form">
+    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+  </form>
+
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'au9bfYPd66oNfFwx6nZp','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              排序研究前戏-计算复杂性
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-03-08T10:04:16+08:00" content="2016-03-08">
+            2016-03-08
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/数据结构/" itemprop="url" rel="index">
+                  <span itemprop="name">数据结构</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2016/03/08/排序研究前戏-计算复杂性/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/08/排序研究前戏-计算复杂性/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p><strong>计算复杂性理论(Computational complexity theory)</strong>是理论计算机科学和数学的一个分支，它致力于将可计算问题根据它们本身的复杂性分类，以及将这些类别联系起来。一个可计算问题被认为是一个原则上可以用计算机解决的问题，亦即这个问题可以用一系列机械的数学步骤解决，例如算法。<br><a id="more"></a><br>如果一个问题的求解需要相当多的资源（无论用什么算法），则被认为是难解的。计算复杂性理论通过引入数学计算模型来研究这些问题以及定量计算解决问题所需的资源（时间和空间），从而将资源的确定方法正式化了。其他复杂性测度同样被运用，比如通信量（应用于通信复杂性），电路中门的数量（应用于电路复杂性）以及中央处理器的数量（应用于并行计算）。计算复杂性理论的一个作用就是确定一个能或不能被计算机求解的问题的所具有的实际限制。<br>在理论计算机科学领域，与此相关的概念有算法分析和可计算性理论。两者之间一个关键的区别是前者致力于分析用一个确定的算法来求解一个问题所需的资源量，而后者则是在更广泛意义上研究用所有可能的算法来解决相同问题。更精确地说，它尝试将问题分成能或不能在现有的适当受限的资源条件下解决这两类。相应地，在现有资源条件下的限制正是区分计算复杂性理论和可计算性理论的一个重要指标：后者关心的是何种问题原则上可以用算法解决。</p>
+<p></p><h2 id="1" style="color:green;">判断性问题和可计算性</h2><br>我们考虑对一个算法问题，什么样的回答是我们所需要的。比如搜索问题：给定数组A，和一个数s，我们要问s在不在A中（判定性问题，decision problem）。而进一步的，s如果在A中的话，s的位置是什么（搜索型问题，search problem）。再比如完美匹配问题（perfect matching）：给定一个二分图G=(V,E)，我们问是不是存在边集E，使得二分图中每个结点恰好属于该边集的一条边（判定型问题）。而进一步的，E存在的话，E具体是什么（搜索型问题）。<p></p>
+<p>自然的，我们会发现对于一般的算法问题A，我们都可以这样来问：首先，解是不是存在的？其次，如果解存在，这个解具体是什么？这就是A的判定型问题和A的搜索型问题（又称函数型问题）区分来源的直观解释。对判定型问题的回答只需是“是”或“否”，而对搜索型问题，需要返回解的具体形式或者“解不存在”。所以一个对A的搜索型问题的算法自然的也是对A的判定型问题的算法。反之，给定了一个A的判定型问题的算法，是否存在A的搜索型问题的算法，在可计算性理论和计算复杂性理论中有着不同的回答，这也是理解计算复杂性理论与它的前身可计算性理论不同的一个基本的观察。</p>
+<p>在可计算性理论中，可以说明，判定型问题和搜索型问题在可计算性的意义下是等价的（见Decision problem）。而在计算复杂性中，Khuller和Vazirani在1990年代证明了在P≠NP的假设下，平面图4-着色问题的判定型问题是在P中的，而寻找其字典序第一的着色是NP难的。[1]</p>
+<p>所以在可计算性理论中，只关注判定型问题是合理的。在计算复杂性理论中，虽然一些基本的复杂性类（如P，NP和PSPACE），以及一些基本的问题（P和NP关系问题等）是用判定型问题来定义的，但函数型问题复杂性类也被定义（如FP，FNP等），而且一些特别的函数型问题复杂性类，如TFNP，也正在逐渐受到关注。</p>
+<p></p><h2 id="2" style="color:green;">算法分析</h2><br>上面提到计算复杂性理论的研究对象是执行一项计算任务所用的资源，特别的，时间和空间是最重要的两项资源。<p></p>
+<p>我们用时间作例子来讨论算法分析的一些基础知识。如果将输入的长度（设为n）作为变量，而我们关注的是算法运行时间与n的函数关系T(n)。因为一个算法在不同的计算模型上实现时T(n)可能会有常数因子的差别（参见可计算性理论），我们使用大O表达式来表示T(n)，这使得我们可以忽略在不同计算模型上实现的常数因子。</p>
+<p>以搜索这个计算任务为例。在搜索问题中，给定了一个具体的数s，和长度为n的数组A（数组中数的位置用1到n作标记），任务是当s在A中时，找到s的位置，而s不在A中时，需要报告”未找到”。这时输入的长度即为n+1。下面的过程即是一个最简单的算法：我们依次扫过A中的每个数，并与s进行比较，如果相等即返回当前的位置，如果扫遍所有的数而算法仍未停止，则返回”未找到”。</p>
+<p>如果我们假设s在A中每个位置的机率都相同，那么算法在找到s的条件下需要1/n (1+2+…+n)=n(n+1)/2n=(n+1)/2的时间。如果s不在A中，那么需要(n+1)的时间。由大O表达式的知识我们知道算法所需的时间即为O(n)。</p>
+<p>而如果我们进一步假设A是已排序的，那么我们有二分查找算法，使得算法的运行时间是O(logn)。可以看出执行一项计算任务，不同的算法在运行时间上是有很大差异的。</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据结构/" rel="tag">#数据结构</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/16/CentOS-mysql安装以及使用/" rel="prev">CentOS mysql安装以及使用</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/04/大数据下高并发的处理详解/" rel="next">大数据下高并发的处理详解</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/03/08/排序研究前戏-计算复杂性/"
+     data-title="排序研究前戏-计算复杂性"
+     data-content=""
+     data-url="https://github.com/CarolineHJQ1991/2016/03/08/排序研究前戏-计算复杂性/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+            <!-- 多说热评文章-->
+            <p>热评文章</p>
+            <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+        
+
+        
+          <div class="comments" id="comments">
+            
+              <div class="ds-thread" data-thread-key="2016/03/08/排序研究前戏-计算复杂性/"
+                   data-title="排序研究前戏-计算复杂性" data-url="https://github.com/CarolineHJQ1991/2016/03/08/排序研究前戏-计算复杂性/">
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/me1.jpg" alt="Caroline.H" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Caroline.H</p>
+        </div>
+        <p class="site-description motion-element" style="color:pink"itemprop="description">我是韩球球，目前是一名由Java->iOS的developer，愿成为内外兼修，才德兼备的女子，追求卓越，一直在通往梦想的桥梁上走着......                             [生如夏花之绚烂，死如秋叶之静美]</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">29</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/CarolineHJQ1991" target="_blank">GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank">CSDN</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank">简书</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">Links</p>
+            
+              <span class="links-of-author-item">
+              <a href="https://www.raywenderlich.com/" target="_blank">Raywenderlich</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://blog.zhowkev.in/" target="_blank">Kevin</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://blog.csdn.net/biggercoffee/" target="_blank">Coffee大神</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1"><span class="nav-number">1.</span> <span class="nav-text">判断性问题和可计算性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2"><span class="nav-number">2.</span> <span class="nav-text">算法分析</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Caroline.H</span>
+  <script async src="/js/count.js"></script>
+  
+  
+  <span id="busuanzi_container_site_uv">
+    本站访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
+
+</div>
+
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"caroline"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+    
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>

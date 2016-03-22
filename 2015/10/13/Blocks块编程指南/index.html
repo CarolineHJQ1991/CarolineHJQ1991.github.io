@@ -1,0 +1,842 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="我是韩球球，目前是一名由Java->iOS的developer，愿成为内外兼修，才德兼备的女子，追求卓越，一直在通往梦想的桥梁上走着......                             [生如夏花之绚烂，死如秋叶之静美]" />
+
+
+
+  <meta name="keywords" content="Blocks," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="根据苹果官方指南翻译，最后加上点objective-c中得一些用法。原文地址：Blocks Programming Topics
+
+
+简介
+
+块对象是C语言级别的语法和运行特性。类似于标准C函数。除了可执行代码之外他们还可以把变量绑定到堆(heap)栈(stack)中去。因此块能维持一系列的状态（data），这些状态或数据会影响执行后的结果。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Blocks块编程指南">
+<meta property="og:url" content="https://github.com/CarolineHJQ1991/2015/10/13/Blocks块编程指南/index.html">
+<meta property="og:site_name" content="Caroline.H 's Blog">
+<meta property="og:description" content="根据苹果官方指南翻译，最后加上点objective-c中得一些用法。原文地址：Blocks Programming Topics
+
+
+简介
+
+块对象是C语言级别的语法和运行特性。类似于标准C函数。除了可执行代码之外他们还可以把变量绑定到堆(heap)栈(stack)中去。因此块能维持一系列的状态（data），这些状态或数据会影响执行后的结果。">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/999329-ad386e08a041cebc.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-01-04T04:49:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Blocks块编程指南">
+<meta name="twitter:description" content="根据苹果官方指南翻译，最后加上点objective-c中得一些用法。原文地址：Blocks Programming Topics
+
+
+简介
+
+块对象是C语言级别的语法和运行特性。类似于标准C函数。除了可执行代码之外他们还可以把变量绑定到堆(heap)栈(stack)中去。因此块能维持一系列的状态（data），这些状态或数据会影响执行后的结果。">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'always'
+  };
+</script>
+
+  <title> Blocks块编程指南 | Caroline.H 's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">Caroline.H 's Blog</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            <i class="menu-item-icon icon-next-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+
+      <li class="menu-item menu-item-high"> 
+      <script src="/js/high.js"></script>
+      <a href="javascript:void(0);" onclick="high_benjamin('/css/high.css')" rel="section">
+      <i class="menu-item-icon icon-high"></i><br />
+        点我High
+      </a>
+      </li>
+
+      
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <form class="site-search-form">
+    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+  </form>
+
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'au9bfYPd66oNfFwx6nZp','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              Blocks块编程指南
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-10-13T11:49:16+08:00" content="2015-10-13">
+            2015-10-13
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                  <span itemprop="name">iOS开发</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2015/10/13/Blocks块编程指南/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/13/Blocks块编程指南/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><blockquote>
+<p>根据苹果官方指南翻译，最后加上点objective-c中得一些用法。<br>原文地址：<a href="https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/Blocks/Articles/00_Introduction.html#//apple_ref/doc/uid/TP40007502-CH1-SW1" target="_blank" rel="external">Blocks Programming Topics</a></p>
+</blockquote>
+<hr>
+<h1 id="00">简介</h1>
+
+<p>块对象是C语言级别的语法和运行特性。类似于标准C函数。除了可执行代码之外他们还可以把变量绑定到堆(heap)栈(stack)中去。因此块能维持一系列的状态（data），这些状态或数据会影响执行后的结果。<a id="more"></a><br>你可以在API传递、多线程中使用块函数表达式。最有用的是把块作为回调函数，因为在回调时可以携带代码和参数。在OS X10.6的Xcode开发工具上可以使用块，它使用GCC个Clang集成，你可以在OS X10.6以后或者IOS4.0以后的版本使用块，块运行时（block runtime）是开源的，可以在<a href="http://llvm.org/svn/llvm-project/compiler-rt/trunk/" target="_blank" rel="external"><a href="http://llvm.org/svn/llvm-project/compiler-rt/trunk/" target="_blank" rel="external">LLVM’s compiler-rt subproject repository</a></a>中找到。块之前在C标准工作组（<a href="http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1370.pdf" target="_blank" rel="external"> <a href="http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1370.pdf" target="_blank" rel="external">N1370: Apple’s Extensions to C</a></a>）中提到过。由于Objective-c和c++都由C衍生而来，所以块都可以在这三种语言中使用。<br>你应该通过阅读这篇文档来学习如何在C、C++、objective-c中使用块。</p>
+<p></p><h2 id="01">文档组成</h2><br>这篇文档包括以下章节：<p></p>
+<ul>
+<li><a href="#10">开始使用块</a>（包括了块的快速、实用、简介）</li>
+<li><a href="#20">概念概述</a>（包括了块的概念简介）</li>
+<li><a href="#30">声明和创建块</a>（包括了如何声明一个块变量和如何实现块）</li>
+<li><a href="#40">块和变量</a>（描述了块和变量的作用，定义了__block类型修饰符）</li>
+<li><a href="#50">使用块</a>（详解各种用法）</li>
+</ul>
+<hr>
+<p></p><h1 id="10">开始使用块</h1><br>下面的部分将使用实例带你开始学习块<p></p>
+<p></p><h2 id="11">声明、使用块</h2><br>我们使用 ^ 操作符去声明一个块变量的开始。块主体使用{}（本例使用C语言，结尾使用;）<p></p>
+<pre><code><span class="built_in">int</span> multiplier = <span class="number">7</span>;
+
+<span class="built_in">int</span> (^myBlock)(<span class="built_in">int</span>) = ^(<span class="built_in">int</span> <span class="built_in">num</span>) {
+
+<span class="keyword">return</span> <span class="built_in">num</span> * multiplier;
+
+};
+</code></pre><p>下图解释此例。<br><img src="http://upload-images.jianshu.io/upload_images/999329-ad386e08a041cebc.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="blocks.jpg"><br>注意，块可以使用同一作用域内定义的变量<br>如果你声明了一个块变量，你可以把它当做函数来使用：</p>
+<pre><code><span class="keyword">int</span> multiple = <span class="number">7</span>;
+<span class="keyword">int</span> (^myBlock)(<span class="keyword">int</span>) = ^(<span class="keyword">int</span> num){
+    <span class="keyword">return</span> num * multiple;
+};
+
+<span class="built_in">printf</span>(<span class="string">"%d"</span>, myBlock(<span class="number">3</span>));
+<span class="comment">//prints "21"</span>
+</code></pre><p></p><h2 id="12">直接使用块</h2><br>很多时候，我们并不需要直接声明一个块变量，你只需要提供一个内联块来作为参数，下例中使用了函数 qsort_b，qsort_b函数和标准函数qsort_r相类似，但是它提供了一个块来作为参数。<p></p>
+<pre><code><span class="keyword">char</span> *myCharacters[<span class="number">3</span>] = { <span class="string">"TomJohn"</span>, <span class="string">"George"</span>, <span class="string">"Charles Condomine"</span> };
+qsort_b(myCharacters, <span class="number">3</span>, <span class="keyword">sizeof</span>(<span class="keyword">char</span> *), ^(<span class="keyword">const</span> <span class="keyword">void</span> *l, <span class="keyword">const</span> <span class="keyword">void</span> *r){
+    <span class="keyword">char</span> *left = *(<span class="keyword">char</span> **)l;
+    <span class="keyword">char</span> *right = *(<span class="keyword">char</span> **)r;
+    <span class="keyword">return</span> <span class="built_in">strncmp</span>(left, right, l);
+});
+
+<span class="comment">//myCharacters is now { "Charles Consuming", "George", "TomJohn" }</span>
+</code></pre><p></p><h2 id="13">Cocoa和块</h2><br> <a href="../../../../General/Conceptual/DevPedia-CocoaCore/Cocoa.html#//apple_ref/doc/uid/TP40008195-CH9">Cocoa</a> <a href="../../../../General/Conceptual/DevPedia-CocoaCore/Framework.html#//apple_ref/doc/uid/TP40008195-CH56">frameworks</a>有一些方法中使用块作用参数，典型的用在集合中执行操作，或者用于操作完成后的回调，下例展示了如何在NSArray的方法sortedArrayUsingComparator中使用块，这个方法只有一个块参数，这样块就变成NSComparator的局部变量了。<p></p>
+<pre><code><span class="built_in">NSArray</span> *stringArray = @[ <span class="string">@"string 1"</span>,
+                          <span class="string">@"string 21"</span>,
+                          <span class="string">@"string 12"</span>,
+                          <span class="string">@"string 11"</span>,
+                          <span class="string">@"string 02"</span> ];
+<span class="keyword">static</span> <span class="built_in">NSStringCompareOptions</span> comparisonOptions = <span class="built_in">NSCaseInsensitiveSearch</span> | <span class="built_in">NSNumericSearch</span> | <span class="built_in">NSWidthInsensitiveSearch</span> | <span class="built_in">NSForceOrderingSearch</span>;
+<span class="built_in">NSLocale</span> *currentLocale = [<span class="built_in">NSLocal</span> currentLocale];
+
+<span class="built_in">NSComparator</span> finderSortBlock = ^(<span class="keyword">id</span> string1, <span class="keyword">id</span> string2) {
+    <span class="built_in">NSRange</span> string1Range = <span class="built_in">NSMakeRange</span>(<span class="number">0</span>, [string1 length]);
+    <span class="keyword">return</span> [string1 compare:string2 options:comparisonOptions range:string1Range locale:currentLocale];
+};
+
+<span class="built_in">NSArray</span> *finderSortArray = [stringsArray sortedArrayUsingComparator:finderSortBlock];
+<span class="built_in">NSLog</span>(<span class="string">@"finderSortArray: %@"</span>, finderSortArray);
+
+<span class="comment">/*
+Output:
+finderSortArray: (
+    "string 1",
+    "string 02",
+    "string 11",
+    "string 12",
+    "string 21",
+)
+*/</span>
+</code></pre><p></p><h2 id="14"><strong>block变量</strong></h2><br>块的一个强大特性是可以改变同一作用域内的变量，如果你声明一个变量时使用block，你就可以在块的作用域内改变它的值，下例中你可以使用block的变量来计算有多少个字符串值相同，在块中使用currentLocale作为只读变量。<p></p>
+<pre><code><span class="built_in">NSArray</span> *stringsArray = @[ <span class="string">@"string 1"</span>,
+                          <span class="string">@"string 21"</span>, <span class="comment">// &lt;-</span>
+                          <span class="string">@"string 12"</span>,
+                          <span class="string">@"string 11"</span>,
+                          <span class="string">@"string 21"</span>, <span class="comment">// &lt;-</span>
+                          <span class="string">@"string 21"</span>, <span class="comment">// &lt;-</span>
+                          <span class="string">@"string 02"</span> ];
+<span class="built_in">NSLocale</span> *currentLocale = [<span class="built_in">NSLocal</span> currentLocale];
+__block <span class="built_in">NSUInteger</span> orderedSameCount = <span class="number">0</span>;
+
+<span class="built_in">NSArray</span> *diacriticInsensitiveSortArray = [stringsArray sortedArrayUsingComparator:^(<span class="keyword">id</span> string1, <span class="keyword">id</span> string2){
+    <span class="built_in">NSRange</span> string1Range = <span class="built_in">NSMakeRange</span>(<span class="number">0</span>, [string1 length]);
+    <span class="built_in">NSComparisonResult</span> comparisonResult = [string1 compare:string2 options:<span class="built_in">NSDiacriticInsenstiveSearch</span> range:string1Range locale:currentLocale];
+
+<span class="keyword">if</span> (comparisonResult == <span class="built_in">NSOrderSame</span>) {
+    orderSameCount++;
+}
+<span class="keyword">return</span> comparisonResult;
+}];
+<span class="built_in">NSLog</span>(<span class="string">@"diacriticInsensitiveSortArray: %@"</span>, diacriticInsensitiveSortArray);
+<span class="built_in">NSLog</span>(<span class="string">@"orderedSameCount: %d"</span>, orderedSameCount);
+
+<span class="comment">/*
+Output:
+finderSortArray: (
+    "string 1",
+    "string 02",
+    "string 11",
+    "string 12",
+    "string 21",
+    "str\U00eeng 21",
+    "stri\U00f1g 21"
+)
+orderSameCount: 2
+*/</span>
+</code></pre><p>更多细节请看以下章节 <a href="#3">声明和创建块</a><br>等待继续更新…</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Blocks/" rel="tag">#Blocks</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/10/13/Hexo托管博客到gitcafe傻瓜教程/" rel="prev">Hexo托管博客到gitcafe傻瓜教程</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/10/13/Blocks块编程指南/"
+     data-title="Blocks块编程指南"
+     data-content=""
+     data-url="https://github.com/CarolineHJQ1991/2015/10/13/Blocks块编程指南/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+            <!-- 多说热评文章-->
+            <p>热评文章</p>
+            <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+        
+
+        
+          <div class="comments" id="comments">
+            
+              <div class="ds-thread" data-thread-key="2015/10/13/Blocks块编程指南/"
+                   data-title="Blocks块编程指南" data-url="https://github.com/CarolineHJQ1991/2015/10/13/Blocks块编程指南/">
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/me1.jpg" alt="Caroline.H" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Caroline.H</p>
+        </div>
+        <p class="site-description motion-element" style="color:pink"itemprop="description">我是韩球球，目前是一名由Java->iOS的developer，愿成为内外兼修，才德兼备的女子，追求卓越，一直在通往梦想的桥梁上走着......                             [生如夏花之绚烂，死如秋叶之静美]</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">29</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/CarolineHJQ1991" target="_blank">GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank">CSDN</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank">简书</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">Links</p>
+            
+              <span class="links-of-author-item">
+              <a href="https://www.raywenderlich.com/" target="_blank">Raywenderlich</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://blog.zhowkev.in/" target="_blank">Kevin</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://blog.csdn.net/biggercoffee/" target="_blank">Coffee大神</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#00"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#01"><span class="nav-number">1.1.</span> <span class="nav-text">文档组成</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10"><span class="nav-number">2.</span> <span class="nav-text">开始使用块</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#11"><span class="nav-number">2.1.</span> <span class="nav-text">声明、使用块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12"><span class="nav-number">2.2.</span> <span class="nav-text">直接使用块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13"><span class="nav-number">2.3.</span> <span class="nav-text">Cocoa和块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14"><span class="nav-number">2.4.</span> <span class="nav-text">block变量</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Caroline.H</span>
+  <script async src="/js/count.js"></script>
+  
+  
+  <span id="busuanzi_container_site_uv">
+    本站访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
+
+</div>
+
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"caroline"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+    
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>
