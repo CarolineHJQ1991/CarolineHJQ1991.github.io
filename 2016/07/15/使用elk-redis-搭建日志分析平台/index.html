@@ -26,7 +26,7 @@
 <link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
 
 
-    <meta name="description" content="我是韩球球，目前是一名由Java->iOS的developer，愿成为内外兼修，才德兼备的女子，追求卓越，一直在通往梦想的桥梁上走着......                             [生如夏花之绚烂，死如秋叶之静美]" />
+    <meta name="description" content="我是韩球球，目前是一名developer，愿成为内外兼修，才德兼备的女子，追求卓越，一直在通往梦想的桥梁上走着......                             [生如夏花之绚烂，死如秋叶之静美]" />
 
 
 
@@ -69,7 +69,7 @@ logstash安装 242, /opt/
 
 在nginx.conf 中设置日志格式：logstash
 123log_format logstash &apos;$http_host $server_addr $remote_addr [$">
-<meta property="og:updated_time" content="2016-07-15T04:04:33.000Z">
+<meta property="og:updated_time" content="2016-07-15T07:10:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用elk+redis 搭建日志分析平台">
 <meta name="twitter:description" content="准备工作
@@ -292,7 +292,38 @@ logstash安装 242, /opt/
 <p>创建logstash agent 配置文件</p>
 <figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim <span class="regexp">/usr/</span>local<span class="regexp">/logstash/</span>etc<span class="regexp">/logstash_agent.conf</span></span><br></pre></td></tr></table></figure>
 <p>代码如下：</p>
-<figure class="highlight puppet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="name">input</span> &#123;</span><br><span class="line">        file &#123;</span><br><span class="line">                type =&gt; <span class="string">"nginx_access"</span></span><br><span class="line">                path =&gt; [<span class="string">"/usr/share/nginx/logs/test.access.log"</span>]</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="name">output</span> &#123;</span><br><span class="line">        redis &#123;</span><br><span class="line">                host =&gt; <span class="string">"localhost"</span></span><br><span class="line">                data_type =&gt; <span class="string">"list"</span></span><br><span class="line">                key =&gt; <span class="string">"logstash:redis"</span></span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></span>
+<figure class="highlight puppet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="name">input</span> &#123;</span><br><span class="line">        file &#123;</span><br><span class="line">                type =&gt; <span class="string">"nginx_access"</span></span><br><span class="line">                path =&gt; [<span class="string">"/usr/share/nginx/logs/test.access.log"</span>]</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="name">output</span> &#123;</span><br><span class="line">        redis &#123;</span><br><span class="line">                host =&gt; <span class="string">"localhost"</span></span><br><span class="line">                data_type =&gt; <span class="string">"list"</span></span><br><span class="line">                key =&gt; <span class="string">"logstash:redis"</span></span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>启动logstash agent</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/opt/</span>logstash<span class="regexp">/bin/</span>logstash -f <span class="regexp">/opt/</span>logstash<span class="regexp">/etc/</span>logstash_agent.conf</span><br></pre></td></tr></table></figure>
+<p>这个时候，它就会把test.access.log中的数据传送到redis中，相当于tail -f。</p>
+<h2 id="1" style="color:green;"> 开启logstash indexer </h2>
+
+<p>创建 logstash indexer 配置文件</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim <span class="regexp">/usr/</span>local<span class="regexp">/logstash/</span>etc<span class="regexp">/logstash_indexer.conf</span></span><br></pre></td></tr></table></figure>
+<p>代码如下：</p>
+<figure class="highlight puppet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="name">input</span> &#123;</span><br><span class="line">        redis &#123;</span><br><span class="line">                host =&gt; <span class="string">"localhost"</span></span><br><span class="line">                data_type =&gt; <span class="string">"list"</span></span><br><span class="line">                key =&gt; <span class="string">"logstash:redis"</span></span><br><span class="line">                type =&gt; <span class="string">"redis-input"</span></span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="name">filter</span> &#123;</span><br><span class="line">    grok &#123;</span><br><span class="line">        match =&gt; [</span><br><span class="line">            <span class="string">"message"</span>, <span class="string">"%&#123;TIMESTAMP_ISO8601:date&#125; \[(?&lt;thread_name&gt;.+?)\] (?&lt;log_level&gt;\w+)\s*(?&lt;content&gt;.*)"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="name">if</span> [log_level] == <span class="string">"ERROR"</span> and <span class="string">"Invalid password for user"</span> not in [content] &#123;</span><br><span class="line">            <span class="name">throttle</span> &#123;</span><br><span class="line">                after_count =&gt; <span class="number">2</span></span><br><span class="line">                key =&gt; <span class="string">"%&#123;content&#125;"</span></span><br><span class="line">                add_tag =&gt; <span class="string">"throttled"</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;      /**增加了throttle这个plugin，目的是为了当有大量异常出现的时候，过滤掉重复的异常，不至于发爆邮箱。**/</span><br><span class="line">    <span class="name">kv</span> &#123;</span><br><span class="line">        prefix =&gt; <span class="string">"request."</span></span><br><span class="line">        field_split =&gt; <span class="string">"&amp;"</span></span><br><span class="line">        source =&gt; <span class="string">"request"</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="name">urldecode</span> &#123;</span><br><span class="line">        all_fields =&gt; <span class="keyword">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="name">date</span> &#123;</span><br><span class="line">        type =&gt; <span class="string">"log-date"</span></span><br><span class="line">        match =&gt; [<span class="string">"timestamp"</span> , <span class="string">"dd/MMM/YYYY:HH:mm:ss Z"</span>]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="name">output</span> &#123;</span><br><span class="line">        elasticsearch &#123;</span><br><span class="line">                embedded =&gt; <span class="keyword">false</span></span><br><span class="line">                protocol =&gt; <span class="string">"http"</span></span><br><span class="line">                host =&gt; <span class="string">"localhost"</span></span><br><span class="line">                port =&gt; <span class="string">"9200"</span></span><br><span class="line">                index =&gt; <span class="string">"access-%&#123;+YYYY.MM.dd&#125;"</span></span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">match =&gt; [</span><br><span class="line">            <span class="string">"message"</span>, <span class="string">"%&#123;WORD:http_host&#125; %&#123;URIHOST:api_domain&#125; %&#123;IP:inner_ip&#125; %&#123;IP:lvs_ip&#125; \[%&#123;HTTPDATE:timestamp&#125;\] \"</span>%&#123;WORD:http_verb&#125; %&#123;URIPATH:baseurl&#125;(?:\?%&#123;NOTSPACE:request&#125;|) HTTP/%&#123;NUMBER:http_version&#125;\<span class="string">" (?:-|%&#123;NOTSPACE:request&#125;) %&#123;NUMBER:http_status_code&#125; (?:%&#123;NUMBER:bytes_read&#125;|-) %&#123;QS:referrer&#125; %&#123;QS:agent&#125; %&#123;NUMBER:time_duration:float&#125; (?:%&#123;NUMBER:time_backend_response:float&#125;|-)"</span></span><br><span class="line">        ]</span><br></pre></td></tr></table></figure>
+<p>这份配置是将nginx_access结构化以后塞入elasticsearch中。</p>
+<p>我们为的过滤得到这样的日志</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2015-01-27 10:37:32,131(date) [<span class="link_label">ajp-apr-127.0.0.1-8009-exec-2</span>](<span class="link_url">thread_name</span>) INFO  (log_level) mobile.ShortMessageService  - &#123;success=true&#125;(content)</span><br><span class="line">2015-01-27 10:41:18,447 [ajp-apr-127.0.0.1-8009-exec-1] ERROR security.UserService  - grails.validation.ValidationException: Validation Error(s) occurred during save():</span><br></pre></td></tr></table></figure>
+<p>对这个配置进行下说明：</p>
+<ul>
+<li>grok中的match正好匹配和不论是GET，还是POST的请求。 </li>
+<li>kv是将request中的A=B&amp;C=D的key，value扩展开来，并且利用es的无schema的特性，保证了如果你增加了一个参数，可以立即生效。</li>
+<li>urldecode是为了保证参数中有中文的话进行urldecode</li>
+<li>date是为了让es中保存的文档的时间为日志的时间，否则是插入es的时间</li>
+</ul>
+<p>好了，现在的结构就完成了，你可以访问一次test.dev之后就在kibana的控制台看到这个访问的日志了。而且还是结构化好的了，非常方便查找。</p>
+<h2 id="1" style="color:green;"> 使用kibana进行查看 </h2>
+
+<p>依次开启es，logstash，kibana之后，可以使用es的head插件确认下es中有access-xx.xx.xx索引的数据，然后打开kibana的页面，第一次进入的时候会让你选择mapping，索引名字填写access-*，则kibana自动会创建mapping</p>
+<h2 id="1" style="color:pink;"> 全文搜索之 Elasticsearch </h2>
+
+<ul>
+<li>输入/输出格式为JSON，意味着不需要定义Scheme。所以过滤的时，利用es的无schema的特性，保证了如果你增加了一个参数，可以立即生效</li>
+<li>RESTful：基本所有操作（索引、查询、甚至是配置）都可以通过 HTTP 接口进行</li>
+</ul>
+</span>
       
     </div>
 
@@ -398,7 +429,7 @@ logstash安装 242, /opt/
           <img class="site-author-image" src="/images/me1.jpg" alt="Caroline.H" itemprop="image"/>
           <p class="site-author-name" itemprop="name">Caroline.H</p>
         </div>
-        <p class="site-description motion-element" style="color:pink"itemprop="description">我是韩球球，目前是一名由Java->iOS的developer，愿成为内外兼修，才德兼备的女子，追求卓越，一直在通往梦想的桥梁上走着......                             [生如夏花之绚烂，死如秋叶之静美]</p>
+        <p class="site-description motion-element" style="color:pink"itemprop="description">我是韩球球，目前是一名developer，愿成为内外兼修，才德兼备的女子，追求卓越，一直在通往梦想的桥梁上走着......                             [生如夏花之绚烂，死如秋叶之静美]</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
@@ -479,7 +510,7 @@ logstash安装 242, /opt/
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1"><span class="nav-number">2.</span> <span class="nav-text">设置nginx 日志格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1"><span class="nav-number">3.</span> <span class="nav-text">开启logstash agent</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1"><span class="nav-number">2.</span> <span class="nav-text">设置nginx 日志格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1"><span class="nav-number">3.</span> <span class="nav-text">开启logstash agent</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1"><span class="nav-number">4.</span> <span class="nav-text"> 开启logstash indexer </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1"><span class="nav-number">5.</span> <span class="nav-text"> 使用kibana进行查看 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1"><span class="nav-number">6.</span> <span class="nav-text"> 全文搜索之 Elasticsearch </span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
