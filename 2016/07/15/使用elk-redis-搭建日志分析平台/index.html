@@ -69,7 +69,7 @@ logstash安装 242, /opt/
 
 在nginx.conf 中设置日志格式：logstash
 123log_format logstash &apos;$http_host $server_addr $remote_addr [$">
-<meta property="og:updated_time" content="2016-07-15T07:10:27.000Z">
+<meta property="og:updated_time" content="2016-07-15T07:14:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用elk+redis 搭建日志分析平台">
 <meta name="twitter:description" content="准备工作
@@ -293,6 +293,7 @@ logstash安装 242, /opt/
 <figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim <span class="regexp">/usr/</span>local<span class="regexp">/logstash/</span>etc<span class="regexp">/logstash_agent.conf</span></span><br></pre></td></tr></table></figure>
 <p>代码如下：</p>
 <figure class="highlight puppet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="name">input</span> &#123;</span><br><span class="line">        file &#123;</span><br><span class="line">                type =&gt; <span class="string">"nginx_access"</span></span><br><span class="line">                path =&gt; [<span class="string">"/usr/share/nginx/logs/test.access.log"</span>]</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="name">output</span> &#123;</span><br><span class="line">        redis &#123;</span><br><span class="line">                host =&gt; <span class="string">"localhost"</span></span><br><span class="line">                data_type =&gt; <span class="string">"list"</span></span><br><span class="line">                key =&gt; <span class="string">"logstash:redis"</span></span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <p>启动logstash agent</p>
 <figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/opt/</span>logstash<span class="regexp">/bin/</span>logstash -f <span class="regexp">/opt/</span>logstash<span class="regexp">/etc/</span>logstash_agent.conf</span><br></pre></td></tr></table></figure>
 <p>这个时候，它就会把test.access.log中的数据传送到redis中，相当于tail -f。</p>
