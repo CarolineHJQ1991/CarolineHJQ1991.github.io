@@ -187,6 +187,109 @@
           
           
             
+              <a class="post-title-link" href="/2016/07/15/使用elk-redis-搭建日志分析平台/" itemprop="url">
+                使用elk+redis 搭建日志分析平台
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-07-15T11:46:14+08:00" content="2016-07-15">
+            2016-07-15
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/日志/" itemprop="url" rel="index">
+                  <span itemprop="name">日志</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2016/07/15/使用elk-redis-搭建日志分析平台/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/15/使用elk-redis-搭建日志分析平台/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><h2 id="1" style="color:green;">准备工作</h2>
+
+<ul>
+<li>安装了redis   240</li>
+<li>安装了elasticsearch，Ubuntu默认目录</li>
+<li>安装了kibana, 开启了监控web</li>
+<li>logstash安装 242, /opt/</li>
+</ul>
+<h2 id="1" style="color:green;">设置nginx 日志格式</h2>
+
+
+<p>在nginx.conf 中设置日志格式：logstash</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">log_format</span> logstash <span class="string">'<span class="variable">$http_host</span> <span class="variable">$server_addr</span> <span class="variable">$remote_addr</span> [<span class="variable">$time_local</span>] "<span class="variable">$request</span>" '</span></span><br><span class="line">                    <span class="string">'<span class="variable">$request_body</span> <span class="variable">$status</span> <span class="variable">$body_bytes_sent</span> "<span class="variable">$http_referer</span>" "<span class="variable">$http_user_agent</span>" '</span></span><br><span class="line">                    <span class="string">'<span class="variable">$request_time</span> <span class="variable">$upstream_response_time</span>'</span>;</span><br></pre></td></tr></table></figure>
+<p>在vhost/test.conf中设置access日志：</p>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">access_log  /usr/share/nginx/logs/test.<span class="keyword">access</span>.<span class="built_in">log</span>  logstash;</span><br></pre></td></tr></table></figure>
+<h2 id="1" style="color:green;">开启logstash agent</h2>
+
+<p>创建logstash agent 配置文件</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim <span class="regexp">/usr/</span>local<span class="regexp">/logstash/</span>etc<span class="regexp">/logstash_agent.conf</span></span><br></pre></td></tr></table></figure>
+<p>代码如下：</p>
+<figure class="highlight puppet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="name">input</span> &#123;</span><br><span class="line">        file &#123;</span><br><span class="line">                type =&gt; <span class="string">"nginx_access"</span></span><br><span class="line">                path =&gt; [<span class="string">"/usr/share/nginx/logs/test.access.log"</span>]</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="name">output</span> &#123;</span><br><span class="line">        redis &#123;</span><br><span class="line">                host =&gt; <span class="string">"localhost"</span></span><br><span class="line">                data_type =&gt; <span class="string">"list"</span></span><br><span class="line">                key =&gt; <span class="string">"logstash:redis"</span></span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2016/03/21/排序算法之三交换排序-冒泡排序和快速排序/" itemprop="url">
                 排序算法之三交换排序-冒泡排序和快速排序
               </a>
@@ -979,94 +1082,6 @@ error: <span class="number">1</span> errors parsing expression
 
 
     
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/31/iOS可变参数定义以及调用/" itemprop="url">
-                iOS可变参数定义以及调用
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-31T11:17:02+08:00" content="2015-12-31">
-            2015-12-31
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/iOS开发/" itemprop="url" rel="index">
-                  <span itemprop="name">iOS开发</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-              &nbsp; | &nbsp;
-              <a href="/2015/12/31/iOS可变参数定义以及调用/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/31/iOS可变参数定义以及调用/" itemprop="commentsCount"></span>
-              </a>
-            </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <h3 style="color:green" id="1">什么是可变长参数?</h3><br>可变长参数：顾名思义，就是函数的参数长度（数量）是可变的。比如C语言的printf系列的（格式化输入输出等）函数，都是参数可变的。下面是printf函数的声明：<br><br>    int printf(const char *format, …);<br><br>可变参数函数声明方式都是类似的<br><br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/31/iOS可变参数定义以及调用/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1105,21 +1120,21 @@ error: <span class="number">1</span> errors parsing expression
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">29</span>
+              <span class="site-state-item-count">30</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             
-              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-count">7</span>
               <span class="site-state-item-name">分类</span>
               
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-count">15</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
