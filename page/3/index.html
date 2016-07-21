@@ -187,6 +187,174 @@
           
           
             
+              <a class="post-title-link" href="/2015/11/30/Swift-2-0新特性之选项集合-Option-Sets/" itemprop="url">
+                Swift 2.0新特性之选项集合(Option Sets)
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-11-30T20:46:02+08:00" content="2015-11-30">
+            2015-11-30
+          </time>
+        </span>
+
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2015/11/30/Swift-2-0新特性之选项集合-Option-Sets/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/30/Swift-2-0新特性之选项集合-Option-Sets/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>Swift 2.0增加了一个很厉害的新特性，其名为选项集合(Option Sets)，这个特性让我们可以用炒鸡简单的方式来对位掩码进行操作。</p>
+<h3 id="位掩码">位掩码</h3><p>如果你从未使用过位掩码，你可能会问，这到底是什么鬼？<br>请容我来稍微解释一下。</p>
+<p>假设我们在写一个角色扮演的游戏（比如说boombeach(海岛奇兵)），角色可能拥有比如满级野人，加血雕像，生命药水等等，你的第一反应可能是用 Bool 属性来对各种设备又还是没有进行表示，类似下面这样：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable"><span class="keyword">var</span> hasWildman</span> = <span class="literal">true</span>  <span class="comment">// 野人</span></span><br><span class="line"><span class="variable"><span class="keyword">var</span> hasStatue</span> = <span class="literal">true</span>  <span class="comment">// 雕像</span></span><br><span class="line"><span class="variable"><span class="keyword">var</span> hasPotionOfLife</span> = <span class="literal">false</span>  <span class="comment">// 生命药水</span></span><br></pre></td></tr></table></figure>
+<p>其实，还可以有另一种做法，就是定义一个整数并使用它的比特位来进行表示。由于每个比特位只能存储 0 或者 1，可以使用它来对每个装备进行表示，这就是所谓的位掩码。如下图所示：</p>
+<p><img src="/images/OptionSets/位掩码.png" alt="位掩码"></p>
+<h3 id="远古时期的位掩码操作方法">远古时期的位掩码操作方法</h3>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/11/30/Swift-2-0新特性之选项集合-Option-Sets/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2015/11/29/iOS表单验证功能/" itemprop="url">
+                iOS表单验证功能
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-11-29T17:16:18+08:00" content="2015-11-29">
+            2015-11-29
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                  <span itemprop="name">iOS开发</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2015/11/29/iOS表单验证功能/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/29/iOS表单验证功能/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h3 id="第一种实现">第一种实现</h3><h4 id="实现效果">实现效果</h4><p>当输入用户名、密码、邮箱的时候，动态的在textField的右边显示错误信息，并给与颜色警告，一旦输入符合，解除错误信息。一旦三个全部输入符合，注册按钮才可以点击，否则一直disable。</p>
+<p>效果图：<br><img src="/images/formValidate.gif" alt="form"></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/11/29/iOS表单验证功能/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2015/11/28/自定义-urlScheme/" itemprop="url">
                 自定义 urlScheme
               </a>
@@ -806,194 +974,11 @@
 
 
     
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/10/13/Hexo托管博客到gitcafe傻瓜教程/" itemprop="url">
-                Hexo托管博客到gitcafe傻瓜教程
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-10-13T17:22:25+08:00" content="2015-10-13">
-            2015-10-13
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/Mac开发/" itemprop="url" rel="index">
-                  <span itemprop="name">Mac开发</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-              &nbsp; | &nbsp;
-              <a href="/2015/10/13/Hexo托管博客到gitcafe傻瓜教程/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/13/Hexo托管博客到gitcafe傻瓜教程/" itemprop="commentsCount"></span>
-              </a>
-            </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p><a href="http://benjaminwhx.com">本人博客地址</a></p>
-<p><h1 id="00">为什么要托管？</h1><br>好处1：托管可以免费托管在各大平台上，如github,gitcafe等。<br>好处2：托管只需要购买一个几十RMB/年的域名，然后CNAME到平台地址，这样就实现了别人通过自己购买的域名来访问你的功能。
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/10/13/Hexo托管博客到gitcafe傻瓜教程/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/10/13/Blocks块编程指南/" itemprop="url">
-                Blocks块编程指南
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-10-13T11:49:16+08:00" content="2015-10-13">
-            2015-10-13
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/iOS开发/" itemprop="url" rel="index">
-                  <span itemprop="name">iOS开发</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-              &nbsp; | &nbsp;
-              <a href="/2015/10/13/Blocks块编程指南/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/13/Blocks块编程指南/" itemprop="commentsCount"></span>
-              </a>
-            </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>根据苹果官方指南翻译，最后加上点objective-c中得一些用法。<br>原文地址：<a href="https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/Blocks/Articles/00_Introduction.html#//apple_ref/doc/uid/TP40007502-CH1-SW1">Blocks Programming Topics</a></p>
-</blockquote>
-<hr>
-<h1 id="00">简介</h1>
-
-<p>块对象是C语言级别的语法和运行特性。类似于标准C函数。除了可执行代码之外他们还可以把变量绑定到堆(heap)栈(stack)中去。因此块能维持一系列的状态（data），这些状态或数据会影响执行后的结果。
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/10/13/Blocks块编程指南/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/">&laquo;</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo;</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">&raquo;</a>
   </nav>
 
  </div>
@@ -1027,21 +1012,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-count">32</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             
-              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-count">8</span>
               <span class="site-state-item-name">分类</span>
               
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-count">16</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

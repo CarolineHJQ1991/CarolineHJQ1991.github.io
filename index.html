@@ -301,6 +301,186 @@
           
           
             
+              <a class="post-title-link" href="/2016/05/16/Jenkins2-3问题汇总/" itemprop="url">
+                Jenkins2.3问题汇总
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-05-16T14:11:44+08:00" content="2016-05-16">
+            2016-05-16
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/项目管理工具/" itemprop="url" rel="index">
+                  <span itemprop="name">项目管理工具</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2016/05/16/Jenkins2-3问题汇总/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/16/Jenkins2-3问题汇总/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h1 id="1" style="color:green;">jenkins配置权限不对导致无法登陆或者空白页面解决办法</h1><br>找到.jenkins/config.xml文件：<br>加上这一段<br><br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 忘记admin的账号密码，注释下面这段就可以了 --&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- &lt;useSecurity&gt;true&lt;/useSecurity&gt;</span><br><span class="line">  &lt;authorizationStrategy class="hudson.security.LegacyAuthorizationStrategy"/&gt;</span><br><span class="line">  &lt;securityRealm class="hudson.security.HudsonPrivateSecurityRealm"&gt;</span><br><span class="line">    &lt;disableSignup&gt;false&lt;/disableSignup&gt;</span><br><span class="line">    &lt;enableCaptcha&gt;false&lt;/enableCaptcha&gt;</span><br><span class="line">  &lt;/securityRealm&gt;--&gt;</span></span><br></pre></td></tr></table></figure><br><br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/05/16/Jenkins2-3问题汇总/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2016/05/16/Jenkins2-3重点备忘/" itemprop="url">
+                Jenkins2.3重点备忘
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-05-16T10:25:00+08:00" content="2016-05-16">
+            2016-05-16
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/项目管理工具/" itemprop="url" rel="index">
+                  <span itemprop="name">项目管理工具</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2016/05/16/Jenkins2-3重点备忘/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/16/Jenkins2-3重点备忘/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h1 id="1" style="color:green;">一、系统管理</h1>
+
+<h2 id="11" style="color:green;">系统设置</h2>
+
+<p><img src="/images/jenkins/a1.png" alt=""></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/05/16/Jenkins2-3重点备忘/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2016/03/21/排序算法之三交换排序-冒泡排序和快速排序/" itemprop="url">
                 排序算法之三交换排序-冒泡排序和快速排序
               </a>
@@ -909,195 +1089,11 @@
 
 
     
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2016/01/05/LLDB使用以及技巧/" itemprop="url">
-                LLDB使用以及技巧
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2016-01-05T15:08:30+08:00" content="2016-01-05">
-            2016-01-05
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/iOS开发/" itemprop="url" rel="index">
-                  <span itemprop="name">iOS开发</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-              &nbsp; | &nbsp;
-              <a href="/2016/01/05/LLDB使用以及技巧/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/05/LLDB使用以及技巧/" itemprop="commentsCount"></span>
-              </a>
-            </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <h1 style="color:green;" id="1">LLDB支持输出id类型</h1>
-
-<p>在Xcode断点调试的时候，在控制台输入id类型的时候就死翘翘了。例如：</p>
-<pre><code>po self.view.frame
-error: <span class="keyword">property</span> <span class="string">'frame'</span> <span class="keyword">not</span> found <span class="keyword">on</span> <span class="keyword">object</span> <span class="keyword">of</span> <span class="keyword">type</span> <span class="string">'UIView *'</span>
-error: <span class="number">1</span> errors parsing expression
-</code></pre><p><strong>解决问题：</strong></p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/05/LLDB使用以及技巧/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2016/01/04/iOS语法之KVC的使用/" itemprop="url">
-                iOS语法之KVC的使用
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2016-01-04T12:44:30+08:00" content="2016-01-04">
-            2016-01-04
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/iOS开发/" itemprop="url" rel="index">
-                  <span itemprop="name">iOS开发</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-              &nbsp; | &nbsp;
-              <a href="/2016/01/04/iOS语法之KVC的使用/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/04/iOS语法之KVC的使用/" itemprop="commentsCount"></span>
-              </a>
-            </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <h3 style="color:green;" id="1">KVC简介</h3>
-
-<p>全称是Key-value coding，翻译成键值编码。顾名思义，在某种程度上跟map的关系匪浅。它提供了一种使用字符串而不是访问器方法去访问一个对象实例变量的机制。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/04/iOS语法之KVC的使用/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">&raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">&raquo;</a>
   </nav>
 
  </div>
@@ -1131,21 +1127,21 @@ error: <span class="number">1</span> errors parsing expression
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-count">32</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             
-              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-count">8</span>
               <span class="site-state-item-name">分类</span>
               
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-count">16</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

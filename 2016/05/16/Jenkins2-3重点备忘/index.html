@@ -1,0 +1,838 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="我是韩球球，目前是一名developer，愿成为内外兼修，才德兼备的女子，追求卓越，一直在通往梦想的桥梁上走着......                             [生如夏花之绚烂，死如秋叶之静美]" />
+
+
+
+  <meta name="keywords" content="jenkins," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="一、系统管理
+
+系统设置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Jenkins2.3重点备忘">
+<meta property="og:url" content="https://github.com/CarolineHJQ1991/2016/05/16/Jenkins2-3重点备忘/index.html">
+<meta property="og:site_name" content="Caroline.H 's Blog">
+<meta property="og:description" content="一、系统管理
+
+系统设置">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/jenkins/a1.png">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/jenkins/a2.png">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/jenkins/a3.png">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/jenkins/a4.png">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/jenkins/a5.png">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/jenkins/b2.png">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/jenkins/b3.png">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/jenkins/b4.png">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/jenkins/a6.png">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/jenkins/a7.png">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/jenkins/b1.jpg">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/jenkins/b5.jpg">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/jenkins/b6.jpg">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/jenkins/b7.jpg">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/jenkins/b8.jpg">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/jenkins/b9.png">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/jenkins/b10.jpg">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/jenkins/b11.jpg">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/jenkins/c1.png">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/jenkins/c2.png">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/jenkins/d1.png">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/jenkins/d2.png">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/jenkins/d3.png">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/jenkins/d4.png">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/jenkins/d5.png">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/jenkins/d6.png">
+<meta property="og:image" content="https://github.com/CarolineHJQ1991/images/jenkins/d7.png">
+<meta property="og:updated_time" content="2016-07-21T03:31:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Jenkins2.3重点备忘">
+<meta name="twitter:description" content="一、系统管理
+
+系统设置">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'always'
+  };
+</script>
+
+  <title> Jenkins2.3重点备忘 | Caroline.H 's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">Caroline.H 's Blog</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            <i class="menu-item-icon icon-next-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+
+      <li class="menu-item menu-item-high"> 
+      <script src="/js/high.js"></script>
+      <a href="javascript:void(0);" onclick="high_benjamin('/css/high.css')" rel="section">
+      <i class="menu-item-icon icon-high"></i><br />
+        点我High
+      </a>
+      </li>
+
+      
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <form class="site-search-form">
+    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+  </form>
+
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'au9bfYPd66oNfFwx6nZp','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              Jenkins2.3重点备忘
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-05-16T10:25:00+08:00" content="2016-05-16">
+            2016-05-16
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/项目管理工具/" itemprop="url" rel="index">
+                  <span itemprop="name">项目管理工具</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2016/05/16/Jenkins2-3重点备忘/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/16/Jenkins2-3重点备忘/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h1 id="1" style="color:green;">一、系统管理</h1>
+
+<h2 id="11" style="color:green;">系统设置</h2>
+
+<p><img src="/images/jenkins/a1.png" alt=""></p>
+<a id="more"></a>
+<p>一般不需要改动什么。</p>
+<p><img src="/images/jenkins/a2.png" alt=""></p>
+<p><strong>Email Extension Plugin配置</strong><br>下面的配置是针对发送邮件的配置，我使用的是163的smtp来发送，大家可以指定其他邮箱。<br>1、系统管理－系统设置，先设置发件人的邮件，<span style="color: red;">切记：一定要设置，且</span><span style="color: #339966;">在系统管理员那个地方设置的email地址要和email配置的相同</span></p>
+<p><img src="/images/jenkins/a3.png" alt=""></p>
+<p><img src="/images/jenkins/a4.png" alt=""></p>
+<p>2、大家可以在下面的 <code>邮件通知</code> 里面测试是否能够发送成功，如果收到以下邮件，恭喜　This is test email #1 sent from Jenkins</p>
+<p><img src="/images/jenkins/a5.png" alt=""></p>
+<p>3、在构建中使用<br>要想在一个项目中使用email-ext插件，你首先必须在项目配置页激活它。在构建后操作——”增加构建后操作步骤”选项中勾选”Editable Email Notification”标签。如下图：</p>
+<p><img src="/images/jenkins/b2.png" alt=""></p>
+<p><img src="/images/jenkins/b3.png" alt=""></p>
+<p>下面的触发器里面选择”Always”的时候发送默认的邮件配置</p>
+<p><img src="/images/jenkins/b4.png" alt=""></p>
+<p>4、下面给出我的标题和内容的配置，方便大家ctrl+c ctrl+v</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">Default</span> <span class="keyword">Subject</span><br><span class="line"></span></span><br><span class="line">构建通知:$&#123;<span class="keyword">BUILD_STATUS&#125; </span>- $&#123;PROJECT_NAME&#125; - <span class="keyword">Build </span># $&#123;<span class="keyword">BUILD_NUMBER&#125; </span>!</span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">Default Content</span><br><span class="line"></span><br><span class="line"><span class="doctype">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"UTF-8"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">title</span>&gt;</span>$&#123;ENV, var="JOB_NAME"&#125;-第$&#123;BUILD_NUMBER&#125;次构建日志<span class="tag">&lt;/<span class="title">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="title">body</span> <span class="attribute">leftmargin</span>=<span class="value">"8"</span> <span class="attribute">marginwidth</span>=<span class="value">"0"</span> <span class="attribute">topmargin</span>=<span class="value">"8"</span> <span class="attribute">marginheight</span>=<span class="value">"4"</span></span><br><span class="line">    <span class="attribute">offset</span>=<span class="value">"0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">table</span> <span class="attribute">width</span>=<span class="value">"95%"</span> <span class="attribute">cellpadding</span>=<span class="value">"0"</span> <span class="attribute">cellspacing</span>=<span class="value">"0"</span></span><br><span class="line">        <span class="attribute">style</span>=<span class="value">"font-size: 11pt; font-family: Tahoma, Arial, Helvetica, sans-serif"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">td</span>&gt;</span>(本邮件是程序自动下发的，请勿回复！)<span class="tag">&lt;/<span class="title">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">td</span>&gt;</span><span class="tag">&lt;<span class="title">h2</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="title">font</span> <span class="attribute">color</span>=<span class="value">"#0000FF"</span>&gt;</span>构建结果 - $&#123;BUILD_STATUS&#125;<span class="tag">&lt;/<span class="title">font</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="title">h2</span>&gt;</span><span class="tag">&lt;/<span class="title">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">td</span>&gt;</span><span class="tag">&lt;<span class="title">br</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">b</span>&gt;</span><span class="tag">&lt;<span class="title">font</span> <span class="attribute">color</span>=<span class="value">"#0B610B"</span>&gt;</span>构建信息<span class="tag">&lt;/<span class="title">font</span>&gt;</span><span class="tag">&lt;/<span class="title">b</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">hr</span> <span class="attribute">size</span>=<span class="value">"2"</span> <span class="attribute">width</span>=<span class="value">"100%"</span> <span class="attribute">align</span>=<span class="value">"center"</span> /&gt;</span><span class="tag">&lt;/<span class="title">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">td</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">ul</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="title">li</span>&gt;</span>项目名称&amp;nbsp;：&amp;nbsp;$&#123;PROJECT_NAME&#125;<span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="title">li</span>&gt;</span>构建编号&amp;nbsp;：&amp;nbsp;第$&#123;BUILD_NUMBER&#125;次构建<span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="title">li</span>&gt;</span>SVN&amp;nbsp;版本：&amp;nbsp;$&#123;SVN_REVISION&#125;<span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="title">li</span>&gt;</span>触发原因：&amp;nbsp;$&#123;CAUSE&#125;<span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="title">li</span>&gt;</span>构建日志：&amp;nbsp;<span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"$&#123;BUILD_URL&#125;console"</span>&gt;</span>$&#123;BUILD_URL&#125;console<span class="tag">&lt;/<span class="title">a</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="title">li</span>&gt;</span>构建&amp;nbsp;&amp;nbsp;Url&amp;nbsp;：&amp;nbsp;<span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"$&#123;BUILD_URL&#125;"</span>&gt;</span>$&#123;BUILD_URL&#125;<span class="tag">&lt;/<span class="title">a</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="title">li</span>&gt;</span>工作目录&amp;nbsp;：&amp;nbsp;<span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"$&#123;PROJECT_URL&#125;ws"</span>&gt;</span>$&#123;PROJECT_URL&#125;ws<span class="tag">&lt;/<span class="title">a</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="title">li</span>&gt;</span>项目&amp;nbsp;&amp;nbsp;Url&amp;nbsp;：&amp;nbsp;<span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"$&#123;PROJECT_URL&#125;"</span>&gt;</span>$&#123;PROJECT_URL&#125;<span class="tag">&lt;/<span class="title">a</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="title">ul</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="title">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">td</span>&gt;</span><span class="tag">&lt;<span class="title">b</span>&gt;</span><span class="tag">&lt;<span class="title">font</span> <span class="attribute">color</span>=<span class="value">"#0B610B"</span>&gt;</span>Changes Since Last</span><br><span class="line">                        Successful Build:<span class="tag">&lt;/<span class="title">font</span>&gt;</span><span class="tag">&lt;/<span class="title">b</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">hr</span> <span class="attribute">size</span>=<span class="value">"2"</span> <span class="attribute">width</span>=<span class="value">"100%"</span> <span class="attribute">align</span>=<span class="value">"center"</span> /&gt;</span><span class="tag">&lt;/<span class="title">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">td</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">ul</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="title">li</span>&gt;</span>历史变更记录 : <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"$&#123;PROJECT_URL&#125;changes"</span>&gt;</span>$&#123;PROJECT_URL&#125;changes<span class="tag">&lt;/<span class="title">a</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="title">ul</span>&gt;</span> $&#123;CHANGES_SINCE_LAST_SUCCESS,reverse=true, format="Changes for Build #%n:<span class="tag">&lt;<span class="title">br</span> /&gt;</span>%c<span class="tag">&lt;<span class="title">br</span> /&gt;</span>",showPaths=true,changesFormat="<span class="tag">&lt;<span class="title">pre</span>&gt;</span>[%a]<span class="tag">&lt;<span class="title">br</span> /&gt;</span>%m<span class="tag">&lt;/<span class="title">pre</span>&gt;</span>",pathFormat="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;%p"&#125;</span><br><span class="line">            <span class="tag">&lt;/<span class="title">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">td</span>&gt;</span><span class="tag">&lt;<span class="title">b</span>&gt;</span>Failed Test Results<span class="tag">&lt;/<span class="title">b</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">hr</span> <span class="attribute">size</span>=<span class="value">"2"</span> <span class="attribute">width</span>=<span class="value">"100%"</span> <span class="attribute">align</span>=<span class="value">"center"</span> /&gt;</span><span class="tag">&lt;/<span class="title">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">td</span>&gt;</span><span class="tag">&lt;<span class="title">pre</span></span><br><span class="line">                    <span class="attribute">style</span>=<span class="value">"font-size: 11pt; font-family: Tahoma, Arial, Helvetica, sans-serif"</span>&gt;</span>$FAILED_TESTS<span class="tag">&lt;/<span class="title">pre</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">br</span> /&gt;</span><span class="tag">&lt;/<span class="title">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">td</span>&gt;</span><span class="tag">&lt;<span class="title">b</span>&gt;</span><span class="tag">&lt;<span class="title">font</span> <span class="attribute">color</span>=<span class="value">"#0B610B"</span>&gt;</span>构建日志 (最后 100行):<span class="tag">&lt;/<span class="title">font</span>&gt;</span><span class="tag">&lt;/<span class="title">b</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">hr</span> <span class="attribute">size</span>=<span class="value">"2"</span> <span class="attribute">width</span>=<span class="value">"100%"</span> <span class="attribute">align</span>=<span class="value">"center"</span> /&gt;</span><span class="tag">&lt;/<span class="title">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">tr</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- &lt;tr&gt;</span><br><span class="line">            &lt;td&gt;Test Logs (if test has ran): &lt;a</span><br><span class="line">                href="$&#123;PROJECT_URL&#125;ws/TestResult/archive_logs/Log-Build-$&#123;BUILD_NUMBER&#125;.zip"&gt;$&#123;PROJECT_URL&#125;/ws/TestResult/archive_logs/Log-Build-$&#123;BUILD_NUMBER&#125;.zip&lt;/a&gt;</span><br><span class="line">                &lt;br /&gt;</span><br><span class="line">            &lt;br /&gt;</span><br><span class="line">            &lt;/td&gt;</span><br><span class="line">        &lt;/tr&gt; --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">td</span>&gt;</span><span class="tag">&lt;<span class="title">textarea</span> <span class="attribute">cols</span>=<span class="value">"80"</span> <span class="attribute">rows</span>=<span class="value">"30"</span> <span class="attribute">readonly</span>=<span class="value">"readonly"</span></span><br><span class="line">                    <span class="attribute">style</span>=<span class="value">"font-family: Courier New"</span>&gt;</span>$&#123;BUILD_LOG, maxLines=100&#125;<span class="tag">&lt;/<span class="title">textarea</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="title">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">table</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>下面就是重要的 <code>Publish over SSH</code> 插件了</p>
+<p><img src="/images/jenkins/a6.png" alt=""></p>
+<p>这是高级配置中的内容，可以指定ssh的密码以及私钥、端口、代理等内容</p>
+<p><img src="/images/jenkins/a7.png" alt=""></p>
+<h2 id="12" style="color:green;">全局安全设置(Configure Global Security)</h2>
+
+<p>默认的Jenkins不包含任何的安全检查，任何人可以修改Jenkins设置，job和启动build等。显然地在大规模的公司需要多个部门一起协调工作的时候，没有任何安全检查会带来很多的问题。 在系统管理－Configure Global Security页面可以“访问控制”进行相应的设置。如下图：</p>
+<p><img src="/images/jenkins/b1.jpg" alt=""></p>
+<p>Jenkins的权限配置文件存放在JENKINS_HOME目录。进入JENKINS_HOME目录，找到config.xml文件。打开config.xml，里面有一堆的东西，找找。。。找到了<usesecurity>和<authorizationstrategy>节点。<usesecurity>节点代表是否使用用户权限，<authorizationstrategy>节点代表用户权限是怎么划分的。</authorizationstrategy></usesecurity></authorizationstrategy></usesecurity></p>
+<p>1） Security Realm，用来决定用户名和密码，且指定用户属于哪个组；<br>2） Authorization Strategy，用来决定用户对那些资源有访问权限；</p>
+<p></p><h3 id="121">一、详细讲解4种授权策略</h3><br><strong>1、任何用户可以做任何事（没有任何限制）</strong><br>1）页面设置如下图：<p></p>
+<p><img src="/images/jenkins/b5.jpg" alt=""></p>
+<p>2）config.xml脚本如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">useSecurity</span>&gt;</span>true<span class="tag">&lt;/<span class="title">useSecurity</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">authorizationStrategy</span> <span class="attribute">class</span>=<span class="value">"hudson.security.AuthorizationStrategy$Unsecured"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">securityRealm</span> <span class="attribute">class</span>=<span class="value">"hudson.security.HudsonPrivateSecurityRealm"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">disableSignup</span>&gt;</span>true<span class="tag">&lt;/<span class="title">disableSignup</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">enableCaptcha</span>&gt;</span>false<span class="tag">&lt;/<span class="title">enableCaptcha</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">securityRealm</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>2、登录用户可以做任何事</strong><br>1）页面设置如下图：</p>
+<p><img src="/images/jenkins/b6.jpg" alt=""></p>
+<p>2）config.xml脚本如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">useSecurity</span>&gt;</span>true<span class="tag">&lt;/<span class="title">useSecurity</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">authorizationStrategy</span> <span class="attribute">class</span>=<span class="value">"hudson.security.FullControlOnceLoggedInAuthorizationStrategy"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">securityRealm</span> <span class="attribute">class</span>=<span class="value">"hudson.security.HudsonPrivateSecurityRealm"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">disableSignup</span>&gt;</span>false<span class="tag">&lt;/<span class="title">disableSignup</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">enableCaptcha</span>&gt;</span>false<span class="tag">&lt;/<span class="title">enableCaptcha</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">securityRealm</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>3、安全矩阵</strong><br>1）页面设置如下图：</p>
+<p><img src="/images/jenkins/b7.jpg" alt=""></p>
+<p>2）config.xml脚本如下：</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;useSecurity&gt;<span class="literal">true</span>&lt;<span class="regexp">/useSecurity&gt;</span><br><span class="line">  &lt;authorizationStrategy class="hudson.security.GlobalMatrixAuthorizationStrategy"&gt;</span><br><span class="line">    &lt;permission&gt;hudson.model.Hudson.Administer:jenkins&lt;/permission</span>&gt;</span><br><span class="line">    &lt;permission&gt;hudson.model.<span class="constant">Hudson</span>.<span class="constant">Read</span><span class="symbol">:anonymous&lt;/permission&gt;</span></span><br><span class="line">    &lt;permission&gt;hudson.model.<span class="constant">Hudson</span>.<span class="constant">Read</span><span class="symbol">:dev&lt;/permission&gt;</span></span><br><span class="line">    &lt;permission&gt;hudson.model.<span class="constant">Item</span>.<span class="constant">Build</span><span class="symbol">:dev&lt;/permission&gt;</span></span><br><span class="line">    &lt;permission&gt;hudson.model.<span class="constant">Item</span>.<span class="constant">Read</span><span class="symbol">:anonymous&lt;/permission&gt;</span></span><br><span class="line">    &lt;permission&gt;hudson.model.<span class="constant">Item</span>.<span class="constant">Read</span><span class="symbol">:dev&lt;/permission&gt;</span></span><br><span class="line">  &lt;<span class="regexp">/authorizationStrategy&gt;</span><br><span class="line">  &lt;securityRealm class="hudson.security.HudsonPrivateSecurityRealm"&gt;</span><br><span class="line">    &lt;disableSignup&gt;false&lt;/disable</span>Signup&gt;</span><br><span class="line">    &lt;enableCaptcha&gt;<span class="literal">false</span>&lt;<span class="regexp">/enableCaptcha&gt;</span><br><span class="line">  &lt;/security</span>Realm&gt;</span><br></pre></td></tr></table></figure>
+<p>设置好权限之后，点击注册，注册相应的账号，如上图的dev,jenkins。</p>
+<p><strong>4、项目矩阵授权策略</strong><br>说明：安全矩阵和项目矩阵授权策略的配置是一模一样的，唯一的区别是项目矩阵授权策略支持在Job的配置页面再次配置授权策略。</p>
+<p><span style="color:red;">这种策略在工作中用得较多</span>，比如针对<span style="color:green;">不同的项目</span>选择不同的用户具有不同权限。<br>1）页面设置如下图：</p>
+<p><img src="/images/jenkins/b8.jpg" alt=""></p>
+<p>各种权限如下(在配置页面将鼠标放到该权限上即可查看帮助)：</p>
+<p><img src="/images/jenkins/b9.png" alt=""></p>
+<p>其中有一些比较特别的权限：<br>最大的权限是Overall的Administer，拥有该权限可以干任何事情。<br>最基本的权限是Overall的Read，用户必须赋予阅读的权限，不然什么都看不到。<br>Job的Discover权限是一个奇葩的权限，帮助说Discover比Read的级别更低。如果匿名用户(没有访问job的权限)直接访问一个Job的Url将重定向到登陆页面。(经测试，这个权限应该是被废弃了。)<br>Credentials的ManageDomains这个权限没有看懂干嘛的，有懂的大家一起交流哈！<br>ps：如果有个用户被赋予了Overall的Read，并没有被赋予Job的Read权限，那么该用户就无法访问job。原因：没有权限。</p>
+<p>2）config.xml脚本如下：</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;useSecurity&gt;<span class="literal">true</span>&lt;<span class="regexp">/useSecurity&gt;</span><br><span class="line">  &lt;authorizationStrategy class="hudson.security.ProjectMatrixAuthorizationStrategy"&gt;</span><br><span class="line">    &lt;permission&gt;hudson.model.Hudson.Administer:admin&lt;/permission</span>&gt;</span><br><span class="line">    &lt;permission&gt;hudson.model.<span class="constant">Hudson</span>.<span class="constant">Read</span><span class="symbol">:anonymous&lt;/permission&gt;</span></span><br><span class="line">    &lt;permission&gt;hudson.model.<span class="constant">Item</span>.<span class="constant">Build</span><span class="symbol">:dev&lt;/permission&gt;</span></span><br><span class="line">    &lt;permission&gt;hudson.model.<span class="constant">Item</span>.<span class="constant">Read</span><span class="symbol">:anonymous&lt;/permission&gt;</span></span><br><span class="line">    &lt;permission&gt;hudson.model.<span class="constant">Item</span>.<span class="constant">Read</span><span class="symbol">:dev&lt;/permission&gt;</span></span><br><span class="line">  &lt;<span class="regexp">/authorizationStrategy&gt;</span><br><span class="line">  &lt;securityRealm class="hudson.security.HudsonPrivateSecurityRealm"&gt;</span><br><span class="line">    &lt;disableSignup&gt;false&lt;/disable</span>Signup&gt;</span><br><span class="line">    &lt;enableCaptcha&gt;<span class="literal">false</span>&lt;<span class="regexp">/enableCaptcha&gt;</span><br><span class="line">  &lt;/security</span>Realm&gt;</span><br></pre></td></tr></table></figure>
+<p>3）每个用户后都有1-2个图标，第一个是反选功能(删除当前已选择的权限，选择其他所有权限)，第二个是删除功能(删除该用户)</p>
+<p><img src="/images/jenkins/b10.jpg" alt=""></p>
+<p>4）在Job中配置项目安全，如下图：</p>
+<p><img src="/images/jenkins/b11.jpg" alt=""></p>
+<p>最后给大家说说在配置文件里面怎么辨别使用是哪种权限控制模式</p>
+<p><authorizationstrategy>节点上有个class属性，这个属性控制着使用那种授权模式。</authorizationstrategy></p>
+<p>登录用户可以做任何事:<br><code>hudson.security.FullControlOnceLoggedInAuthorizationStrategy</code><br>项目矩阵授权策略:<br><code>hudson.security.ProjectMatrixAuthorizationStrategy</code><br>安全矩阵:<br><code>hudson.security.GlobalMatrixAuthorizationStrategy</code><br>遗留模式:<br><code>hudson.security.LegacyAuthorizationStrategy</code></p>
+<h2 id="13" style="color:green;">全局设置(Global Tool Configuration)</h2>
+
+<p><img src="/images/jenkins/c1.png" alt=""></p>
+<p><img src="/images/jenkins/c2.png" alt=""></p>
+<p>这里没什么好讲的，配置就对了。</p>
+<hr>
+<h1 id="2" style="color:green;">二、Job配置</h1>
+
+<p></p><h2 id="21" style="color:green;">General</h2><br><img src="/images/jenkins/d1.png" alt=""><p></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">丢弃旧的构建：这项功能主要是为了节省服务器空间，我设置为“保持构建的最大个数”为<span class="number">30</span>，超过的Jenkins会自动删除旧的构建。 </span><br><span class="line"></span><br><span class="line">安静期：一个计划中的构建在开始之前需要等待选项中设置的秒数</span><br><span class="line"></span><br><span class="line">重试次数：如果从版本库签出代码失败,Jenkins会按照这个指定的次数进行重试之后再放弃.</span><br></pre></td></tr></table></figure>
+<p></p><h2 id="22" style="color:green;">源码管理</h2><br><img src="/images/jenkins/d2.png" alt=""><p></p>
+<p>git和subversion的都一样的配置，基本都是输入一个url和分支，以及认证信息，其他的选项根据自己的需要配置，当然你也可以不适用源码管理。选择None。</p>
+<p></p><h2 id="23" style="color:green;">构建触发器&amp;构建环境</h2><br><img src="/images/jenkins/d3.png" alt=""><p></p>
+<p>这里我没怎么选，我把执行的操作都放在了构建和构建后操作中。</p>
+<p></p><h2 id="24" style="color:green;">构建</h2><br><img src="/images/jenkins/d4.png" alt=""><p></p>
+<p><img src="/images/jenkins/d5.png" alt=""></p>
+<p>这里我执行的shell命令大概的意思是，进行打包上传阿里云服务器，然后执行服务器上的一个脚本<code>kill-tomcat-force.sh</code></p>
+<p>这里放上两个脚本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bin/bash</span></span><br><span class="line">JENKINS_HOME=<span class="string">"/Users/benjamin/.jenkins"</span></span><br><span class="line">PROJECT=<span class="string">"hotelsupplies"</span></span><br><span class="line">WORKSPACE=<span class="string">"<span class="variable">$JENKINS_HOME</span>"</span>/workspace</span><br><span class="line">TARGET=<span class="string">"target"</span></span><br><span class="line">FULL=<span class="string">"<span class="variable">$WORKSPACE</span>"</span>/<span class="string">"<span class="variable">$PROJECT</span>"</span>/<span class="string">"<span class="variable">$TARGET</span>"</span></span><br><span class="line">ALIYUN=<span class="string">"root@121.42.169.178"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#cd ~/.jenkins/workspace</span></span><br><span class="line"><span class="comment">#git clone https://github.com/benjaminwhx/hotelsupplies.git --depth=1</span></span><br><span class="line"><span class="built_in">cd</span> ~/Desktop/hotelsupplies</span><br><span class="line">mvn clean install -Dmaven.test.skip=<span class="literal">true</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"maven打包成功"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ ! <span class="operator">-d</span> <span class="string">"<span class="variable">$WORKSPACE</span>"</span>/<span class="string">"<span class="variable">$PROJECT</span>"</span>/<span class="string">"<span class="variable">$TARGET</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">	mkdir -p <span class="string">"<span class="variable">$FULL</span>"</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line">cp <span class="string">"<span class="variable">$TARGET</span>"</span>/<span class="string">"<span class="variable">$PROJECT</span>"</span>.war <span class="string">"<span class="variable">$FULL</span>"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"war package prepare for send to ALiYun!!!"</span></span><br><span class="line"></span><br><span class="line">scp <span class="string">"<span class="variable">$FULL</span>"</span>/<span class="string">"<span class="variable">$PROJECT</span>"</span>.war <span class="string">"<span class="variable">$ALIYUN</span>"</span>:/root/server</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"war包上传成功!"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># settings</span></span><br><span class="line"><span class="comment"># 不export JAVA_HOME就会出现Neither the JAVA_HOME nor the JRE_HOME environment variable is defined错</span></span><br><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/<span class="built_in">local</span>/jdk1.<span class="number">8.0</span>_73</span><br><span class="line">TOMCAT_PORT=<span class="string">"80"</span></span><br><span class="line">TOMCAT_HOME=<span class="string">"/root/server/apache-tomcat-8.0.32"</span></span><br><span class="line">PROJECT=<span class="string">"hotelsupplies"</span></span><br><span class="line">SERVER=<span class="string">"/root/server"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ ! <span class="operator">-e</span> <span class="string">"<span class="variable">$SERVER</span>"</span>/<span class="string">"<span class="variable">$PROJECT</span>"</span>.war ]; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"<span class="variable">$PROJECT</span>"</span>.war <span class="string">"文件不存在，结束当前执行"</span></span><br><span class="line">  <span class="built_in">exit</span>;</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># tomcat bin folder</span></span><br><span class="line">path=<span class="string">"/root/server/apache-tomcat-8.0.32/bin"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># shutdown tomcat</span></span><br><span class="line"><span class="string">"<span class="variable">$path</span>"</span>/shutdown.sh</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"tomcat关闭"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># kill tomcat pid</span></span><br><span class="line"><span class="built_in">kill</span> -<span class="number">9</span> $(lsof -i:<span class="number">80</span> |awk <span class="string">'&#123;print $2&#125;'</span>| tail -n <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除webapps下的项目</span></span><br><span class="line">rm -rf <span class="string">"<span class="variable">$TOMCAT_HOME</span>"</span>/webapps/<span class="string">"<span class="variable">$PROJECT</span>"</span>.war</span><br><span class="line">mv <span class="string">"<span class="variable">$SERVER</span>"</span>/<span class="string">"<span class="variable">$PROJECT</span>"</span>.war <span class="string">"<span class="variable">$TOMCAT_HOME</span>"</span>/webapps</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"替换webapps下的war包"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># restart tomcat</span></span><br><span class="line"><span class="string">"<span class="variable">$path</span>"</span>/startup.sh</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"重启tomcat"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"finish..."</span></span><br></pre></td></tr></table></figure>
+<p></p><h2 id="25" style="color:green;">构建后操作</h2><br><img src="/images/jenkins/d6.png" alt=""><p></p>
+<p><img src="/images/jenkins/d7.png" alt=""></p>
+<p>这里主要是构建完成后发送邮件以及删除指定目录。</p>
+<p>以后用的功能多了再进行补充。。。</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/jenkins/" rel="tag">#jenkins</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/16/Jenkins2-3问题汇总/" rel="prev">Jenkins2.3问题汇总</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/21/排序算法之三交换排序-冒泡排序和快速排序/" rel="next">排序算法之三交换排序-冒泡排序和快速排序</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/05/16/Jenkins2-3重点备忘/"
+     data-title="Jenkins2.3重点备忘"
+     data-content=""
+     data-url="https://github.com/CarolineHJQ1991/2016/05/16/Jenkins2-3重点备忘/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+            <!-- 多说热评文章-->
+            <p>热评文章</p>
+            <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+        
+
+        
+          <div class="comments" id="comments">
+            
+              <div class="ds-thread" data-thread-key="2016/05/16/Jenkins2-3重点备忘/"
+                   data-title="Jenkins2.3重点备忘" data-url="https://github.com/CarolineHJQ1991/2016/05/16/Jenkins2-3重点备忘/">
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/me1.jpg" alt="Caroline.H" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Caroline.H</p>
+        </div>
+        <p class="site-description motion-element" style="color:pink"itemprop="description">我是韩球球，目前是一名developer，愿成为内外兼修，才德兼备的女子，追求卓越，一直在通往梦想的桥梁上走着......                             [生如夏花之绚烂，死如秋叶之静美]</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">32</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">16</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/CarolineHJQ1991" target="_blank">GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank">CSDN</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank">简书</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">Links</p>
+            
+              <span class="links-of-author-item">
+              <a href="https://www.raywenderlich.com/" target="_blank">Raywenderlich</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://blog.zhowkev.in/" target="_blank">Kevin</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://blog.csdn.net/biggercoffee/" target="_blank">Coffee大神</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1"><span class="nav-number">1.</span> <span class="nav-text">一、系统管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#11"><span class="nav-number">1.1.</span> <span class="nav-text">系统设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12"><span class="nav-number">1.2.</span> <span class="nav-text">全局安全设置(Configure Global Security)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#121"><span class="nav-number">1.2.1.</span> <span class="nav-text">一、详细讲解4种授权策略</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13"><span class="nav-number">1.3.</span> <span class="nav-text">全局设置(Global Tool Configuration)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2"><span class="nav-number">2.</span> <span class="nav-text">二、Job配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#21"><span class="nav-number">2.1.</span> <span class="nav-text">General</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#22"><span class="nav-number">2.2.</span> <span class="nav-text">源码管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#23"><span class="nav-number">2.3.</span> <span class="nav-text">构建触发器&构建环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#24"><span class="nav-number">2.4.</span> <span class="nav-text">构建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#25"><span class="nav-number">2.5.</span> <span class="nav-text">构建后操作</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Caroline.H</span>
+  <script async src="/js/count.js"></script>
+  
+  
+  <span id="busuanzi_container_site_uv">
+    本站访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
+
+</div>
+
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"caroline"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+    
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>
